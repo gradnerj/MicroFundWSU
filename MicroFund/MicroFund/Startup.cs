@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MicroFund.Data;
+using DataAccessLayer.Data;
 
 namespace MicroFund {
     public class Startup {
