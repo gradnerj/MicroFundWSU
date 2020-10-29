@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroFund", "MicroFund\MicroFund.csproj", "{B92AF630-0EE8-40DE-B3EE-FD608661A0BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{C3F5FCDA-A1A8-47F7-9A63-9294BEB076EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{C3F5FCDA-A1A8-47F7-9A63-9294BEB076EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{7AAB64C9-8EBC-4081-8704-76A3AF1B23B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C3F5FCDA-A1A8-47F7-9A63-9294BEB076EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3F5FCDA-A1A8-47F7-9A63-9294BEB076EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3F5FCDA-A1A8-47F7-9A63-9294BEB076EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAB64C9-8EBC-4081-8704-76A3AF1B23B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAB64C9-8EBC-4081-8704-76A3AF1B23B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAB64C9-8EBC-4081-8704-76A3AF1B23B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAB64C9-8EBC-4081-8704-76A3AF1B23B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
