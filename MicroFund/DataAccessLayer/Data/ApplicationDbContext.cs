@@ -18,6 +18,7 @@ namespace DataAccessLayer.Data {
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<BusinessModelAnalysis> BusinessModelAnalysis { get; set; }
         public DbSet<Demographic> Demographic { get; set; }
+        public DbSet<ExternalFunding> ExternalFunding { get; set; }
         public DbSet<Mentor> Mentor { get; set; }
     }
 }
