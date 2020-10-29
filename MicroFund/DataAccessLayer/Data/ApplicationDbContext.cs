@@ -11,11 +11,19 @@ namespace DataAccessLayer.Data {
             : base(options) {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AwardScorecard>()
+                .HasKey(c => new { c.PitchId, c.ApplicationUserId });
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Address> Address { get; set; }
         public DbSet<Applicant> Applicant { get; set; }
         public DbSet<ApplicationDetails> ApplicationDetails { get; set; }
         public DbSet<ApplicationScorecard> ApplicationScorecard { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<AwardScorecard> AwardScorecard { get; set; }
         public DbSet<BusinessModelAnalysis> BusinessModelAnalysis { get; set; }
         public DbSet<Demographic> Demographic { get; set; }
         public DbSet<ExternalFunding> ExternalFunding { get; set; }
