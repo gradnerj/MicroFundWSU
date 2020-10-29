@@ -14,5 +14,6 @@ namespace DataAccessLayer.Data {
         public DbSet<Address> Address { get; set; }
         public DbSet<Applicant> Applicant { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Demographic> Demographic { get; set; }
     }
 }
