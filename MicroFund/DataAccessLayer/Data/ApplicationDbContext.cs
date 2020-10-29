@@ -15,6 +15,8 @@ namespace DataAccessLayer.Data {
         {
             modelBuilder.Entity<AwardScorecard>()
                 .HasKey(c => new { c.PitchId, c.ApplicationUserId });
+            modelBuilder.Entity<PitchScorecard>()
+                .HasKey(c => new { c.PitchId, c.ApplicationUserId });
             base.OnModelCreating(modelBuilder);
         }
 
@@ -31,5 +33,6 @@ namespace DataAccessLayer.Data {
         public DbSet<GrantPhase> GrantPhase { get; set; }
         public DbSet<Mentor> Mentor { get; set; }
         public DbSet<Pitch> Pitch { get; set; }
+        public DbSet<PitchScorecard> PitchScorecard { get; set; }
     }
 }
