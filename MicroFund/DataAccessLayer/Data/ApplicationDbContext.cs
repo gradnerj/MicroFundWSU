@@ -10,7 +10,8 @@ namespace DataAccessLayer.Data {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) {
         }
-        
+
+        public DbSet<Address> Address { get; set; }
         public DbSet<Applicant> Applicant { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
