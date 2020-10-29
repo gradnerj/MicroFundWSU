@@ -12,5 +12,6 @@ namespace DataAccessLayer.Data {
         }
         
         public DbSet<Applicant> Applicant { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }
