@@ -20,5 +20,6 @@ namespace DataAccessLayer.Data {
         public DbSet<Demographic> Demographic { get; set; }
         public DbSet<ExternalFunding> ExternalFunding { get; set; }
         public DbSet<Mentor> Mentor { get; set; }
+        public DbSet<Pitch> Pitch { get; set; }
     }
 }
