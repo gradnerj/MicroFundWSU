@@ -4,188 +4,20 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace MicroFund.Data.Migrations
+namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201029011021_AddingApplicationDetails")]
-    partial class AddingApplicationDetails
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DataAccessLayer.Models.Address", b =>
-                {
-                    b.Property<int>("ApplicantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Zip")
-                        .HasColumnType("int");
-
-                    b.HasKey("ApplicantId");
-
-                    b.ToTable("Address");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Applicant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CellPhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Applicant");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ApplicationDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("AmountRequested")
-                        .HasColumnType("real");
-
-                    b.Property<int>("ApplicantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompetitionDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasExternalFunding")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HaveAttendedMicroFunWorkshop")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("HearAboutMicroFund")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IPDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Industry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MarketOpportunity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("OneMillionCupsExperience")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PlanForFunds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PreviousMicroFundRecipient")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ProductServiceDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProjectedSalesDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrototypeFile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SalesDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SmallBusinessDevCenterCounselorDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("StatusOfBusiness")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TargetMarketDemographic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TeamDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Website")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicantId");
-
-                    b.ToTable("ApplicationDetails");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Demographic", b =>
-                {
-                    b.Property<int>("ApplicantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AgeRange")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HighestLevelEducationCompleted")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IncomeRange")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MilitaryStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RaceOrEthnicity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResidenceEnvironment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ApplicantId");
-
-                    b.ToTable("Demographic");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -250,10 +82,6 @@ namespace MicroFund.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -305,8 +133,6 @@ namespace MicroFund.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -336,12 +162,10 @@ namespace MicroFund.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -378,12 +202,10 @@ namespace MicroFund.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -391,46 +213,6 @@ namespace MicroFund.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Address", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Applicant", "Applicant")
-                        .WithMany()
-                        .HasForeignKey("ApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ApplicationDetails", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Applicant", "Applicant")
-                        .WithMany()
-                        .HasForeignKey("ApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Demographic", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Applicant", "Applicant")
-                        .WithMany()
-                        .HasForeignKey("ApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

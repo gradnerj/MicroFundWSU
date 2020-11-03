@@ -9,6 +9,8 @@
     <Compile Remove="Data\Migrations\20201029142522_AddEmailSenderAndAuthSenderOptions.Designer.cs" />
     <Compile Remove="Data\Migrations\20201029151000_AddAuthSenderOptions.cs" />
     <Compile Remove="Data\Migrations\20201029151000_AddAuthSenderOptions.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201103021029_test.cs" />
+    <Compile Remove="Data\Migrations\20201103021029_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +20,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>
