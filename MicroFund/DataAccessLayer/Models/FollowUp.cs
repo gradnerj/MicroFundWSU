@@ -8,38 +8,39 @@ namespace DataAccessLayer.Models
 {
     public class FollowUp
     {
-        public int Id { get; set; }
+        public int FollowUpId { get; set; }
 
-        [Display(Name = "GrantPhase")]
-        public int GrantPhaseId { get; set; }
+        [Required]
+        [Display(Name = "Application")]
+        public int ApplicationId { get; set; }
 
-        [ForeignKey("GrantPhaseId")]
-        public GrantPhase GrantPhase { get; set; }
+        [Required]
+        [ForeignKey("ApplicationId")]
+        public Application Application { get; set; }
 
-        public string Type { get; set; }
+        [Required]
+        [Display(Name = "FollowUpType")]
+        public int FollowUpTypeId { get; set; }
+
+        [Required]
+        [ForeignKey("FollowUpTypeId")]
+        public FollowUpType FollowUpType { get; set; }
+
+        [Required]
+        public DateTime FollowUpDate { get; set; }
 
         public bool Response { get; set; }
 
         public DateTime ResponseDate { get; set; }
 
-        public int JobsAdded { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UpdatedBy { get; set; }
 
-        public float SalesIncrease { get; set; }
+        [Required]
+        public DateTime UpdatedDate { get; set; }
 
-        public bool Profitable { get; set; }
-
-        public string Status { get; set; }
-
-        public int NumberOfEmployees { get; set; }
-
-        public float Revenue { get; set; }
-
-        public bool Exit { get; set; }
-
-        public bool Funding { get; set; }
-
-        public float FundingAmount { get; set; }
-
-        public string FundingType { get; set; }
+        [Required]
+        public bool IsArchived { get; set; }
     }
 }

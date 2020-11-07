@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,28 +12,47 @@ namespace DataAccessLayer.Data {
             : base(options) {
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-            //modelBuilder.Entity<AwardScorecard>()
-            //    .HasKey(c => new { c.PitchId, c.ApplicationUserId });
-            //modelBuilder.Entity<PitchScorecard>()
-            //    .HasKey(c => new { c.PitchId, c.ApplicationUserId });
-            //base.OnModelCreating(modelBuilder);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
 
-        //public DbSet<Address> Address { get; set; }
-        //public DbSet<Applicant> Applicant { get; set; }
-        //public DbSet<ApplicationDetails> ApplicationDetails { get; set; }
-        //public DbSet<ApplicationScorecard> ApplicationScorecard { get; set; }
-        //public DbSet<ApplicationUser> ApplicationUser { get; set; }
-        //public DbSet<AwardScorecard> AwardScorecard { get; set; }
-        //public DbSet<BusinessModelAnalysis> BusinessModelAnalysis { get; set; }
-        //public DbSet<Demographic> Demographic { get; set; }
-        //public DbSet<ExternalFunding> ExternalFunding { get; set; }
-        //public DbSet<FollowUp> FollowUp { get; set; }
-        //public DbSet<GrantPhase> GrantPhase { get; set; }
-        //public DbSet<Mentor> Mentor { get; set; }
-        //public DbSet<Pitch> Pitch { get; set; }
-        //public DbSet<PitchScorecard> PitchScorecard { get; set; }
+            base.OnModelCreating(modelbuilder);
+        }
+
+        /*
+                protected override void OnModelCreating(ModelBuilder modelBuilder)
+                {
+                    modelBuilder.Entity<AwardScorecard>()
+                        .HasKey(c => new { c.PitchId, c.ApplicationUserId });
+                    modelBuilder.Entity<PitchScorecard>()
+                        .HasKey(c => new { c.PitchId, c.ApplicationUserId });
+                    base.OnModelCreating(modelBuilder);
+                }*/
+
+        public DbSet<Address> Address { get; set; }
+        public DbSet<AddressType> AddressType { get; set; }
+        public DbSet<Applicant> Applicant { get; set; }
+        public DbSet<Application> Application { get; set; }
+        public DbSet<ApplicationStatus> ApplicationStatus { get; set; }
+        public DbSet<AwardHistory> AwardHistory { get; set; }
+        public DbSet<ContactInfo> ContactInfo { get; set; }
+        public DbSet<ContactType> ContactType { get; set; }
+        public DbSet<Expenditure> Expenditure { get; set; }
+        public DbSet<ExternalFunding> ExternalFunding { get; set; }
+        public DbSet<FollowUp> FollowUp { get; set; }
+        public DbSet<FollowUpType> FollowUpType { get; set; }
+        public DbSet<MentorAssignment> MentorAssignment { get; set; }
+        public DbSet<MentorNote> MentorNote { get; set; }
+        public DbSet<Pitch> Pitch { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<QuestionCategory> QuestionCategory { get; set; }
+        public DbSet<Response> Response { get; set; }
+        public DbSet<ScoreCard> ScoreCard { get; set; }
+        public DbSet<ScoreCardField> ScoreCardField { get; set; }
+        public DbSet<ScoringCategory> ScoringCategory { get; set; }
+
     }
 }

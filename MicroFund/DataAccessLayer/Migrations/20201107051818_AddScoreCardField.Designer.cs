@@ -4,14 +4,16 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201107051818_AddScoreCardField")]
+    partial class AddScoreCardField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -708,52 +710,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Response");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Models.ScoreCard", b =>
-                {
-                    b.Property<int>("ScoreCardId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("JudgeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PitchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ScoreCardFieldId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ScoreCardId");
-
-                    b.HasIndex("JudgeId");
-
-                    b.HasIndex("PitchId");
-
-                    b.HasIndex("ScoreCardFieldId");
-
-                    b.ToTable("ScoreCard");
-                });
-
             modelBuilder.Entity("DataAccessLayer.Models.ScoreCardField", b =>
                 {
                     b.Property<int>("ScoreCardFieldId")
@@ -1165,27 +1121,6 @@ namespace DataAccessLayer.Migrations
                     b.HasOne("DataAccessLayer.Models.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ScoreCard", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Judge")
-                        .WithMany()
-                        .HasForeignKey("JudgeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.Pitch", "Pitch")
-                        .WithMany()
-                        .HasForeignKey("PitchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.ScoreCardField", "ScoreCardField")
-                        .WithMany()
-                        .HasForeignKey("ScoreCardFieldId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

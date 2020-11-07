@@ -1,25 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class Pitch
+    public class FollowUpType
     {
-        public int PitchId { get; set; }
+        public int FollowUpTypeId { get; set; }
 
         [Required]
-        [Display(Name = "Application")]
-        public int ApplicationId { get; set; }
-
-        [Required]
-        [ForeignKey("ApplicationId")]
-        public Application Application { get; set; }
-
-        [Required]
-        public DateTime PitchDate { get; set; }
+        [StringLength(64)]
+        public string FollowUpTypeDescription { get; set; }
 
         [Required]
         [StringLength(128)]

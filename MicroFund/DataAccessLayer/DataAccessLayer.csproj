@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20201029142522_AddEmailSenderAndAuthSenderOptions.cs" />
-    <Compile Remove="Data\Migrations\20201029142522_AddEmailSenderAndAuthSenderOptions.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201029151000_AddAuthSenderOptions.cs" />
-    <Compile Remove="Data\Migrations\20201029151000_AddAuthSenderOptions.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201103021029_test.cs" />
-    <Compile Remove="Data\Migrations\20201103021029_test.Designer.cs" />
+    <Compile Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="Data\Migrations\**" />
+    <None Remove="Data\Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201107044311_AddApplicant.cs" />
+    <Compile Remove="Migrations\20201107044311_AddApplicant.Designer.cs" />
+    <Compile Remove="Migrations\20201107045224_AddAddress.cs" />
+    <Compile Remove="Migrations\20201107045224_AddAddress.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +24,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

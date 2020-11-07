@@ -8,19 +8,49 @@ namespace DataAccessLayer.Models
 {
     public class Address
     {
-        [Key]
-        [Display(Name = "Applicant")]
-        public int ApplicantId { get; set; }
+        public int AddressId { get; set; }
 
+        [Required]
+        [Display(Name = "Applicant")]
+        public string ApplicantId { get; set; }
+
+        [Required]
         [ForeignKey("ApplicantId")]
         public Applicant Applicant { get; set; }
 
+        [Display(Name = "AddressType")]
+        public int AddressTypeId { get; set; }
+
+        [Required]
+        [ForeignKey("AddressTypeId")]
+        public AddressType AddressType { get; set; }
+
+        [Required]
+        [StringLength(64)]
         public string Street { get; set; }
 
+        [Required]
+        [StringLength(64)]
         public string City { get; set; }
 
-        public int Zip { get; set; }
+        [Required]
+        public string State { get; set; }
 
+        [Required]
+        public string Zip { get; set; }
+
+        [Required]
+        [StringLength(64)]
         public string Country { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        public string UpdatedBy { get; set; }
+
+        [Required]
+        public DateTime UpdatedDate { get; set; }
+
+        [Required]
+        public bool IsArchived { get; set; }
     }
 }
