@@ -75,7 +75,7 @@ namespace MicroFund.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            string role = Request.Form["rdsUserRole"].ToString();
+            string role = Request.Form["rdUserRole"].ToString();
             if (role == "") { role = StaticDetails.AdminRole; } // Make the first login an Admin
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

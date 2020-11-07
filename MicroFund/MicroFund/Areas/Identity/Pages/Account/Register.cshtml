@@ -35,11 +35,11 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             @if (User.IsInRole(StaticDetails.AdminRole)) {
-        <div class="form-group">
-            <input type="radio" name="rdUserRole" value="@StaticDetails.AdminRole" /> @StaticDetails.AdminRole
-            <input type="radio" name="rdUserRole" value="@StaticDetails.JudgeRole" /> @StaticDetails.JudgeRole
-            <input type="radio" name="rdUserRole" value="@StaticDetails.MentorRole" /> @StaticDetails.MentorRole
-            <input type="radio" name="rdUserRole" value="@StaticDetails.ApplicantRole" /> @StaticDetails.ApplicantRole
+            <div class="form-group">
+                <input type="radio" name="rdUserRole" value="@StaticDetails.AdminRole" /> @StaticDetails.AdminRole
+                <input type="radio" name="rdUserRole" value="@StaticDetails.JudgeRole" /> @StaticDetails.JudgeRole
+                <input type="radio" name="rdUserRole" value="@StaticDetails.MentorRole" /> @StaticDetails.MentorRole
+                <input type="radio" name="rdUserRole" value="@StaticDetails.ApplicantRole" /> @StaticDetails.ApplicantRole
         </div>
             } else {
                 <input type="hidden" name="rdUserRole" value="@StaticDetails.ApplicantRole" />
