@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-custom border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">MicroFund</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,9 +22,9 @@
                         @if (User.IsInRole(Utility.StaticDetails.AdminRole))
                         {
                         <li class="nav-item dropdown">
-                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Admin</a>
-                            <div class="dropdown-menu bg-dark">
-                                <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Manage Users</a>
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
+                            <div class="dropdown-menu bg-light">
+                                <a class="dropdown-item text-dark" asp-page="/Admin/User/Index">Users</a>
                             </div>
                         </li>
                         }

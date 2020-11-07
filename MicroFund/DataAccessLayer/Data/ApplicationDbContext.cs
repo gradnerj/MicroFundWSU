@@ -31,7 +31,7 @@ namespace DataAccessLayer.Data {
                         .HasKey(c => new { c.PitchId, c.ApplicationUserId });
                     base.OnModelCreating(modelBuilder);
                 }*/
-
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<AddressType> AddressType { get; set; }
         public DbSet<Applicant> Applicant { get; set; }
