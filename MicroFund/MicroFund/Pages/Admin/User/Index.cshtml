@@ -39,9 +39,17 @@
                             @Model.UserRoles[user.Email]
                         </td>
                         <td>
-                            <a class="btn btn-outline-success" href="#">Update</a>
-                            <a class="btn btn-outline-danger" href="#">Delete</a>
-                            <a class="btn btn-outline-warning" href="#">Lock</a>
+                            <a class="btn btn-outline-success" asp-page="/Admin/User/Update">Update</a>
+                            <a class="btn btn-outline-danger" asp-page="/Admin/User/Delete">Delete</a>
+                            <form method="post">
+                                @{
+                                    if (user.LockoutEnd > DateTime.Now) {
+                                        <button type="submit" class="btn btn-outline-warning" asp-page-handler="lockUnlock" asp-route-id="@user.Id">Unlock</button>
+                                    } else {
+                                        <button type="submit" class="btn btn-outline-warning" asp-page-handler="lockUnlock" asp-route-id="@user.Id">Lock</button>
+                                    }
+                                }
+                            </form>
                         </td>
                     </tr>
                 }
