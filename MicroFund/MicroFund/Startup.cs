@@ -9,7 +9,8 @@ using DataAccessLayer.Data;
 using System;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using DataAccessLayer.Models;
-
+using DataAccessLayer.Repository;
+using Microsoft.Extensions.DependencyInjection;
 namespace MicroFund {
     public class Startup {
         public Startup(IConfiguration configuration) {
@@ -20,14 +21,16 @@ namespace MicroFund {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddRazorPages();
+    
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IRepository, Repository>();
+            services.AddRazorPages();
 
             services.AddMvc(options => {
                 options.EnableEndpointRouting = false;
