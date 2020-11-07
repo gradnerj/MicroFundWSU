@@ -1,0 +1,51 @@
+﻿@page
+@model MicroFund.Pages.Admin.User.IndexModel
+@inject UserManager<IdentityUser> UserManager
+@{
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Users</h2>
+
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="/Account/Register" asp-area="Identity" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Create New</a>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var user in Model.ApplicationUsers) {
+                    <tr>
+                        <td>
+                            @user.Email
+                        </td>
+                        <td>
+                            @Model.UserRoles[user.Email]
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" href="#">Update</a>
+                            <a class="btn btn-outline-danger" href="#">Delete</a>
+                            <a class="btn btn-outline-warning" href="#">Lock</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

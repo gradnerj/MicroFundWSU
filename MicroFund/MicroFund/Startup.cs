@@ -20,15 +20,19 @@ namespace MicroFund {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddRazorPages();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
+            
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddRazorPages();
+            services.AddMvc(options => {
+                options.EnableEndpointRouting = false;
+
+            });
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -74,15 +78,13 @@ namespace MicroFund {
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => {
-                endpoints.MapRazorPages();
-            });
+            app.UseMvc();
+            //app.UseEndpoints(endpoints => {
+            //    endpoints.MapRazorPages();
+            //});
         }
     }
 }

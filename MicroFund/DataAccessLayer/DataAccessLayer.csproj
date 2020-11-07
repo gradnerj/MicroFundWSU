@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20201107044311_AddApplicant.Designer.cs" />
     <Compile Remove="Migrations\20201107045224_AddAddress.cs" />
     <Compile Remove="Migrations\20201107045224_AddAddress.Designer.cs" />
+    <Compile Remove="Migrations\20201107184222_AppUserAsDbSet.cs" />
+    <Compile Remove="Migrations\20201107184222_AppUserAsDbSet.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
