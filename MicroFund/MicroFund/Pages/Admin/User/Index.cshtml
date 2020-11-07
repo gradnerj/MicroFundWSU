@@ -1,4 +1,8 @@
 ﻿@page
+@model MicroFund.Pages.Admin.User.IndexModel
+@inject UserManager<IdentityUser> UserManager
+@{
+}
 <div class="container">
     <div class="row">
         <div class="col-6">
@@ -10,4 +14,30 @@
         </div>
     </div>
     <br /><br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Role
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var user in Model.ApplicationUsers) {
+                    <tr>
+                        <td>
+                            @user.Email
+                        </td>
+                        <td>
+                            @Model.UserRoles[user.Email]
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>
