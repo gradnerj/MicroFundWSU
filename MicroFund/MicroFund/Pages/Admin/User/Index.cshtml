@@ -39,8 +39,8 @@
                             @Model.UserRoles[user.Email]
                         </td>
                         <td>
-                            <a class="btn btn-outline-success" asp-page="/Admin/User/Update">Update</a>
-                            <a class="btn btn-outline-danger" asp-page="/Admin/User/Delete">Delete</a>
+                            <a class="btn btn-outline-success" asp-page="/Admin/User/Update" asp-route-id="@user.Id">Update</a>
+                            <a class="btn btn-outline-danger" asp-page="/Admin/User/Delete" asp-route-id="@user.Id">Delete</a>
                             <form method="post">
                                 @{
                                     if (user.LockoutEnd > DateTime.Now) {

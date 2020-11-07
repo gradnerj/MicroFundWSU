@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Data;
+using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,6 +35,15 @@ namespace DataAccessLayer.Repository {
 
         public async Task<IList<IdentityUser>> GetAllUsersAsync() {
             return await _context.Users.ToListAsync();
+        }
+
+        public async Task<string> GetUserRoleAsync(string id) {
+            var role =  await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(id));
+            return role.FirstOrDefault().ToString();
+        }
+
+        public ApplicationUser GetUserById(string id) {
+            return  _context.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
         }
         #endregion
 

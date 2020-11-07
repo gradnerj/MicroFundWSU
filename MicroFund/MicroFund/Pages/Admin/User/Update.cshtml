@@ -5,6 +5,14 @@
 <div class="container">
 
     <h1>Update User</h1>
-
+    <form class="form" method="post">
+        <input asp-for="AppUser.Id" type="hidden" value="@Model.AppUser.Id" />
+        <input asp-for="AppUser.ConcurrencyStamp" type="hidden" value="@Model.AppUser.ConcurrencyStamp" />
+        <label asp-for="AppUser.Email">Email</label>
+        <input asp-for="AppUser.Email"type="email" value="@Model.AppUser.Email"/>
+        <label>Role</label>
+        <input type="text" value="@Model.UserRole" />
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
 
 </div>
