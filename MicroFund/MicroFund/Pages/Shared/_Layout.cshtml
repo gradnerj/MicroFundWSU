@@ -44,10 +44,10 @@
                         @if (User.IsInRole(Utility.StaticDetails.JudgeRole))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Judge/ViewApplications/Index">View Applications</a>
+                                <a class="nav-link text-white" asp-page="/Judge/Applications/Index">View Applications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Judge/ViewScorecards/Index">View Scorecards</a>
+                                <a class="nav-link text-white" asp-page="/Judge/Scorecards/Index">View Scorecards</a>
                             </li>
                         }
                         @if (User.IsInRole(Utility.StaticDetails.MentorRole))
