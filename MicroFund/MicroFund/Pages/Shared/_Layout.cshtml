@@ -31,28 +31,28 @@
                         @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
                         {
                             <li class="nav-item">
-                                <a class="dropdown-item text-white" asp-page="/Applicant/Profile/Index">Profile</a>
+                                <a class="dropdown-item text-dark" asp-page="/Applicant/Profile/Index">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item text-white" asp-page="/Applicant/MyApplications/Index">My Applications</a>
+                                <a class="dropdown-item text-dark" asp-page="/Applicant/MyApplications/Index">My Applications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item text-white" asp-page="/Applicant/Apply/Index">Apply</a>
+                                <a class="dropdown-item text-dark" asp-page="/Applicant/Apply/Index">Apply</a>
                             </li>
                         }
                         @if (User.IsInRole(Utility.StaticDetails.JudgeRole))
                         {
                             <li class="nav-item">
-                                <a class="dropdown-item text-white" asp-page="/Judge/ViewApplications/Index">View Applications</a>
+                                <a class="dropdown-item text-dark" asp-page="/Judge/Applications/Index">View Applications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item text-white" asp-page="/Judge/ViewScorecards/Index">View Scorecards</a>
+                                <a class="dropdown-item text-dark" asp-page="/Judge/Scorecards/Index">View Scorecards</a>
                             </li>
                         }
                         @if (User.IsInRole(Utility.StaticDetails.MentorRole))
                         {
                             <li class="nav-item">
-                                <a class="dropdown-item text-white" asp-page="/Mentor/Assignments/Index">Assignments</a>
+                                <a class="dropdown-item text-dark" asp-page="/Mentor/Assignments/Index">Assignments</a>
                             </li>
                         }
 
