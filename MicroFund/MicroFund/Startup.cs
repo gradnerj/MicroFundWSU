@@ -10,7 +10,6 @@ using System;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
-using Microsoft.Extensions.DependencyInjection;
 namespace MicroFund {
     public class Startup {
         public Startup(IConfiguration configuration) {
