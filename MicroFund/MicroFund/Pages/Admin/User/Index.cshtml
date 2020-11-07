@@ -23,6 +23,9 @@
                 <th>
                     Role
                 </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +37,11 @@
                         </td>
                         <td>
                             @Model.UserRoles[user.Email]
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" href="#">Update</a>
+                            <a class="btn btn-outline-danger" href="#">Delete</a>
+                            <a class="btn btn-outline-warning" href="#">Lock</a>
                         </td>
                     </tr>
                 }
