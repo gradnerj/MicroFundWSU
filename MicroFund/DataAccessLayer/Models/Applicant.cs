@@ -7,27 +7,11 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class Applicant
+    public class Applicant : ApplicationUser
     {
-        [Key]
-        [Required]
-        [Display(Name = "Applicant")]
-        public string ApplicantId { get; set; }
-
-        [Required]
-        [ForeignKey("ApplicantId")]
-        public IdentityUser IdentityUser { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }
-
-        [Required]
-        [StringLength(64)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(64)]
-        public string LastName { get; set; }
 
         [Required]
         public DateTime DOB { get; set; }

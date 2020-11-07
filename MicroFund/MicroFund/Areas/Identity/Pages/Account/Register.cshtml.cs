@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.Extensions.Logging;
+using Utility;
 
 namespace MicroFund.Areas.Identity.Pages.Account
 {
@@ -23,17 +25,20 @@ namespace MicroFund.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly RoleManager<IdentityRole> _roleManager;
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -70,14 +75,47 @@ namespace MicroFund.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            string role = Request.Form["rdsUserRole"].ToString();
+            if (role == "") { role = StaticDetails.AdminRole; } // Make the first login an Admin
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                //add the roles to the ASPNET Roles table if they do not exist yet
+                if (!await _roleManager.RoleExistsAsync(StaticDetails.AdminRole)) {
+                    _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminRole)).GetAwaiter().GetResult();
+                }
+                if (!await _roleManager.RoleExistsAsync(StaticDetails.JudgeRole)) {
+                    _roleManager.CreateAsync(new IdentityRole(StaticDetails.JudgeRole)).GetAwaiter().GetResult();
+                }
+                if (!await _roleManager.RoleExistsAsync(StaticDetails.MentorRole)) {
+                    _roleManager.CreateAsync(new IdentityRole(StaticDetails.MentorRole)).GetAwaiter().GetResult();
+                }
+                if (!await _roleManager.RoleExistsAsync(StaticDetails.ApplicantRole)) {
+                    _roleManager.CreateAsync(new IdentityRole(StaticDetails.ApplicantRole)).GetAwaiter().GetResult();
+                }
                 if (result.Succeeded)
                 {
+                    var roleType = "";
+                    if (role == StaticDetails.AdminRole) {
+                        roleType = StaticDetails.AdminRole;
+                    } 
+                    else if(role == StaticDetails.ApplicantRole) {
+                        roleType = StaticDetails.ApplicantRole;
+                    } 
+                    else if(role == StaticDetails.JudgeRole) {
+                        roleType = StaticDetails.JudgeRole;
+                    } 
+                    else if(role == StaticDetails.MentorRole) {
+                        roleType = StaticDetails.MentorRole;
+                    }
+                    else {
+                        throw new Exception("Invalid role type");
+                    }
+                    await _userManager.AddToRoleAsync(user, roleType);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -85,21 +123,21 @@ namespace MicroFund.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        values: new { area = "Identity", userId = user.Id, code, returnUrl },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    //}
+                    //else
+                    //{
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
-                    }
+                    //}
                 }
                 foreach (var error in result.Errors)
                 {
