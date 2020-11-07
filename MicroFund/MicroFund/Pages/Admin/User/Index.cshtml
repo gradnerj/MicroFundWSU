@@ -24,6 +24,9 @@
                     Role
                 </th>
                 <th>
+                    Is Archived
+                </th>
+                <th>
                     Actions
                 </th>
             </tr>
@@ -37,6 +40,9 @@
                         </td>
                         <td>
                             @Model.UserRoles[user.Email]
+                        </td>
+                        <td>
+                            @user.IsArchived
                         </td>
                         <td>
                             <a class="btn btn-outline-success" asp-page="/Admin/User/Update" asp-route-id="@user.Id">Update</a>

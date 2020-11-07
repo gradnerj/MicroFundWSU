@@ -14,7 +14,7 @@ namespace MicroFund.Pages.Admin.User {
     public class IndexModel : PageModel {
         private readonly IRepository _repository;
         private readonly ApplicationDbContext _context;
-        public IList<IdentityUser> ApplicationUsers { get; set; } 
+        public IList<ApplicationUser> ApplicationUsers { get; set; } 
         public Dictionary<string, string> UserRoles { get; set; }
 
         public IndexModel(IRepository repository, ApplicationDbContext context) {

@@ -52,7 +52,6 @@ namespace DataAccessLayer.Models
         [Required]
         public DateTime UpdatedDate { get; set; }
 
-        [Required]
-        public bool IsArchived { get; set; }
+
     }
 }

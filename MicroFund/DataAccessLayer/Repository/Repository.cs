@@ -33,8 +33,8 @@ namespace DataAccessLayer.Repository {
             return rolesDict;
         }
 
-        public async Task<IList<IdentityUser>> GetAllUsersAsync() {
-            return await _context.Users.ToListAsync();
+        public async Task<IList<ApplicationUser>> GetAllUsersAsync() {
+            return await _context.ApplicationUsers.ToListAsync();
         }
 
         public async Task<string> GetUserRoleAsync(string id) {

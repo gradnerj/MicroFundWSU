@@ -5,6 +5,10 @@
 <div class="container">
 
     <h1>Delete User</h1>
-
+    <form method="post">
+        <input for="userId" name="userId" value="@Model.AppUser.Id" type="hidden"/>
+        Are you sure you want to delete User: @Model.AppUser.Email
+        <button type="submit" class="btn btn-danger"></button>
+    </form>
 
 </div>
