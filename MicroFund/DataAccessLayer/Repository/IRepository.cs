@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repository {
         #endregion
 
         #region RETRIEVE Methods
-        Task<IList<IdentityUser>> GetAllUsersAsync();
+        Task<IList<ApplicationUser>> GetAllUsersAsync();
         Task<Dictionary<string, string>> GetAllUserRolesAsync();
 
         Task<string> GetUserRoleAsync(string id);
