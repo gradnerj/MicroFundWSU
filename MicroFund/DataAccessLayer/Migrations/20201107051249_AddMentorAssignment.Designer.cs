@@ -4,14 +4,16 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201107051249_AddMentorAssignment")]
+    partial class AddMentorAssignment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,64 +244,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("ApplicationStatus");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Models.AwardHistory", b =>
-                {
-                    b.Property<int>("AwardHistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Agreement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("AwardDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("AwardType")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
-
-                    b.Property<int>("ExpenditureId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("MailedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Provider")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
-
-                    b.Property<int>("ReqNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("AwardHistoryId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.HasIndex("ExpenditureId");
-
-                    b.ToTable("AwardHistory");
-                });
-
             modelBuilder.Entity("DataAccessLayer.Models.ContactInfo", b =>
                 {
                     b.Property<int>("ContactInfoId")
@@ -365,74 +309,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("ContactTypeId");
 
                     b.ToTable("ContactType");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Expenditure", b =>
-                {
-                    b.Property<int>("ExpenditureId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ExpenditureId");
-
-                    b.ToTable("Expenditure");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ExternalFunding", b =>
-                {
-                    b.Property<int>("ExternalFundingId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ExternalFundingId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("ExternalFunding");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.FollowUp", b =>
@@ -545,70 +421,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("MentorAssignment");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Models.MentorNote", b =>
-                {
-                    b.Property<int>("MentorNoteId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MentorAssignmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("MentorNoteId");
-
-                    b.HasIndex("MentorAssignmentId");
-
-                    b.ToTable("MentorNote");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Pitch", b =>
-                {
-                    b.Property<int>("PitchId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("PitchDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PitchId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("Pitch");
-                });
-
             modelBuilder.Entity("DataAccessLayer.Models.Question", b =>
                 {
                     b.Property<int>("QuestionId")
@@ -706,121 +518,6 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Response");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ScoreCard", b =>
-                {
-                    b.Property<int>("ScoreCardId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("JudgeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PitchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ScoreCardFieldId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ScoreCardId");
-
-                    b.HasIndex("JudgeId");
-
-                    b.HasIndex("PitchId");
-
-                    b.HasIndex("ScoreCardFieldId");
-
-                    b.ToTable("ScoreCard");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ScoreCardField", b =>
-                {
-                    b.Property<int>("ScoreCardFieldId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ScoreCardFieldDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("ScoreCardFieldName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<int>("ScoringCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("Weight")
-                        .HasColumnType("real");
-
-                    b.HasKey("ScoreCardFieldId");
-
-                    b.HasIndex("ScoringCategoryId");
-
-                    b.ToTable("ScoreCardField");
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ScoringCategory", b =>
-                {
-                    b.Property<int>("ScoringCategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ScoringCategoryDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ScoringCategoryId");
-
-                    b.ToTable("ScoringCategory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1058,21 +755,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Models.AwardHistory", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Application", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.Expenditure", "Expenditure")
-                        .WithMany()
-                        .HasForeignKey("ExpenditureId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataAccessLayer.Models.ContactInfo", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.Applicant", "Applicant")
@@ -1084,15 +766,6 @@ namespace DataAccessLayer.Migrations
                     b.HasOne("DataAccessLayer.Models.ContactType", "ContactType")
                         .WithMany()
                         .HasForeignKey("ContactTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ExternalFunding", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Application", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -1127,24 +800,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DataAccessLayer.Models.MentorNote", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.MentorAssignment", "MentorAssignment")
-                        .WithMany()
-                        .HasForeignKey("MentorAssignmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Pitch", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.Application", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataAccessLayer.Models.Question", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.QuestionCategory", "QuestionCategory")
@@ -1165,36 +820,6 @@ namespace DataAccessLayer.Migrations
                     b.HasOne("DataAccessLayer.Models.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ScoreCard", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Judge")
-                        .WithMany()
-                        .HasForeignKey("JudgeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.Pitch", "Pitch")
-                        .WithMany()
-                        .HasForeignKey("PitchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.ScoreCardField", "ScoreCardField")
-                        .WithMany()
-                        .HasForeignKey("ScoreCardFieldId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.ScoreCardField", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.ScoringCategory", "ScoringCategory")
-                        .WithMany()
-                        .HasForeignKey("ScoringCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

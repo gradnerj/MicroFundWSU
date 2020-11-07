@@ -6,9 +6,9 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class ExternalFunding
+    public class AwardHistory
     {
-        public int ExternalFundingId { get; set; }
+        public int AwardHistoryId { get; set; }
 
         [Required]
         [Display(Name = "Application")]
@@ -19,14 +19,33 @@ namespace DataAccessLayer.Models
         public Application Application { get; set; }
 
         [Required]
+        [Display(Name = "Expenditure")]
+        public int ExpenditureId { get; set; }
+
+        [Required]
+        [ForeignKey("ExpenditureId")]
+        public Expenditure Expenditure { get; set; }
+
+        [Required]
+        public DateTime AwardDate { get; set; }
+
+        [Required]
         public float Amount { get; set; }
 
         [Required]
         [StringLength(64)]
-        public string Source { get; set; }
+        public string Agreement { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public int ReqNumber { get; set; }
+
+        public DateTime MailedDate { get; set; }
+
+        [StringLength(64)]
+        public string Provider { get; set; }
+
+        [StringLength(64)]
+        public string AwardType { get; set; }
 
         [Required]
         [StringLength(128)]

@@ -6,27 +6,28 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class ExternalFunding
+    public class ScoreCardField
     {
-        public int ExternalFundingId { get; set; }
+        public int ScoreCardFieldId { get; set; }
 
         [Required]
-        [Display(Name = "Application")]
-        public int ApplicationId { get; set; }
+        [Display(Name = "ScoringCategory")]
+        public int ScoringCategoryId { get; set; }
 
         [Required]
-        [ForeignKey("ApplicationId")]
-        public Application Application { get; set; }
+        [ForeignKey("ScoringCategoryId")]
+        public ScoringCategory ScoringCategory { get; set; }
 
         [Required]
-        public float Amount { get; set; }
+        [StringLength(128)]
+        public string ScoreCardFieldName { get; set; }
 
         [Required]
-        [StringLength(64)]
-        public string Source { get; set; }
+        [StringLength(250)]
+        public string ScoreCardFieldDescription { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public float Weight { get; set; }
 
         [Required]
         [StringLength(128)]

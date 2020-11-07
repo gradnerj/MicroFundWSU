@@ -6,27 +6,21 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class ExternalFunding
+    public class MentorNote
     {
-        public int ExternalFundingId { get; set; }
+        public int MentorNoteId { get; set; }
 
         [Required]
-        [Display(Name = "Application")]
-        public int ApplicationId { get; set; }
+        [Display(Name = "MentorAssignment")]
+        public int MentorAssignmentId { get; set; }
 
         [Required]
-        [ForeignKey("ApplicationId")]
-        public Application Application { get; set; }
+        [ForeignKey("MentorAssignmentId")]
+        public MentorAssignment MentorAssignment { get; set; }
 
         [Required]
-        public float Amount { get; set; }
-
-        [Required]
-        [StringLength(64)]
-        public string Source { get; set; }
-
-        [Required]
-        public DateTime Date { get; set; }
+        [StringLength(250)]
+        public string Notes { get; set; }
 
         [Required]
         [StringLength(128)]
