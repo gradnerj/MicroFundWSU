@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +12,10 @@ namespace DataAccessLayer.Repository {
         #region RETRIEVE Methods
         Task<IList<IdentityUser>> GetAllUsersAsync();
         Task<Dictionary<string, string>> GetAllUserRolesAsync();
+
+        Task<string> GetUserRoleAsync(string id);
+
+        ApplicationUser GetUserById(string id);
         #endregion
 
         #region UPDATE Methods
