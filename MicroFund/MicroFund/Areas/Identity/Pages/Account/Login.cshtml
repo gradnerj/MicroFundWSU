@@ -5,48 +5,67 @@
     ViewData["Title"] = "Log in";
 }
 
+<div class="row mt-5">
+    <div class="col-6">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <section>
+                    <form id="account" method="post">
+                        <h4 class="text-center">Welcome, please log in:</h4>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="float-right">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label asp-for="Input.RememberMe">
+                                        <input asp-for="Input.RememberMe" />
+                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary" style="width:80%;background-color:#4e2a67 !important">Log in</button>
+                        </div>
+                        <div class="border mt-5 p-3" style="border-width:thick">
+                            <div class="form-group">
+                                <p>
+                                    Don't have an account? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="float-right">Create one here</a>
+                                </p>
+                                <p>
+                                    Forgot password? <a id="forgot-password" asp-page="./ForgotPassword" class="float-right">Reset it here</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
 
-<div class="row">
-    <div class="col offset-4">
-        <h1>@ViewData["Title"]</h1>
+        </div>
+
     </div>
-    <div class="col-md-4 offset-4">
-        <section>
-            <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+    <div class="col-6">
+        <div class="row">
+            <div class="text-center">
+                <img src="~/images/WildcatMicrofund_horizontal-01_transparent_purple.png" alt="logo" style="width:400px;height:168px;" />
+
+                <div class="border mt-5 p-4" style="border-width:thick;width:100%;">
+                    <h5>The Wildcat MicroFund offers free grants for entrepreneurs in the community and University. The goal of the Fund is to help cultivate business ideas, launch new businesses and to enliven and engage the entrepreneurial/innovative communities of our area.</h5>
+                    <h5 class="pt-3 pr-1 pb-1 pl-1">(801) 555-5555</h5>
+                    <h5 class="p-1">microfund@mail.weber.edu</h5>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                </div>
-            </form>
-        </section>
+            </div>
+        </div>
     </div>
 </div>
 

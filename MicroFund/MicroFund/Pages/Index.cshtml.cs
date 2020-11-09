@@ -14,8 +14,18 @@ namespace MicroFund.Pages {
             _logger = logger;
         }
 
-        public void OnGet() {
+        public IActionResult OnGet()
+        {
+            if(!User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            } else
+            {                
+                return Page();
+            }
+            
+        } 
 
-        }
+        
     }
 }
