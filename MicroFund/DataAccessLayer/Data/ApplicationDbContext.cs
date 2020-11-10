@@ -53,6 +53,6 @@ namespace DataAccessLayer.Data {
         public DbSet<ScoreCard> ScoreCard { get; set; }
         public DbSet<ScoreCardField> ScoreCardField { get; set; }
         public DbSet<ScoringCategory> ScoringCategory { get; set; }
-
+        public DbSet<PitchEvent> PitchEvents { get; set; }
     }
 }

@@ -1,0 +1,77 @@
+﻿@page
+@inject UserManager<IdentityUser> UserManager
+@model MicroFund.Pages.CalendarModel
+@{
+}
+
+
+<h1>Calendar</h1>
+<div class="row justify-content-center">
+    <div class="col-md-10 col-xl-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var pitches = JSON.parse('@Html.Raw(Json.Serialize(Model.Events))');
+        console.log(pitches);
+        var evs = [];
+        for (var key in pitches) {
+            console.log(pitches[key]);
+            evs.push({
+                id: pitches[key]['pitchId'],
+                title: 'Pitch: ' + pitches[key]['pitchId'],
+                start: pitches[key]['pitchDate'],
+                popup: {
+                    title: 'Pitch: ' + pitches[key]['pitchId'],
+                    pitchDate: pitches[key]['pitchDate'],
+                    cash: pitches[key]['cash'],
+                    services: pitches[key]['services']
+                }
+            })
+        };
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'dayGrid', 'timeGrid'],
+            defaultView: 'dayGridMonth',
+            header: {
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: evs,
+            eventMouseEnter: function (info) {
+                console.log('eventMouseEnter');
+                var tis = info.el;
+                var popup = info.event.extendedProps.popup;
+                var pDate = new Date(popup.pitchDate);
+                formatted_pitchDate = pDate.toLocaleString(undefined, {
+                    month: "short", day: "numeric",
+                    hour: "numeric", minute: "numeric"
+                })
+            
+                @{ var user = await UserManager.GetUserAsync(User); }
+                var tooltip = '<div class="tooltipevent" style="top:' + ($(tis).offset().top - 5) + 'px;left:' + ($(tis).offset().left + ($(tis).width()) / 2) +
+                    'px"><h4 class="brand" id="tooltipheader">' + '<a href="#">' + popup.title + '</a>' +
+                    '</h4> <hr id="skinnybreak" /><div id="tooltipdiv">' + '<b>Date:</b> ' + formatted_pitchDate +
+                    '</div><hr id="skinnybreak"/><div id="tooltipdiv"><b>Cash:</b> ' + popup.cash +
+                    '</div ><hr id="skinnybreak"/><div id ="tooltipdiv"><b>Services:</b> ' + popup.services + '</div >';
+
+                var $tooltip = $(tooltip).appendTo('body');
+                setTimeout(function () {
+                    console.log('Tool Tip Timed Out');
+                    $(info.el).css('z-index', 8);
+                    $('.tooltipevent').remove();
+                }, 2500);
+            }
+        });
+
+        calendar.render();
+    });
+
+</script>
