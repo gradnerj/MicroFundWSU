@@ -20,8 +20,14 @@ namespace MicroFund.Pages {
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             } else
-            {                
-                return Page();
+            {
+                if (User.IsInRole(Utility.StaticDetails.MentorRole)) {
+                    return RedirectToPage("/Mentor/Dashboard/Index");
+                } else
+                {
+                    return Page();
+                }
+                
             }
             
         } 

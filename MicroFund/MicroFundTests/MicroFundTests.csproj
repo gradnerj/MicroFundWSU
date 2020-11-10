@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\MicroFund\MicroFund.csproj" />
   </ItemGroup>
 
 </Project>
