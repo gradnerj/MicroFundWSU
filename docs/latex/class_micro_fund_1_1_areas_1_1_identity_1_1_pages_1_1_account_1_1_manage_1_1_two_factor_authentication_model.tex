@@ -1,0 +1,133 @@
+\hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}{}\doxysection{Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model Class Reference}
+\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+Inheritance diagram for Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a8df3272f76316439ae743f8c19bc1a0f}{Two\+Factor\+Authentication\+Model}} (User\+Manager$<$ Identity\+User $>$ user\+Manager, Sign\+In\+Manager$<$ Identity\+User $>$ sign\+In\+Manager, I\+Logger$<$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}{Two\+Factor\+Authentication\+Model}} $>$ logger)
+\item 
+async Task$<$ I\+Action\+Result $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a391d9a9788cf77ce49b0ae6a84741859}{On\+Get}} ()
+\item 
+async Task$<$ I\+Action\+Result $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abdff192dd629a0cc056489919b681580}{On\+Post}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a8a2ab277453f5b63b8397464e6b68c17}{Has\+Authenticator}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_aebd561148b48889d3b208a7a3a0b379a}{Recovery\+Codes\+Left}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_aedfc85a015332342289ef98cd2e48beb}{Is2fa\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_af474b9fafbb3a5245832fb7349ad1e04}{Is\+Machine\+Remembered}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a581ee80fc699e98d0f8f82ceb1da66f1}{Status\+Message}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly User\+Manager$<$ Identity\+User $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a46e40af0cd3457f10d99903c6cd34209}{\+\_\+user\+Manager}}
+\item 
+readonly Sign\+In\+Manager$<$ Identity\+User $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abd810c48247ffafa693c14b285070cbd}{\+\_\+sign\+In\+Manager}}
+\item 
+readonly I\+Logger$<$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}{Two\+Factor\+Authentication\+Model}} $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_ad5a797e48b8667403ce11b8c9e9360ba}{\+\_\+logger}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abd312be70d66749485405003be252e51}{Authenicator\+Uri\+Format}} = \char`\"{}otpauth\+://totp/\{0\}\+:\{1\}?secret=\{2\}\&issuer=\{0\}\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a8df3272f76316439ae743f8c19bc1a0f}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a8df3272f76316439ae743f8c19bc1a0f}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!TwoFactorAuthenticationModel@{TwoFactorAuthenticationModel}}
+\index{TwoFactorAuthenticationModel@{TwoFactorAuthenticationModel}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{TwoFactorAuthenticationModel()}{TwoFactorAuthenticationModel()}}
+{\footnotesize\ttfamily Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Two\+Factor\+Authentication\+Model (\begin{DoxyParamCaption}\item[{User\+Manager$<$ Identity\+User $>$}]{user\+Manager,  }\item[{Sign\+In\+Manager$<$ Identity\+User $>$}]{sign\+In\+Manager,  }\item[{I\+Logger$<$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}{Two\+Factor\+Authentication\+Model}} $>$}]{logger }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a391d9a9788cf77ce49b0ae6a84741859}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a391d9a9788cf77ce49b0ae6a84741859}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily async Task$<$I\+Action\+Result$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abdff192dd629a0cc056489919b681580}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abdff192dd629a0cc056489919b681580}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!OnPost@{OnPost}}
+\index{OnPost@{OnPost}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{OnPost()}{OnPost()}}
+{\footnotesize\ttfamily async Task$<$I\+Action\+Result$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+On\+Post (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_ad5a797e48b8667403ce11b8c9e9360ba}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_ad5a797e48b8667403ce11b8c9e9360ba}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!\_logger@{\_logger}}
+\index{\_logger@{\_logger}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{\_logger}{\_logger}}
+{\footnotesize\ttfamily readonly I\+Logger$<$\mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model}{Two\+Factor\+Authentication\+Model}}$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+\_\+logger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abd810c48247ffafa693c14b285070cbd}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abd810c48247ffafa693c14b285070cbd}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!\_signInManager@{\_signInManager}}
+\index{\_signInManager@{\_signInManager}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{\_signInManager}{\_signInManager}}
+{\footnotesize\ttfamily readonly Sign\+In\+Manager$<$Identity\+User$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+\_\+sign\+In\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a46e40af0cd3457f10d99903c6cd34209}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a46e40af0cd3457f10d99903c6cd34209}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!\_userManager@{\_userManager}}
+\index{\_userManager@{\_userManager}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{\_userManager}{\_userManager}}
+{\footnotesize\ttfamily readonly User\+Manager$<$Identity\+User$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+\_\+user\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abd312be70d66749485405003be252e51}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_abd312be70d66749485405003be252e51}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!AuthenicatorUriFormat@{AuthenicatorUriFormat}}
+\index{AuthenicatorUriFormat@{AuthenicatorUriFormat}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{AuthenicatorUriFormat}{AuthenicatorUriFormat}}
+{\footnotesize\ttfamily const string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Authenicator\+Uri\+Format = \char`\"{}otpauth\+://totp/\{0\}\+:\{1\}?secret=\{2\}\&issuer=\{0\}\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a8a2ab277453f5b63b8397464e6b68c17}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a8a2ab277453f5b63b8397464e6b68c17}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!HasAuthenticator@{HasAuthenticator}}
+\index{HasAuthenticator@{HasAuthenticator}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{HasAuthenticator}{HasAuthenticator}}
+{\footnotesize\ttfamily bool Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Has\+Authenticator\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_aedfc85a015332342289ef98cd2e48beb}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_aedfc85a015332342289ef98cd2e48beb}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!Is2faEnabled@{Is2faEnabled}}
+\index{Is2faEnabled@{Is2faEnabled}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{Is2faEnabled}{Is2faEnabled}}
+{\footnotesize\ttfamily bool Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Is2fa\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_af474b9fafbb3a5245832fb7349ad1e04}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_af474b9fafbb3a5245832fb7349ad1e04}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!IsMachineRemembered@{IsMachineRemembered}}
+\index{IsMachineRemembered@{IsMachineRemembered}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{IsMachineRemembered}{IsMachineRemembered}}
+{\footnotesize\ttfamily bool Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Is\+Machine\+Remembered\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_aebd561148b48889d3b208a7a3a0b379a}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_aebd561148b48889d3b208a7a3a0b379a}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!RecoveryCodesLeft@{RecoveryCodesLeft}}
+\index{RecoveryCodesLeft@{RecoveryCodesLeft}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{RecoveryCodesLeft}{RecoveryCodesLeft}}
+{\footnotesize\ttfamily int Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Recovery\+Codes\+Left\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a581ee80fc699e98d0f8f82ceb1da66f1}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_two_factor_authentication_model_a581ee80fc699e98d0f8f82ceb1da66f1}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}!StatusMessage@{StatusMessage}}
+\index{StatusMessage@{StatusMessage}!MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel@{MicroFund.Areas.Identity.Pages.Account.Manage.TwoFactorAuthenticationModel}}
+\doxysubsubsection{\texorpdfstring{StatusMessage}{StatusMessage}}
+{\footnotesize\ttfamily string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Two\+Factor\+Authentication\+Model.\+Status\+Message\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Gradn/\+One\+Drive/\+C\+S 4790/\+Micro\+Fund\+W\+S\+U/\+Micro\+Fund/\+Micro\+Fund/\+Areas/\+Identity/\+Pages/\+Account/\+Manage/\mbox{\hyperlink{_two_factor_authentication_8cshtml_8cs}{Two\+Factor\+Authentication.\+cshtml.\+cs}}\end{DoxyCompactItemize}

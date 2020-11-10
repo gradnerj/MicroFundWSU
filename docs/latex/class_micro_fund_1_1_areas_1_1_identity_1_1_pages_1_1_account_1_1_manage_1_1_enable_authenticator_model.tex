@@ -1,0 +1,165 @@
+\hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}{}\doxysection{Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model Class Reference}
+\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+Inheritance diagram for Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_1_1_input_model}{Input\+Model}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_aa00e07b0f75562d5c8e2cbe7c28b0bf1}{Enable\+Authenticator\+Model}} (User\+Manager$<$ Identity\+User $>$ user\+Manager, I\+Logger$<$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}{Enable\+Authenticator\+Model}} $>$ logger, Url\+Encoder url\+Encoder)
+\item 
+async Task$<$ I\+Action\+Result $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_af794ea8f546d2a9d3a98e47cb402bc77}{On\+Get\+Async}} ()
+\item 
+async Task$<$ I\+Action\+Result $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a633a9429c5afeefca30ceb933c3d1bc8}{On\+Post\+Async}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_aefba915a92aa34b4d20f3a5e123c3c6f}{Shared\+Key}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ab5b76d06749238ccde38ef21e41d7221}{Authenticator\+Uri}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+string\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ac4f279275146d513b4c5e741f5323984}{Recovery\+Codes}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a5a79c8df40581bbba909a3701e6690bc}{Status\+Message}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_1_1_input_model}{Input\+Model}} \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ae1610ed773593e660a294945cd9a56b7}{Input}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a055ba65928adb134aa75780dc82cdb58}{Load\+Shared\+Key\+And\+Qr\+Code\+Uri\+Async}} (Identity\+User user)
+\item 
+string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a302b864976c5ec4c2f18442450bcc54d}{Format\+Key}} (string unformatted\+Key)
+\item 
+string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a485fdb85bf20bef35b0c6a3e1714230c}{Generate\+Qr\+Code\+Uri}} (string email, string unformatted\+Key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly User\+Manager$<$ Identity\+User $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a8c4e4d794b0cc5f19075d7655486d72f}{\+\_\+user\+Manager}}
+\item 
+readonly I\+Logger$<$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}{Enable\+Authenticator\+Model}} $>$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a9e46cc5014a2d74a3f7c3445ee9a99fb}{\+\_\+logger}}
+\item 
+readonly Url\+Encoder \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a0048c81c395798129e5bad00d82ef2fb}{\+\_\+url\+Encoder}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a163e5fe01d3903ba256ad2cbd5e69695}{Authenticator\+Uri\+Format}} = \char`\"{}otpauth\+://totp/\{0\}\+:\{1\}?secret=\{2\}\&issuer=\{0\}\&digits=6\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_aa00e07b0f75562d5c8e2cbe7c28b0bf1}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_aa00e07b0f75562d5c8e2cbe7c28b0bf1}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!EnableAuthenticatorModel@{EnableAuthenticatorModel}}
+\index{EnableAuthenticatorModel@{EnableAuthenticatorModel}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{EnableAuthenticatorModel()}{EnableAuthenticatorModel()}}
+{\footnotesize\ttfamily Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Enable\+Authenticator\+Model (\begin{DoxyParamCaption}\item[{User\+Manager$<$ Identity\+User $>$}]{user\+Manager,  }\item[{I\+Logger$<$ \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}{Enable\+Authenticator\+Model}} $>$}]{logger,  }\item[{Url\+Encoder}]{url\+Encoder }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a302b864976c5ec4c2f18442450bcc54d}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a302b864976c5ec4c2f18442450bcc54d}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!FormatKey@{FormatKey}}
+\index{FormatKey@{FormatKey}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{FormatKey()}{FormatKey()}}
+{\footnotesize\ttfamily string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Format\+Key (\begin{DoxyParamCaption}\item[{string}]{unformatted\+Key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a485fdb85bf20bef35b0c6a3e1714230c}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a485fdb85bf20bef35b0c6a3e1714230c}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!GenerateQrCodeUri@{GenerateQrCodeUri}}
+\index{GenerateQrCodeUri@{GenerateQrCodeUri}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{GenerateQrCodeUri()}{GenerateQrCodeUri()}}
+{\footnotesize\ttfamily string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Generate\+Qr\+Code\+Uri (\begin{DoxyParamCaption}\item[{string}]{email,  }\item[{string}]{unformatted\+Key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a055ba65928adb134aa75780dc82cdb58}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a055ba65928adb134aa75780dc82cdb58}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!LoadSharedKeyAndQrCodeUriAsync@{LoadSharedKeyAndQrCodeUriAsync}}
+\index{LoadSharedKeyAndQrCodeUriAsync@{LoadSharedKeyAndQrCodeUriAsync}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{LoadSharedKeyAndQrCodeUriAsync()}{LoadSharedKeyAndQrCodeUriAsync()}}
+{\footnotesize\ttfamily async Task Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Load\+Shared\+Key\+And\+Qr\+Code\+Uri\+Async (\begin{DoxyParamCaption}\item[{Identity\+User}]{user }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_af794ea8f546d2a9d3a98e47cb402bc77}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_af794ea8f546d2a9d3a98e47cb402bc77}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!OnGetAsync@{OnGetAsync}}
+\index{OnGetAsync@{OnGetAsync}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{OnGetAsync()}{OnGetAsync()}}
+{\footnotesize\ttfamily async Task$<$I\+Action\+Result$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+On\+Get\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a633a9429c5afeefca30ceb933c3d1bc8}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a633a9429c5afeefca30ceb933c3d1bc8}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!OnPostAsync@{OnPostAsync}}
+\index{OnPostAsync@{OnPostAsync}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{OnPostAsync()}{OnPostAsync()}}
+{\footnotesize\ttfamily async Task$<$I\+Action\+Result$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+On\+Post\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a9e46cc5014a2d74a3f7c3445ee9a99fb}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a9e46cc5014a2d74a3f7c3445ee9a99fb}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!\_logger@{\_logger}}
+\index{\_logger@{\_logger}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{\_logger}{\_logger}}
+{\footnotesize\ttfamily readonly I\+Logger$<$\mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model}{Enable\+Authenticator\+Model}}$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+\_\+logger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a0048c81c395798129e5bad00d82ef2fb}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a0048c81c395798129e5bad00d82ef2fb}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!\_urlEncoder@{\_urlEncoder}}
+\index{\_urlEncoder@{\_urlEncoder}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{\_urlEncoder}{\_urlEncoder}}
+{\footnotesize\ttfamily readonly Url\+Encoder Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+\_\+url\+Encoder\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a8c4e4d794b0cc5f19075d7655486d72f}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a8c4e4d794b0cc5f19075d7655486d72f}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!\_userManager@{\_userManager}}
+\index{\_userManager@{\_userManager}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{\_userManager}{\_userManager}}
+{\footnotesize\ttfamily readonly User\+Manager$<$Identity\+User$>$ Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+\_\+user\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a163e5fe01d3903ba256ad2cbd5e69695}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a163e5fe01d3903ba256ad2cbd5e69695}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!AuthenticatorUriFormat@{AuthenticatorUriFormat}}
+\index{AuthenticatorUriFormat@{AuthenticatorUriFormat}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{AuthenticatorUriFormat}{AuthenticatorUriFormat}}
+{\footnotesize\ttfamily const string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Authenticator\+Uri\+Format = \char`\"{}otpauth\+://totp/\{0\}\+:\{1\}?secret=\{2\}\&issuer=\{0\}\&digits=6\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ab5b76d06749238ccde38ef21e41d7221}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ab5b76d06749238ccde38ef21e41d7221}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!AuthenticatorUri@{AuthenticatorUri}}
+\index{AuthenticatorUri@{AuthenticatorUri}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{AuthenticatorUri}{AuthenticatorUri}}
+{\footnotesize\ttfamily string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Authenticator\+Uri\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ae1610ed773593e660a294945cd9a56b7}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ae1610ed773593e660a294945cd9a56b7}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!Input@{Input}}
+\index{Input@{Input}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{Input}{Input}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_1_1_input_model}{Input\+Model}} Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Input\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ac4f279275146d513b4c5e741f5323984}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_ac4f279275146d513b4c5e741f5323984}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!RecoveryCodes@{RecoveryCodes}}
+\index{RecoveryCodes@{RecoveryCodes}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{RecoveryCodes}{RecoveryCodes}}
+{\footnotesize\ttfamily string \mbox{[}$\,$\mbox{]} Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Recovery\+Codes\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_aefba915a92aa34b4d20f3a5e123c3c6f}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_aefba915a92aa34b4d20f3a5e123c3c6f}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!SharedKey@{SharedKey}}
+\index{SharedKey@{SharedKey}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{SharedKey}{SharedKey}}
+{\footnotesize\ttfamily string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Shared\+Key\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a5a79c8df40581bbba909a3701e6690bc}\label{class_micro_fund_1_1_areas_1_1_identity_1_1_pages_1_1_account_1_1_manage_1_1_enable_authenticator_model_a5a79c8df40581bbba909a3701e6690bc}} 
+\index{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}!StatusMessage@{StatusMessage}}
+\index{StatusMessage@{StatusMessage}!MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel@{MicroFund.Areas.Identity.Pages.Account.Manage.EnableAuthenticatorModel}}
+\doxysubsubsection{\texorpdfstring{StatusMessage}{StatusMessage}}
+{\footnotesize\ttfamily string Micro\+Fund.\+Areas.\+Identity.\+Pages.\+Account.\+Manage.\+Enable\+Authenticator\+Model.\+Status\+Message\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Gradn/\+One\+Drive/\+C\+S 4790/\+Micro\+Fund\+W\+S\+U/\+Micro\+Fund/\+Micro\+Fund/\+Areas/\+Identity/\+Pages/\+Account/\+Manage/\mbox{\hyperlink{_enable_authenticator_8cshtml_8cs}{Enable\+Authenticator.\+cshtml.\+cs}}\end{DoxyCompactItemize}

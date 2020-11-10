@@ -1,0 +1,67 @@
+\hypertarget{interface_data_access_layer_1_1_repository_1_1_i_repository}{}\doxysection{Data\+Access\+Layer.\+Repository.\+I\+Repository Interface Reference}
+\label{interface_data_access_layer_1_1_repository_1_1_i_repository}\index{DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}}
+Inheritance diagram for Data\+Access\+Layer.\+Repository.\+I\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_data_access_layer_1_1_repository_1_1_i_repository}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Task$<$ I\+List$<$ \mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}} $>$ $>$ \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_a63a877548f85b9eb1d4e69f55d156b33}{Get\+All\+Users\+Async}} ()
+\item 
+Task$<$ Dictionary$<$ string, string $>$ $>$ \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_a4ebfe3c0938b4c85a0cdd00a4640f128}{Get\+All\+User\+Roles\+Async}} ()
+\item 
+Task$<$ string $>$ \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_a4a405c02574c158c59bbb383c0bf3984}{Get\+User\+Role\+Async}} (string id)
+\item 
+\mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}} \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_af9bf0eb30cf50e1b1f519093e794cd22}{Get\+User\+By\+Id}} (string id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interface_data_access_layer_1_1_repository_1_1_i_repository_a4ebfe3c0938b4c85a0cdd00a4640f128}\label{interface_data_access_layer_1_1_repository_1_1_i_repository_a4ebfe3c0938b4c85a0cdd00a4640f128}} 
+\index{DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}!GetAllUserRolesAsync@{GetAllUserRolesAsync}}
+\index{GetAllUserRolesAsync@{GetAllUserRolesAsync}!DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}}
+\doxysubsubsection{\texorpdfstring{GetAllUserRolesAsync()}{GetAllUserRolesAsync()}}
+{\footnotesize\ttfamily Task$<$Dictionary$<$string, string$>$ $>$ Data\+Access\+Layer.\+Repository.\+I\+Repository.\+Get\+All\+User\+Roles\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_ab5d2fd9301b656d3968fe55405cfe788}{Data\+Access\+Layer.\+Repository.\+Repository}}.
+
+\mbox{\Hypertarget{interface_data_access_layer_1_1_repository_1_1_i_repository_a63a877548f85b9eb1d4e69f55d156b33}\label{interface_data_access_layer_1_1_repository_1_1_i_repository_a63a877548f85b9eb1d4e69f55d156b33}} 
+\index{DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}!GetAllUsersAsync@{GetAllUsersAsync}}
+\index{GetAllUsersAsync@{GetAllUsersAsync}!DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}}
+\doxysubsubsection{\texorpdfstring{GetAllUsersAsync()}{GetAllUsersAsync()}}
+{\footnotesize\ttfamily Task$<$I\+List$<$\mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}}$>$ $>$ Data\+Access\+Layer.\+Repository.\+I\+Repository.\+Get\+All\+Users\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_afa7d8130a7d3e80c3943e511abfdd33c}{Data\+Access\+Layer.\+Repository.\+Repository}}.
+
+\mbox{\Hypertarget{interface_data_access_layer_1_1_repository_1_1_i_repository_af9bf0eb30cf50e1b1f519093e794cd22}\label{interface_data_access_layer_1_1_repository_1_1_i_repository_af9bf0eb30cf50e1b1f519093e794cd22}} 
+\index{DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}!GetUserById@{GetUserById}}
+\index{GetUserById@{GetUserById}!DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}}
+\doxysubsubsection{\texorpdfstring{GetUserById()}{GetUserById()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}} Data\+Access\+Layer.\+Repository.\+I\+Repository.\+Get\+User\+By\+Id (\begin{DoxyParamCaption}\item[{string}]{id }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_a8c5e12645951743907074c25f97d161a}{Data\+Access\+Layer.\+Repository.\+Repository}}.
+
+\mbox{\Hypertarget{interface_data_access_layer_1_1_repository_1_1_i_repository_a4a405c02574c158c59bbb383c0bf3984}\label{interface_data_access_layer_1_1_repository_1_1_i_repository_a4a405c02574c158c59bbb383c0bf3984}} 
+\index{DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}!GetUserRoleAsync@{GetUserRoleAsync}}
+\index{GetUserRoleAsync@{GetUserRoleAsync}!DataAccessLayer.Repository.IRepository@{DataAccessLayer.Repository.IRepository}}
+\doxysubsubsection{\texorpdfstring{GetUserRoleAsync()}{GetUserRoleAsync()}}
+{\footnotesize\ttfamily Task$<$string$>$ Data\+Access\+Layer.\+Repository.\+I\+Repository.\+Get\+User\+Role\+Async (\begin{DoxyParamCaption}\item[{string}]{id }\end{DoxyParamCaption})}
+
+
+
+Implemented in \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_ad0295838649574529fdc68d0ae68d67d}{Data\+Access\+Layer.\+Repository.\+Repository}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Gradn/\+One\+Drive/\+C\+S 4790/\+Micro\+Fund\+W\+S\+U/\+Micro\+Fund/\+Data\+Access\+Layer/\+Repository/\mbox{\hyperlink{_i_repository_8cs}{I\+Repository.\+cs}}\end{DoxyCompactItemize}

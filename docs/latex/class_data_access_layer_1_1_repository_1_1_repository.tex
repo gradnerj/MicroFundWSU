@@ -1,0 +1,100 @@
+\hypertarget{class_data_access_layer_1_1_repository_1_1_repository}{}\doxysection{Data\+Access\+Layer.\+Repository.\+Repository Class Reference}
+\label{class_data_access_layer_1_1_repository_1_1_repository}\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+Inheritance diagram for Data\+Access\+Layer.\+Repository.\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_data_access_layer_1_1_repository_1_1_repository}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_aa7d3e7aef4cc0bd0e7eb1eeeba1747db}{Repository}} (\mbox{\hyperlink{class_data_access_layer_1_1_data_1_1_application_db_context}{Application\+Db\+Context}} context, User\+Manager$<$ Identity\+User $>$ user\+Manager)
+\item 
+async Task$<$ Dictionary$<$ string, string $>$ $>$ \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_ab5d2fd9301b656d3968fe55405cfe788}{Get\+All\+User\+Roles\+Async}} ()
+\item 
+async Task$<$ I\+List$<$ \mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}} $>$ $>$ \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_afa7d8130a7d3e80c3943e511abfdd33c}{Get\+All\+Users\+Async}} ()
+\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_ad0295838649574529fdc68d0ae68d67d}{Get\+User\+Role\+Async}} (string id)
+\item 
+\mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}} \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_a8c5e12645951743907074c25f97d161a}{Get\+User\+By\+Id}} (string id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_data_access_layer_1_1_data_1_1_application_db_context}{Application\+Db\+Context}} \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_a0d90f0cb25161bd1d13a41938fcf1539}{\+\_\+context}}
+\item 
+readonly User\+Manager$<$ Identity\+User $>$ \mbox{\hyperlink{class_data_access_layer_1_1_repository_1_1_repository_a1e6656683667fe28873b60babeb26b13}{\+\_\+user\+Manager}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_aa7d3e7aef4cc0bd0e7eb1eeeba1747db}\label{class_data_access_layer_1_1_repository_1_1_repository_aa7d3e7aef4cc0bd0e7eb1eeeba1747db}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!Repository@{Repository}}
+\index{Repository@{Repository}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{Repository()}{Repository()}}
+{\footnotesize\ttfamily Data\+Access\+Layer.\+Repository.\+Repository.\+Repository (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_data_access_layer_1_1_data_1_1_application_db_context}{Application\+Db\+Context}}}]{context,  }\item[{User\+Manager$<$ Identity\+User $>$}]{user\+Manager }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_ab5d2fd9301b656d3968fe55405cfe788}\label{class_data_access_layer_1_1_repository_1_1_repository_ab5d2fd9301b656d3968fe55405cfe788}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!GetAllUserRolesAsync@{GetAllUserRolesAsync}}
+\index{GetAllUserRolesAsync@{GetAllUserRolesAsync}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{GetAllUserRolesAsync()}{GetAllUserRolesAsync()}}
+{\footnotesize\ttfamily async Task$<$Dictionary$<$string, string$>$ $>$ Data\+Access\+Layer.\+Repository.\+Repository.\+Get\+All\+User\+Roles\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_a4ebfe3c0938b4c85a0cdd00a4640f128}{Data\+Access\+Layer.\+Repository.\+I\+Repository}}.
+
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_afa7d8130a7d3e80c3943e511abfdd33c}\label{class_data_access_layer_1_1_repository_1_1_repository_afa7d8130a7d3e80c3943e511abfdd33c}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!GetAllUsersAsync@{GetAllUsersAsync}}
+\index{GetAllUsersAsync@{GetAllUsersAsync}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{GetAllUsersAsync()}{GetAllUsersAsync()}}
+{\footnotesize\ttfamily async Task$<$I\+List$<$\mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}}$>$ $>$ Data\+Access\+Layer.\+Repository.\+Repository.\+Get\+All\+Users\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_a63a877548f85b9eb1d4e69f55d156b33}{Data\+Access\+Layer.\+Repository.\+I\+Repository}}.
+
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_a8c5e12645951743907074c25f97d161a}\label{class_data_access_layer_1_1_repository_1_1_repository_a8c5e12645951743907074c25f97d161a}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!GetUserById@{GetUserById}}
+\index{GetUserById@{GetUserById}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{GetUserById()}{GetUserById()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_data_access_layer_1_1_models_1_1_application_user}{Application\+User}} Data\+Access\+Layer.\+Repository.\+Repository.\+Get\+User\+By\+Id (\begin{DoxyParamCaption}\item[{string}]{id }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_af9bf0eb30cf50e1b1f519093e794cd22}{Data\+Access\+Layer.\+Repository.\+I\+Repository}}.
+
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_ad0295838649574529fdc68d0ae68d67d}\label{class_data_access_layer_1_1_repository_1_1_repository_ad0295838649574529fdc68d0ae68d67d}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!GetUserRoleAsync@{GetUserRoleAsync}}
+\index{GetUserRoleAsync@{GetUserRoleAsync}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{GetUserRoleAsync()}{GetUserRoleAsync()}}
+{\footnotesize\ttfamily async Task$<$string$>$ Data\+Access\+Layer.\+Repository.\+Repository.\+Get\+User\+Role\+Async (\begin{DoxyParamCaption}\item[{string}]{id }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_data_access_layer_1_1_repository_1_1_i_repository_a4a405c02574c158c59bbb383c0bf3984}{Data\+Access\+Layer.\+Repository.\+I\+Repository}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_a0d90f0cb25161bd1d13a41938fcf1539}\label{class_data_access_layer_1_1_repository_1_1_repository_a0d90f0cb25161bd1d13a41938fcf1539}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!\_context@{\_context}}
+\index{\_context@{\_context}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{\_context}{\_context}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_data_access_layer_1_1_data_1_1_application_db_context}{Application\+Db\+Context}} Data\+Access\+Layer.\+Repository.\+Repository.\+\_\+context\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_data_access_layer_1_1_repository_1_1_repository_a1e6656683667fe28873b60babeb26b13}\label{class_data_access_layer_1_1_repository_1_1_repository_a1e6656683667fe28873b60babeb26b13}} 
+\index{DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}!\_userManager@{\_userManager}}
+\index{\_userManager@{\_userManager}!DataAccessLayer.Repository.Repository@{DataAccessLayer.Repository.Repository}}
+\doxysubsubsection{\texorpdfstring{\_userManager}{\_userManager}}
+{\footnotesize\ttfamily readonly User\+Manager$<$Identity\+User$>$ Data\+Access\+Layer.\+Repository.\+Repository.\+\_\+user\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Gradn/\+One\+Drive/\+C\+S 4790/\+Micro\+Fund\+W\+S\+U/\+Micro\+Fund/\+Data\+Access\+Layer/\+Repository/\mbox{\hyperlink{_repository_8cs}{Repository.\+cs}}\end{DoxyCompactItemize}
