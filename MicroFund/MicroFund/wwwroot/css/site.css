@@ -52,7 +52,15 @@ a.notLinks:hover, a.notLinks:active {
 for details on configuring this project to bundle and minify static web assets. */
 
 .bg-purple-wsu {
-    background-color: #4E2A67;
+    background-color: #492365 !important;
+}
+
+.bg-gray-wsu {
+    background-color: #575047 !important;;
+}
+
+.bg-pantone666-wsu {
+    background-color: #a391b1 !important;;
 }
 
 /*.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
