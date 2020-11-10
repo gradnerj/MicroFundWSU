@@ -23,7 +23,11 @@ namespace MicroFund.Pages {
             {
                 if (User.IsInRole(Utility.StaticDetails.MentorRole)) {
                     return RedirectToPage("/Mentor/Dashboard/Index");
-                } else
+                }
+                else if (User.IsInRole(Utility.StaticDetails.JudgeRole)) {
+                    return RedirectToPage("/Judge/Dashboard/Index");
+                }
+                else
                 {
                     return Page();
                 }
