@@ -10,18 +10,21 @@ namespace DataAccessLayer.Models
         public int ApplicationStatusId { get; set; }
 
         [Required]
-        [Display(Name = "Status Description")]
+        [Display(Name = "Description")]
         [StringLength(32)]
         public string StatusDescription { get; set; }
 
         [Required]
+        [Display(Name = "Updated By")]
         [StringLength(128)]
         public string UpdatedBy { get; set; }
 
         [Required]
+        [Display(Name = "Updated Date")]
         public DateTime UpdatedDate { get; set; }
 
         [Required]
+        [Display(Name = "Is Archived")]
         public bool IsArchived { get; set; }
     }
 }

@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Question[0].QuestionCategory)
+                @Html.DisplayNameFor(model => model.Question[0].QuestionDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Question[0].QuestionDescription)
+                @Html.DisplayNameFor(model => model.Question[0].QuestionCategory)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Question[0].IsArchived)
@@ -29,10 +29,10 @@
 @foreach (var item in Model.Question) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.QuestionCategory.QuestionCategoryDescription)
+                @Html.DisplayFor(modelItem => item.QuestionDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuestionDescription)
+                @Html.DisplayFor(modelItem => item.QuestionCategory.QuestionCategoryDescription)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsArchived)
