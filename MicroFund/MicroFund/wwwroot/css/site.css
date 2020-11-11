@@ -1,9 +1,14 @@
 ﻿
 
 
-
+a.notLinks:hover, a.notLinks:active {
+    color: #4E2A67 !important;
+    font-size: 125%;
+    background-color: lightgray;
+}
 
 /*ToolTip Styling */
+
 .tooltipevent {
     width: 200px;
     /*    height:px;*/
@@ -50,10 +55,10 @@ for details on configuring this project to bundle and minify static web assets. 
     background-color: #4E2A67;
 }
 
-.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
+/*.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
     background-color: white !important;
     color: #4E2A67 !important;
-}
+}*/
 
 a.navbar-brand {
   white-space: normal;
@@ -61,11 +66,11 @@ a.navbar-brand {
   word-break: break-all;
 }
 
- Provide sufficient contrast against white background 
-a {
+ /*Provide sufficient contrast against white background*/ 
+/*a {
   color: #0366d6;
 }
-
+*/
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
