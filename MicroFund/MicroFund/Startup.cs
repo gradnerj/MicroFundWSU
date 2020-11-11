@@ -26,6 +26,8 @@ namespace MicroFund {
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IRepository, Repository>();
             services.AddRazorPages();
 
@@ -82,6 +84,14 @@ namespace MicroFund {
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvc();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute(name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+
+            });
         }
     }
 }
