@@ -84,6 +84,14 @@ namespace MicroFund {
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMvc();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute(name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+
+            });
         }
     }
 }
