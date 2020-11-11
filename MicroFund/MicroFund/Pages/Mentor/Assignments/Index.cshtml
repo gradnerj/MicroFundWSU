@@ -3,4 +3,57 @@
 @{
 }
 
-<p>This page is under construction!</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Mentor Assignment</h2>
+        </div>
+    </div>
+    <br /><br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    Date Submitted
+                </th>
+                <th>
+                    Application Status
+                </th>
+                <th>
+                    Mentor Assigned
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var app in Model.Applications)
+                {
+                    <tr>
+                        <td>
+                            @app.CompanyName
+                        </td>
+                        <td>
+                            @app.ApplicationCreationDate
+                        </td>
+                        <td>
+                            @app.ApplicationStatus
+                        </td>
+                        <td>
+                            @Model.MentorAssignments[app.ApplicationId + ""]
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" asp-page="/Mentor/Assignments/Update" asp-route-id="@app.ApplicationId">Update</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

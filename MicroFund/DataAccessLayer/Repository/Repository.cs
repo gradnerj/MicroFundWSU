@@ -46,6 +46,29 @@ namespace DataAccessLayer.Repository {
             return  _context.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
         }
 
+        public async Task<IList<IdentityUser>> GetAllMentorsAsync()
+        {
+            return await _userManager.GetUsersInRoleAsync("Mentor");
+        }
+
+        public async Task<IList<Application>> GetAllApplicationsAsync() {
+            return await _context.Application.ToListAsync();
+        }
+
+        public async Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync()
+        {
+            var assignmentDict = new Dictionary<string, string>();
+            var applications = await GetAllApplicationsAsync();
+
+            foreach( var app in applications)
+            {
+                var mentorId = await _context.MentorAssignment.Where(x => x.ApplicationId == app.ApplicationId).Select(x => x.MentorId).FirstOrDefaultAsync();
+                var mentor = GetUserById(mentorId);
+                assignmentDict.Add(app.ApplicationId.ToString(), mentor.FullName);
+            }
+
+            return assignmentDict;
+        }
         #endregion
 
         #region UPDATE Methods

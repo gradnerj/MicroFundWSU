@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MicroFund.Pages.Admin.Applications
+namespace MicroFund.Pages.Mentor.Assignments
 {
-    public class AssignMentorModel : PageModel
+    public class UpdateModel : PageModel
     {
         public void OnGet()
         {
