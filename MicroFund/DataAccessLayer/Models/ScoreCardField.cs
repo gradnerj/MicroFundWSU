@@ -19,10 +19,6 @@ namespace DataAccessLayer.Models
         public ScoringCategory ScoringCategory { get; set; }
 
         [Required]
-        [StringLength(128)]
-        public string ScoreCardFieldName { get; set; }
-
-        [Required]
         [Display(Name = "Description")]
         [StringLength(250)]
         public string ScoreCardFieldDescription { get; set; }
