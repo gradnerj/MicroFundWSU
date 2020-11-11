@@ -14,7 +14,7 @@ namespace DataAccessLayer.Models
         [Display(Name = "ScoringCategory")]
         public int ScoringCategoryId { get; set; }
 
-        [Required]
+        
         [ForeignKey("ScoringCategoryId")]
         public ScoringCategory ScoringCategory { get; set; }
 

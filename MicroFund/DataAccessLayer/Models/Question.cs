@@ -14,7 +14,6 @@ namespace DataAccessLayer.Models
         [Display(Name = "QuestionCategory")]
         public int QuestionCategoryId { get; set; }
 
-        [Required]
         [ForeignKey("QuestionCategoryId")]
         public QuestionCategory QuestionCategory { get; set; }
 
