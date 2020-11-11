@@ -21,9 +21,6 @@ namespace DataAccessLayer.Repository {
 
         ApplicationUser GetUserById(string id);
 
-        Task<IList<ApplicationStatus>> GetApplicationStatuses();
-
-        ApplicationStatus GetApplicationStatusObjById(int? id);
 
         #endregion
 

@@ -20,8 +20,6 @@ namespace MicroFundTests
         private IConfigurationRoot _config;
         private DbContextOptions<ApplicationDbContext> _options;
         private readonly ApplicationDbContext _context;
-        private readonly IRepository _repo;
-        private UserManager<IdentityUser> _userManager;
 
         public AccountUserTests()
         {
@@ -29,8 +27,6 @@ namespace MicroFundTests
             _config = builder.Build();
             _options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(_config.GetConnectionString("DefaultConnection")).Options;
             _context = new ApplicationDbContext(_options);
-           // _userManager = userManager;
-           // _repo = new Repository(_context, _userManager);
         }
 
         [TestMethod]

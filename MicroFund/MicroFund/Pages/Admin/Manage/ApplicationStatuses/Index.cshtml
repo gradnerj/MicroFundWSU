@@ -1,0 +1,42 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ApplicationStatuses.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Application Statuses</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationStatus[0].StatusDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationStatus[0].IsArchived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ApplicationStatus) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsArchived)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ApplicationStatusId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ApplicationStatusId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ApplicationStatusId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-purple-wsu mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"> <img src="~/images/WildcatMicrofund_horizontal-01_transparent_white.png" alt="logo" style="width:117px;height:40px;"/> </a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"> <img src="~/images/WildcatMicrofund_horizontal-01_transparent_white.png" alt="logo" style="width:117px;height:40px;" /> </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,16 +20,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        @if (User.IsInRole(Utility.StaticDetails.AdminRole)) {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
-                            <div class="dropdown-menu bg-purple-wsu">
-                                <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
-                                <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatus/Index">Application Status</a>
-                            </div>
-                        </li>
+                        @if (User.IsInRole(Utility.StaticDetails.AdminRole))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
+                                <div class="dropdown-menu bg-purple-wsu">
+                                    <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/AddressTypes/Index">Address Types</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ContactTypes/Index">Contact Types</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatuses/Index">Application Status</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/Questions/Index">Questions</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/QuestionCategories/Index">Question Categories</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoreCardFields/Index">Score Card Fields</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoringCategories/Index">Scoring Categories</a>
+                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/FollowUpTypes/Index">Follow Up Types</a>
+                                </div>
+                            </li>
                         }
-                        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole)) {
+                        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-page="/Applicant/Profile/Index">Profile</a>
                             </li>
@@ -40,15 +49,15 @@
                                 <a class="nav-link text-white" asp-page="/Applicant/Apply/Index">Apply</a>
                             </li>
                         }
-
-
                     </ul>
-                    @if (User.IsInRole(Utility.StaticDetails.JudgeRole)) {
+                    @if (User.IsInRole(Utility.StaticDetails.JudgeRole))
+                    {
                         <div class="row" style="text-align:center;">
                             <h3 class="text-white align-middle">&nbsp;&nbsp;&nbsp;Judge Dashboard</h3>
                         </div>
                     }
-                    @if (User.IsInRole(Utility.StaticDetails.MentorRole)) {
+                    @if (User.IsInRole(Utility.StaticDetails.MentorRole))
+                    {
 
                         @*<a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assignments</a>*@
                         <div class="row" style="text-align:center;">

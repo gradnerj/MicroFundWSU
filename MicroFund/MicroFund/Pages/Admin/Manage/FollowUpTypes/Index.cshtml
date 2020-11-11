@@ -1,0 +1,42 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.FollowUpTypes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Follow Up Types</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FollowUpType[0].FollowUpTypeDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FollowUpType[0].IsArchived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FollowUpType) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FollowUpTypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsArchived)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FollowUpTypeId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.FollowUpTypeId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FollowUpTypeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
