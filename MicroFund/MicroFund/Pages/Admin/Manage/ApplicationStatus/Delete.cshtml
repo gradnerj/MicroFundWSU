@@ -1,0 +1,15 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ApplicationStatus.DeleteModel
+@{
+}
+
+<div class="container">
+
+    <h1>Delete Application Status</h1>
+    <form method="post">
+        <input for="applicationStatusId" name="applicationStatusId" value="@Model.ApplicationStatusObj.ApplicationStatusId" type="hidden" />
+        Are you sure you want to delete application status: @Model.ApplicationStatusObj.StatusDescription
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+
+</div>

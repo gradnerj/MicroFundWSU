@@ -21,12 +21,13 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole(Utility.StaticDetails.AdminRole)) {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
-                                <div class="dropdown-menu bg-purple-wsu">
-                                    <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
-                                </div>
-                            </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
+                            <div class="dropdown-menu bg-purple-wsu">
+                                <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
+                                <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatus/Index">Application Status</a>
+                            </div>
+                        </li>
                         }
                         @if (User.IsInRole(Utility.StaticDetails.ApplicantRole)) {
                             <li class="nav-item">

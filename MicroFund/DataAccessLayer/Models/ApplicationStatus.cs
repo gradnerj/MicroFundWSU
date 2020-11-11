@@ -10,6 +10,7 @@ namespace DataAccessLayer.Models
         public int ApplicationStatusId { get; set; }
 
         [Required]
+        [Display(Name = "Status Description")]
         [StringLength(32)]
         public string StatusDescription { get; set; }
 

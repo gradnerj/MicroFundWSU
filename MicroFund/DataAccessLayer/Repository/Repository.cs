@@ -45,6 +45,18 @@ namespace DataAccessLayer.Repository {
         public ApplicationUser GetUserById(string id) {
             return  _context.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
         }
+
+        public async Task<IList<ApplicationStatus>> GetApplicationStatuses()
+        {
+            
+                return await _context.ApplicationStatus.ToListAsync();
+            
+        }
+
+        public ApplicationStatus GetApplicationStatusObjById(int? id)
+        {
+            return _context.ApplicationStatus.Where(x => x.ApplicationStatusId == id).FirstOrDefault();
+        }
         #endregion
 
         #region UPDATE Methods
