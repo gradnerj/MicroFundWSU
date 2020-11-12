@@ -45,6 +45,7 @@ namespace DataAccessLayer.Repository {
         public ApplicationUser GetUserById(string id) {
             return  _context.ApplicationUsers.Where(u => u.Id == id).FirstOrDefault();
         }
+
         #endregion
 
         #region UPDATE Methods

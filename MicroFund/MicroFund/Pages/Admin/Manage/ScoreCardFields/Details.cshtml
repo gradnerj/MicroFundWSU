@@ -1,0 +1,55 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ScoreCardFields.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ScoreCardField</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.ScoringCategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.ScoringCategory.ScoringCategoryDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.ScoreCardFieldDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.ScoreCardFieldDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.Weight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.Weight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.UpdatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.UpdatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.UpdatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.UpdatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.IsArchived)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.IsArchived)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ScoreCardField.ScoreCardFieldId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

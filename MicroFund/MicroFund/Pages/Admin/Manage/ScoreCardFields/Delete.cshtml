@@ -1,0 +1,58 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ScoreCardFields.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ScoreCardField</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.ScoringCategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.ScoringCategory.ScoringCategoryDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.ScoreCardFieldDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.ScoreCardFieldDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.Weight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.Weight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.UpdatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.UpdatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.UpdatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.UpdatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreCardField.IsArchived)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreCardField.IsArchived)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="ScoreCardField.ScoreCardFieldId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

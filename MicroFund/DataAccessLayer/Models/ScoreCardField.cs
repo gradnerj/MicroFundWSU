@@ -14,15 +14,12 @@ namespace DataAccessLayer.Models
         [Display(Name = "ScoringCategory")]
         public int ScoringCategoryId { get; set; }
 
-        [Required]
+        [Display(Name = "Category")]
         [ForeignKey("ScoringCategoryId")]
         public ScoringCategory ScoringCategory { get; set; }
 
         [Required]
-        [StringLength(128)]
-        public string ScoreCardFieldName { get; set; }
-
-        [Required]
+        [Display(Name = "Description")]
         [StringLength(250)]
         public string ScoreCardFieldDescription { get; set; }
 
@@ -30,13 +27,16 @@ namespace DataAccessLayer.Models
         public float Weight { get; set; }
 
         [Required]
+        [Display(Name = "Updated By")]
         [StringLength(128)]
         public string UpdatedBy { get; set; }
 
         [Required]
+        [Display(Name = "Updated Date")]
         public DateTime UpdatedDate { get; set; }
 
         [Required]
+        [Display(Name = "Is Archived")]
         public bool IsArchived { get; set; }
     }
 }

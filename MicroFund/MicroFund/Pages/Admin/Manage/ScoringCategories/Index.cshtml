@@ -1,0 +1,42 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ScoringCategories.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Scoring Categories</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoringCategory[0].ScoringCategoryDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScoringCategory[0].IsArchived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ScoringCategory) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScoringCategoryDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsArchived)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ScoringCategoryId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ScoringCategoryId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ScoringCategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

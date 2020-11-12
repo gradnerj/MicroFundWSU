@@ -1,0 +1,42 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ContactTypes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ContactType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ContactType.ContactTypeId" />
+            <div class="form-group">
+                <label asp-for="ContactType.ContactTypeDescription" class="control-label"></label>
+                <input asp-for="ContactType.ContactTypeDescription" class="form-control" />
+                <span asp-validation-for="ContactType.ContactTypeDescription" class="text-danger"></span>
+            </div>
+            <input asp-for="ContactType.UpdatedBy" type="hidden" value="@Model.CurrentUserId" />
+            <input asp-for="ContactType.UpdatedDate" type="hidden" value="@DateTime.Now" />
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ContactType.IsArchived" /> @Html.DisplayNameFor(model => model.ContactType.IsArchived)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

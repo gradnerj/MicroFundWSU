@@ -7,6 +7,10 @@ namespace DataAccessLayer.Repository {
     public interface IRepository {
 
         #region CREATE Methods
+
+
+
+
         #endregion
 
         #region RETRIEVE Methods
@@ -16,6 +20,8 @@ namespace DataAccessLayer.Repository {
         Task<string> GetUserRoleAsync(string id);
 
         ApplicationUser GetUserById(string id);
+
+
         #endregion
 
         #region UPDATE Methods

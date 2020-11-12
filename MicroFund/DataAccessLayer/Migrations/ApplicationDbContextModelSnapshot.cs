@@ -121,6 +121,11 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("ApplicationStatusId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
@@ -734,11 +739,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
-
-                    b.Property<string>("ScoreCardFieldName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
 
                     b.Property<int>("ScoringCategoryId")
                         .HasColumnType("int");

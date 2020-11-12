@@ -1,0 +1,43 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.ApplicationStatuses.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ApplicationStatus</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationStatus.StatusDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationStatus.StatusDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationStatus.UpdatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationStatus.UpdatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationStatus.UpdatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationStatus.UpdatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationStatus.IsArchived)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationStatus.IsArchived)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ApplicationStatus.ApplicationStatusId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

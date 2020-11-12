@@ -1,0 +1,49 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.Questions.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.QuestionCategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.QuestionCategory.QuestionCategoryDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.QuestionDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.QuestionDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.UpdatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.UpdatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.UpdatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.UpdatedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.IsArchived)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.IsArchived)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Question.QuestionId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

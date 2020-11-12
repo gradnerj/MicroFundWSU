@@ -23,6 +23,11 @@ namespace DataAccessLayer.Models
         public int ApplicationStatusId { get; set; }
 
         [Required]
+        [Display(Name ="Company Name")]
+        [StringLength(128)]
+        public string CompanyName { get; set; }
+
+        [Required]
         [ForeignKey("ApplicationStatusId")]
         public ApplicationStatus ApplicationStatus { get; set; }
 
