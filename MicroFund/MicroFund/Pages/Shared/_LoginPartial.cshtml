@@ -38,13 +38,15 @@
                     let nid = notifications[n]['NotificationID'];
                     let nMessage = notifications[n]['NotificationMessage'];
                     var route = "api/Notification/dropnotification/?notificationID=" + nid;
-                    middle = middle + `<a class="dropdown-item" href="/api/Notification/dropnotification?notificationid=${nid}">${nMessage}</a>`;
+                    middle = middle + `<a class="notLinks dropdown-item" href="/api/Notification/dropnotification?notificationid=${nid}">${nMessage}</a>`;
 
                 }
                 var str_html = openingDiv + middle + closingDiv;
                 el.insertAdjacentHTML('beforeend', str_html);
             }
-        }
+    }
+
+    
 </script>
 
 <ul class="navbar-nav">
