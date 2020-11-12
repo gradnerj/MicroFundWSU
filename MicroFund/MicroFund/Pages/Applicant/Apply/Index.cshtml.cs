@@ -17,8 +17,10 @@ namespace MicroFund.Pages.Applicant.Apply
         }
         public async Task OnGetAsync()
         {
-            var applicant = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == "8a89b953-3a97-4a64-90f3-4e3061e08691");
-    
+            
+            
+            //var applicant = await _context.Applicant.FirstOrDefaultAsync(u => u.Id == "a26730a9-0400-4c5c-8c3a-ee63b4956f71");
+            //DataAccessLayer.Models.Applicant app = (DataAccessLayer.Models.Applicant)applicant;
         }
     }
 }

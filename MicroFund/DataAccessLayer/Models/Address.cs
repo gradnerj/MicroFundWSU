@@ -14,9 +14,6 @@ namespace DataAccessLayer.Models
         [Display(Name = "Applicant")]
         public string ApplicantId { get; set; }
 
-        [Required]
-        [ForeignKey("ApplicantId")]
-        public Applicant Applicant { get; set; }
 
         [Display(Name = "AddressType")]
         public int AddressTypeId { get; set; }

@@ -7,8 +7,10 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    public class Applicant : ApplicationUser
+    public class Demographics
     {
+        [Key]
+        public string ApplicationUserId { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }

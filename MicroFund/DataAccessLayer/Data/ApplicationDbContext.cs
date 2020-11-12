@@ -34,7 +34,7 @@ namespace DataAccessLayer.Data {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<AddressType> AddressType { get; set; }
-        public DbSet<Applicant> Applicant { get; set; }
+        public DbSet<Demographics> Demographics { get; set; }
         public DbSet<Application> Application { get; set; }
         public DbSet<ApplicationStatus> ApplicationStatus { get; set; }
         public DbSet<AwardHistory> AwardHistory { get; set; }

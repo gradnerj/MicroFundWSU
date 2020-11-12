@@ -44,63 +44,63 @@ namespace MicroFundTests
             Assert.Fail("This should fail adding duplicate user");
         }
 
-        [TestMethod]
-        public void UpdateApplicant()
-        {
-            var user1 = new Applicant()
-            {
-                CreationDate = DateTime.Now,
-                FirstName = "UpdateApplicant",
-                LastName = "UnitTest",
-                DOB = DateTime.Now,
-                HighestEduCompleted = "Some College",
-                CurrentStudent = false,
-                WSUEntrepreneurshipMinor = false,
-                WSUEmployee = false,
-                WSUNumber = "",
-                Gender = "Female",
-                RaceEthnicity = "Caucasion",
-                Income = 100000.00f,
-                ResidenceEnvironment = "Rent",
-                VeteranStatus = true,
-                UpdatedBy = "",
-                UpdatedDate = DateTime.Now,
-                IsArchived = false
-            };
+        //[TestMethod]
+        //public void UpdateApplicant()
+        //{
+        //    var user1 = new Applicant()
+        //    {
+        //        CreationDate = DateTime.Now,
+        //        FirstName = "UpdateApplicant",
+        //        LastName = "UnitTest",
+        //        DOB = DateTime.Now,
+        //        HighestEduCompleted = "Some College",
+        //        CurrentStudent = false,
+        //        WSUEntrepreneurshipMinor = false,
+        //        WSUEmployee = false,
+        //        WSUNumber = "",
+        //        Gender = "Female",
+        //        RaceEthnicity = "Caucasion",
+        //        Income = 100000.00f,
+        //        ResidenceEnvironment = "Rent",
+        //        VeteranStatus = true,
+        //        UpdatedBy = "",
+        //        UpdatedDate = DateTime.Now,
+        //        IsArchived = false
+        //    };
 
-            _context.Applicant.Add(user1);
-            _context.SaveChanges();
+        //    _context.Applicant.Add(user1);
+        //    _context.SaveChanges();
 
-            var userFromDB = _context.Applicant.Where(x => x.FirstName.Equals("UpdateApplicant")).FirstOrDefault();
+        //    var userFromDB = _context.Applicant.Where(x => x.FirstName.Equals("UpdateApplicant")).FirstOrDefault();
 
-            user1.CreationDate = Convert.ToDateTime("11/01/2020");
-            user1.FirstName = "UnitTest";
-            user1.LastName = "UpdateApplicant";
-            user1.DOB = Convert.ToDateTime("08/01/1995");
-            user1.HighestEduCompleted = "BS";
-            user1.CurrentStudent = true;
-            user1.WSUEntrepreneurshipMinor = true;
-            user1.WSUEmployee = true;
-            user1.WSUNumber = "W1234567";
-            user1.Gender = "Male";
-            user1.RaceEthnicity = "American Indian";
-            user1.Income = 1.00f;
-            user1.ResidenceEnvironment = "Own";
-            user1.VeteranStatus = false;
-            user1.VeteranStatus = false;
-            user1.UpdatedBy = "";
-            user1.UpdatedDate = Convert.ToDateTime("11/09/2020");
-            user1.IsArchived = true;
+        //    user1.CreationDate = Convert.ToDateTime("11/01/2020");
+        //    user1.FirstName = "UnitTest";
+        //    user1.LastName = "UpdateApplicant";
+        //    user1.DOB = Convert.ToDateTime("08/01/1995");
+        //    user1.HighestEduCompleted = "BS";
+        //    user1.CurrentStudent = true;
+        //    user1.WSUEntrepreneurshipMinor = true;
+        //    user1.WSUEmployee = true;
+        //    user1.WSUNumber = "W1234567";
+        //    user1.Gender = "Male";
+        //    user1.RaceEthnicity = "American Indian";
+        //    user1.Income = 1.00f;
+        //    user1.ResidenceEnvironment = "Own";
+        //    user1.VeteranStatus = false;
+        //    user1.VeteranStatus = false;
+        //    user1.UpdatedBy = "";
+        //    user1.UpdatedDate = Convert.ToDateTime("11/09/2020");
+        //    user1.IsArchived = true;
 
-            var result = _context.Applicant.Update(user1);
-            _context.SaveChanges();
+        //    var result = _context.Applicant.Update(user1);
+        //    _context.SaveChanges();
 
-            Assert.AreEqual(userFromDB, user1);
+        //    Assert.AreEqual(userFromDB, user1);
 
-            _context.Applicant.Remove(userFromDB);
-            _context.SaveChanges();
+        //    _context.Applicant.Remove(userFromDB);
+        //    _context.SaveChanges();
 
-        }
+        //}
 
         [TestMethod]
         public void DuplicateAddresses()

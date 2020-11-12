@@ -96,6 +96,7 @@ namespace MicroFund.Areas.Identity.Pages.Account
                     _roleManager.CreateAsync(new IdentityRole(StaticDetails.MentorRole)).GetAwaiter().GetResult();
                 }
                 if (!await _roleManager.RoleExistsAsync(StaticDetails.ApplicantRole)) {
+          
                     _roleManager.CreateAsync(new IdentityRole(StaticDetails.ApplicantRole)).GetAwaiter().GetResult();
                 }
                 if (result.Succeeded)
