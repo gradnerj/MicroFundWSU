@@ -10,22 +10,33 @@ using DataAccessLayer.Models;
 
 namespace MicroFund.Pages.Mentor.Assignments
 {
-    public class IndexModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly DataAccessLayer.Data.ApplicationDbContext _context;
 
-        public IndexModel(DataAccessLayer.Data.ApplicationDbContext context)
+        public DetailsModel(DataAccessLayer.Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<MentorAssignment> MentorAssignment { get;set; }
+        public MentorAssignment MentorAssignment { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             MentorAssignment = await _context.MentorAssignment
                 .Include(m => m.Application)
-                .Include(m => m.Mentor).ToListAsync();
+                .Include(m => m.Mentor).FirstOrDefaultAsync(m => m.MentorAssignmentId == id);
+
+            if (MentorAssignment == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
     }
 }

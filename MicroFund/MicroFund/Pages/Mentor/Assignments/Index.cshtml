@@ -1,59 +1,72 @@
 ﻿@page
 @model MicroFund.Pages.Mentor.Assignments.IndexModel
+
 @{
+    ViewData["Title"] = "Index";
 }
 
+<h1>Index</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <h2>Mentor Assignment</h2>
-        </div>
-    </div>
-    <br /><br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Company Name
-                </th>
-                <th>
-                    Date Submitted
-                </th>
-                <th>
-                    Application Status
-                </th>
-                <th>
-                    Mentor Assigned
-                </th>
-                <th>
-                    Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                foreach (var app in Model.Applications)
-                {
-                    <tr>
-                        <td>
-                            @app.CompanyName
-                        </td>
-                        <td>
-                            @app.ApplicationCreationDate
-                        </td>
-                        <td>
-                            @app.ApplicationStatus
-                        </td>
-                        <td>
-                            @Model.MentorAssignments[app.ApplicationId + ""]
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-success" asp-page="/Mentor/Assignments/Update" asp-route-id="@app.ApplicationId">Update</a>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-</div>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].Mentor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].Application)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].DateAssigned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].ApprovedToPitchDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorAssignment[0].IsArchived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MentorAssignment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mentor.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Application.ApplicantId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAssigned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovedToPitchDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsArchived)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.MentorAssignmentId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.MentorAssignmentId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.MentorAssignmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
