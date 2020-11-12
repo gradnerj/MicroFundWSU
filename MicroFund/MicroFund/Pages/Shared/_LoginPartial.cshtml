@@ -6,7 +6,7 @@
         if (@User.Identity.IsAuthenticated.ToString().ToLower() == true) {
             const uID = "@UserManager.GetUserId(User)";
             const Http = new XMLHttpRequest();
-            const url = "https://localhost:44357/api/Notification/getnotscount/?userId=" + uID;
+            const url = "/api/Notification/getnotscount/?userId=" + uID;
             Http.open("GET", url);
             Http.send();
 
