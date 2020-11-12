@@ -2,25 +2,83 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<script>
+        if (@User.Identity.IsAuthenticated.ToString().ToLower() == true) {
+            const uID = "@UserManager.GetUserId(User)";
+            const Http = new XMLHttpRequest();
+            const url = "https://localhost:44357/api/Notification/getnotscount/?userId=" + uID;
+            Http.open("GET", url);
+            Http.send();
+
+            Http.onreadystatechange = (e) => {
+                const notiCount = JSON.parse(Http.responseText)["COUNT"];
+                
+                if (notiCount != 0) {
+                    document.getElementById("notiCounter").classList.add('badge-danger');
+                    document.getElementById("notiCounter").classList.add('badge-counter');
+                    document.getElementById('notiCounter').innerHTML = notiCount;
+                } else {
+                    document.getElementById("notiCounter").classList.remove('badge-danger');
+                    document.getElementById("notiCounter").classList.remove('badge-counter');
+                }
+
+            }
+            const Http1 = new XMLHttpRequest();
+            const url1 = "https://localhost:44357/api/Notification/getnots/?userId=" + uID;
+            Http1.open("GET", url1);
+            Http1.send();
+            Http1.onreadystatechange = (e) => {
+
+                var notifications = JSON.parse(Http1.responseText);
+                el = document.getElementById('notificationBell');
+                let openingDiv = `<div class='dropdown-menu dropdown-menu-right animate slideIn' aria-labelledby='navbarDropdown'>`;
+                let closingDiv = `</div>`;
+                let middle = ``;
+                for (n in notifications) {
+                    let nid = notifications[n]['NotificationID'];
+                    let nMessage = notifications[n]['NotificationMessage'];
+                    var route = "api/Notification/dropnotification/?notificationID=" + nid;
+                    middle = middle + `<a class="notLinks dropdown-item" href="/api/Notification/dropnotification?notificationid=${nid}">${nMessage}</a>`;
+
+                }
+                var str_html = openingDiv + middle + closingDiv;
+                el.insertAdjacentHTML('beforeend', str_html);
+            }
+    }
+
+    
+</script>
+
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-white">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+    @if (SignInManager.IsSignedIn(User)) {
+
+
+        <li id="notificationBell" class="nav-item dropdown no-arrow">
+            <p class="d-none">@UserManager.GetUserId(User)</p>
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-bell mx-1"></i>
+                <span class="badge" id="notiCounter"></span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+            </form>
+        </li>
+    } else {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
 </ul>
+@section Scripts{
+    
+    
+}

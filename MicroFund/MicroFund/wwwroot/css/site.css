@@ -1,14 +1,64 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿
+
+
+a.notLinks:hover, a.notLinks:active {
+    color: #4E2A67 !important;
+    font-size: 125%;
+    background-color: lightgray;
+}
+
+/*ToolTip Styling */
+
+.tooltipevent {
+    width: 200px;
+    /*    height:px;*/
+    background: White;
+    color: black;
+    position: absolute;
+    z-index: 10001;
+    transform: translate3d(-50%,-100%,0);
+    font-size: 0.8rem;
+    box-shadow: 1px 1px 3px 0px #888888;
+    line-height: 1rem;
+}
+
+    .tooltipevent div {
+        padding: 5px;
+    }
+
+#tooltipheader {
+    color: blue;
+    padding-left: 10px
+}
+
+#tooltipdue {
+    margin: 0px;
+    padding: 0px;
+    padding-left: 10px;
+}
+
+#skinnybreak {
+    margin: 0px;
+    padding: 0px;
+}
+
+#tooltiplink {
+    color: blue;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 .bg-purple-wsu {
     background-color: #4E2A67;
 }
 
-.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
+/*.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
     background-color: white !important;
     color: #4E2A67 !important;
-}
+}*/
 
 a.navbar-brand {
   white-space: normal;
@@ -16,11 +66,11 @@ a.navbar-brand {
   word-break: break-all;
 }
 
- Provide sufficient contrast against white background 
-a {
+ /*Provide sufficient contrast against white background*/ 
+/*a {
   color: #0366d6;
 }
-
+*/
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
