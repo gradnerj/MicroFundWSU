@@ -5,57 +5,51 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h1>Mentor Assignment Details</h1>
+<h4>@Model.Application.CompanyName | Application # @Model.Iteration</h4>
 <div>
-    <h4>MentorAssignment</h4>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            Applicant Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Applicant.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            Application Created
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ApplicationCreationDate)
+        </dd>
+        <dt class="col-sm-2">
+            Application Status
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Application.ApplicationStatus.StatusDescription)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MentorAssignment.Mentor)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorAssignment.Mentor.Id)
+            @Html.DisplayFor(model => model.Mentor.FullName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorAssignment.Application)
+            Mentor Assigned By
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorAssignment.Application.ApplicantId)
+            @Html.DisplayFor(model => model.UpdatedByName)
         </dd>
+
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorAssignment.DateAssigned)
+            Mentor Assigned On
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MentorAssignment.DateAssigned)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorAssignment.ApprovedToPitchDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorAssignment.ApprovedToPitchDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorAssignment.UpdatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorAssignment.UpdatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorAssignment.UpdatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorAssignment.UpdatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorAssignment.IsArchived)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorAssignment.IsArchived)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.MentorAssignment.MentorAssignmentId">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Application.ApplicationId">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>

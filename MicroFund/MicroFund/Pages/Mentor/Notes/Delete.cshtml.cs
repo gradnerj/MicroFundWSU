@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 
-namespace MicroFund.Pages.Mentor.Assignments
+namespace MicroFund.Pages.Mentor.Notes
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace MicroFund.Pages.Mentor.Assignments
         }
 
         [BindProperty]
-        public MentorAssignment MentorAssignment { get; set; }
+        public MentorNote MentorNote { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,11 +29,10 @@ namespace MicroFund.Pages.Mentor.Assignments
                 return NotFound();
             }
 
-            MentorAssignment = await _context.MentorAssignment
-                .Include(m => m.Application)
-                .Include(m => m.Mentor).FirstOrDefaultAsync(m => m.MentorAssignmentId == id);
+            MentorNote = await _context.MentorNote
+                .Include(m => m.MentorAssignment).FirstOrDefaultAsync(m => m.MentorNoteId == id);
 
-            if (MentorAssignment == null)
+            if (MentorNote == null)
             {
                 return NotFound();
             }
@@ -47,11 +46,11 @@ namespace MicroFund.Pages.Mentor.Assignments
                 return NotFound();
             }
 
-            MentorAssignment = await _context.MentorAssignment.FindAsync(id);
+            MentorNote = await _context.MentorNote.FindAsync(id);
 
-            if (MentorAssignment != null)
+            if (MentorNote != null)
             {
-                _context.MentorAssignment.Remove(MentorAssignment);
+                _context.MentorNote.Remove(MentorNote);
                 await _context.SaveChangesAsync();
             }
 

@@ -7,25 +7,36 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repository;
+using Microsoft.AspNetCore.Identity;
 
 namespace MicroFund.Pages.Mentor.Assignments
 {
     public class IndexModel : PageModel
     {
-        private readonly DataAccessLayer.Data.ApplicationDbContext _context;
 
-        public IndexModel(DataAccessLayer.Data.ApplicationDbContext context)
+        private readonly IRepository _repository;
+        public IList<IdentityUser> Mentors { get; set; }
+        public Dictionary<string, string> MentorAssignments { get; set; }
+        public IList<Application> Applications { get; set; }
+        public int Iteration { get; set; }
+        public Dictionary<int, int> ApplicationIterations { get; set; }
+
+
+        public IndexModel(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
-
-        public IList<MentorAssignment> MentorAssignment { get;set; }
 
         public async Task OnGetAsync()
         {
-            MentorAssignment = await _context.MentorAssignment
-                .Include(m => m.Application)
-                .Include(m => m.Mentor).ToListAsync();
+            MentorAssignments = new Dictionary<string, string>();
+            ApplicationIterations = new Dictionary<int, int>();
+            
+            Mentors = await _repository.GetAllMentorsAsync();
+            MentorAssignments = await _repository.GetAllMentorAssignmentsAsync();
+            Applications = await _repository.GetAllApplicationsAsync();
+            ApplicationIterations = await _repository.GetAllApplicationIterationsAsync();
         }
     }
 }

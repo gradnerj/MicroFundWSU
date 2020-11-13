@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 
-namespace MicroFund.Pages.Mentor.Assignments
+namespace MicroFund.Pages.Mentor.Notes
 {
     public class CreateModel : PageModel
     {
@@ -21,13 +21,12 @@ namespace MicroFund.Pages.Mentor.Assignments
 
         public IActionResult OnGet()
         {
-        ViewData["ApplicationId"] = new SelectList(_context.Application, "ApplicationId", "ApplicantId");
-        ViewData["MentorId"] = new SelectList(_context.Users, "Id", "Id");
+        ViewData["MentorAssignmentId"] = new SelectList(_context.MentorAssignment, "MentorAssignmentId", "MentorId");
             return Page();
         }
 
         [BindProperty]
-        public MentorAssignment MentorAssignment { get; set; }
+        public MentorNote MentorNote { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -38,7 +37,7 @@ namespace MicroFund.Pages.Mentor.Assignments
                 return Page();
             }
 
-            _context.MentorAssignment.Add(MentorAssignment);
+            _context.MentorNote.Add(MentorNote);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
