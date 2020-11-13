@@ -43,7 +43,7 @@ namespace MicroFund.Pages.Mentor.Assignments
             //set mentor object
             Mentor = _repository.GetMentorByApplicationId(id);
             //get application number of application and business
-            Iteration = await _repository.GetIterationByApplicantId(Application.ApplicationId, Application.ApplicantId);            
+            Iteration = await _repository.GetIterationByApplicantId(Application.ApplicationId, Application.ApplicantId, Application.CompanyName);            
 
             if(Mentor != null)
             {

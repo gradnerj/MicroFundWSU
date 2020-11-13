@@ -48,7 +48,7 @@ namespace MicroFundTests
             {
                 ApplicantId = "8a89b953-3a97-4a64-90f3-4e3061e08691",
                 ApplicationStatusId = 4,
-                CompanyName = "Company 2",
+                CompanyName = "Stickers for Men",
                 ApplicationCreationDate = DateTime.Now,
                 UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
                 UpdatedDate = DateTime.Now,

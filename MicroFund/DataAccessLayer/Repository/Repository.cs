@@ -92,10 +92,10 @@ namespace DataAccessLayer.Repository {
             return GetUserById(mentorId);
         }
 
-        public async Task<int> GetIterationByApplicantId(int applicationId, string applicantId)
+        public async Task<int> GetIterationByApplicantId(int applicationId, string applicantId, string companyName)
         {
             List<Application> applicationList = new List<Application>();
-            applicationList = await _context.Application.Where(x => x.ApplicantId == applicantId).ToListAsync();
+            applicationList = await _context.Application.Where(x => x.ApplicantId == applicantId && x.CompanyName.Equals(companyName)).ToListAsync();
             var application = GetApplicationById(applicationId);
             return applicationList.IndexOf(application) + 1;
         }
@@ -131,7 +131,7 @@ namespace DataAccessLayer.Repository {
 
                     foreach (var app in userApplications)
                     {
-                        iterationsDict.Add(app.ApplicationId, await GetIterationByApplicantId(app.ApplicationId, user.Id));
+                        iterationsDict.Add(app.ApplicationId, await GetIterationByApplicantId(app.ApplicationId, user.Id, company));
                     }
                 }
                 

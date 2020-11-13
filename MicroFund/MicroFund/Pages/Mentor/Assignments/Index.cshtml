@@ -31,10 +31,10 @@
     <tbody>
         @foreach (var app in Model.Applications)
         {
-            string redText = "";
-            if (app.ApplicationStatus.StatusDescription.Equals("unassigned"))
+            string selectedRow = "";
+            if (app.ApplicationStatus.StatusDescription.Equals("Approved"))
             {
-                redText = "text-danger";
+                selectedRow = "text-danger font-weight-bold";
             }
         <tr>
             <td>
@@ -43,10 +43,10 @@
             <td>
                 @Model.ApplicationIterations[app.ApplicationId]
             </td>
-            <td class="@redText">
+            <td>
                 @app.ApplicationStatus.StatusDescription
             </td>
-            <td>
+            <td class="@selectedRow">
                 @Model.MentorAssignments[app.ApplicationId + ""]
             </td>
             <td>
