@@ -21,17 +21,14 @@ namespace DataAccessLayer.Repository {
 
         Application GetApplicationById(int id);
         Task<IList<Application>> GetAllApplicationsAsync();
-        Task<IList<Application>> GetAllApplicationsByApplicantIdAndCompanyNameAsync(string id, string name);
         Task<Dictionary<int, int>> GetAllApplicationIterationsAsync();
-        ApplicationUser GetApplicantByApplicationId(int id);
-        Task<IList<IdentityUser>> GetAllApplicantsAsync();        
-        Task<int> GetIterationByApplicantId(int applicationId, string applicantId, string companyName);        
+        ApplicationUser GetApplicantByApplicationId(int id);            
+        Task<int> GetIteration(int applicationId, string applicantId, string companyName);        
         ApplicationUser GetMentorByApplicationId(int id);
         Task<IList<IdentityUser>> GetAllMentorsAsync();
         Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync();
         MentorAssignment GetMentorAssignmentByApplicationId(int id);
         int GetStatusIdByName(string role);
-        Task<IList<string>> GetAllCompaniesByApplicantIdAsync(string id);
 
         #endregion
 

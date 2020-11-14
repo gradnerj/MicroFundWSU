@@ -39,7 +39,7 @@ namespace MicroFund.Pages.Mentor.Assignments
             Applicant = _repository.GetApplicantByApplicationId(id);
             Application = _repository.GetApplicationById(id);
             Mentor = _repository.GetMentorByApplicationId(id);
-            Iteration = await _repository.GetIterationByApplicantId(Application.ApplicationId, Application.ApplicantId, Application.CompanyName);
+            Iteration = await _repository.GetIteration(Application.ApplicationId, Application.ApplicantId, Application.CompanyName);
             MentorAssignment = _repository.GetMentorAssignmentByApplicationId(id);
             if(MentorAssignment != null)
             {

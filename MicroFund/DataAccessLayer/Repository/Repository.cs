@@ -92,7 +92,7 @@ namespace DataAccessLayer.Repository {
             return GetUserById(mentorId);
         }
 
-        public async Task<int> GetIterationByApplicantId(int applicationId, string applicantId, string companyName)
+        public async Task<int> GetIteration(int applicationId, string applicantId, string companyName)
         {
             List<Application> applicationList = new List<Application>();
             applicationList = await _context.Application.Where(x => x.ApplicantId == applicantId && x.CompanyName.Equals(companyName)).ToListAsync();
@@ -100,38 +100,23 @@ namespace DataAccessLayer.Repository {
             return applicationList.IndexOf(application) + 1;
         }
 
-        public async Task<IList<Application>> GetAllApplicationsByApplicantIdAndCompanyNameAsync(string id, string name)
-        {
-            return await _context.Application.Where(x => x.ApplicantId.Equals(id) && x.CompanyName.Equals(name)).OrderBy(x => x.ApplicationCreationDate).ToListAsync();
-        }
-
-        public async Task<IList<string>> GetAllCompaniesByApplicantIdAsync(string id)
-        {
-            return await _context.Application.Where(x => x.ApplicantId.Equals(id)).Select(x => x.CompanyName).Distinct().ToListAsync();
-        }
-
-        public async Task<IList<IdentityUser>> GetAllApplicantsAsync()
-        {
-            return await _userManager.GetUsersInRoleAsync("Applicant");
-        }
-
         public async Task<Dictionary<int, int>> GetAllApplicationIterationsAsync()
         {
             var iterationsDict = new Dictionary<int, int>();
-            List<IdentityUser> applicants = (List<IdentityUser>)await GetAllApplicantsAsync();
+            List<IdentityUser> applicants = (List<IdentityUser>)await _userManager.GetUsersInRoleAsync("Applicant");
 
             foreach (var user in applicants)
             {
 
-                var userCompanies = await GetAllCompaniesByApplicantIdAsync(user.Id);
+                var userCompanies = await _context.Application.Where(x => x.ApplicantId.Equals(user.Id)).Select(x => x.CompanyName).Distinct().ToListAsync();
 
-                foreach(var company in userCompanies)
+                foreach (var company in userCompanies)
                 {
-                    var userApplications = await GetAllApplicationsByApplicantIdAndCompanyNameAsync(user.Id, company);
+                    var userApplications = await _context.Application.Where(x => x.ApplicantId.Equals(user.Id) && x.CompanyName.Equals(company)).OrderBy(x => x.ApplicationCreationDate).ToListAsync();
 
                     foreach (var app in userApplications)
                     {
-                        iterationsDict.Add(app.ApplicationId, await GetIterationByApplicantId(app.ApplicationId, user.Id, company));
+                        iterationsDict.Add(app.ApplicationId, await GetIteration(app.ApplicationId, user.Id, company));
                     }
                 }
                 
