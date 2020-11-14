@@ -19,6 +19,9 @@ namespace DataAccessLayer.Models
         public MentorAssignment MentorAssignment { get; set; }
 
         [Required]
+        public DateTime MeetingDate { get; set; }
+
+        [Required]
         [StringLength(250)]
         public string Notes { get; set; }
 
