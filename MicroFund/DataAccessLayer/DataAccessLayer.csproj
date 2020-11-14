@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20201107184222_AppUserAsDbSet.Designer.cs" />
     <Compile Remove="Migrations\20201107231915_MovedIsArchivedForUsers.cs" />
     <Compile Remove="Migrations\20201107231915_MovedIsArchivedForUsers.Designer.cs" />
+    <Compile Remove="Migrations\20201113152758_addedAddress_Demographics_Contacts_to_ApplicationUser.cs" />
+    <Compile Remove="Migrations\20201113152758_addedAddress_Demographics_Contacts_to_ApplicationUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

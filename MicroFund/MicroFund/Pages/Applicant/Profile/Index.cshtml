@@ -3,4 +3,176 @@
 @{
 }
 
-<p>This page is under construction!</p>
+<div class="container-fluid">
+    <div class="col-sm-10 mx-auto border border-dark">
+       
+        <form method="post" class="px-3">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="h1">User Profile</div>
+                </div>
+            </div>
+            <div class="h5 text-left border-bottom my-2 pb-2">
+                Personal Information
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label class="col-form-label" asp-for="Input.FirstName"></label>
+                    <input class="form-control" asp-for="Input.FirstName" />
+                    <span class="text-danger" asp-validation-for="Input.FirstName"></span>
+                </div>
+                <div class="col form-group">
+                    <label class="col-form-label" asp-for="Input.LastName"></label>
+                    <input class="form-control" asp-for="Input.LastName" />
+                    <span class="text-danger" asp-validation-for="Input.LastName"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-8 form-group">
+                    <label class="col-form-label" asp-for="Input.Email"></label>
+                    <input class="form-control" asp-for="Input.Email" />
+                    <span class="text-danger" asp-validation-for="Input.Email"></span>
+                </div>
+                <div class="col-4 form-group">
+                    <label class="col-form-label" asp-for="Input.ContactInfoDetail">Cell Phone</label>
+                    <input class="form-control" asp-for="Input.ContactInfoDetail" />
+                    <span class="text-danger" asp-validation-for="Input.ContactInfoDetail"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" asp-for="Input.Street"></label>
+                <input class="form-control" asp-for="Input.Street" />
+                <span class="text-danger" asp-validation-for="Input.Street"></span>
+            </div>
+            <div class="form-row">
+                <div class="col-6 form-group">
+                    <label class="col-form-label" asp-for="Input.City"></label>
+                    <input class="form-control" asp-for="Input.City" />
+                    <span class="text-danger" asp-validation-for="Input.City"></span>
+                </div>
+                <div class="col-3 form-group">
+                    <label class="col-form-label" asp-for="Input.State"></label>
+                    <input class="form-control" asp-for="Input.State" />
+                    <span class="text-danger" asp-validation-for="Input.State"></span>
+                </div>
+                <div class="col-3 form-group">
+                    <label class="col-form-label" asp-for="Input.Zip"></label>
+                    <input class="form-control" asp-for="Input.Zip" />
+                    <span class="text-danger" asp-validation-for="Input.Zip"></span>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="col-form-label" asp-for="Input.Country"></label>
+                <input class="form-control" asp-for="Input.Country" />
+                <span class="text-danger" asp-validation-for="Input.Country"></span>
+            </div>
+            <div class="h5 text-left border-bottom my-2 pb-2">
+                Demographic Information
+            </div>
+            <div class="form-row">
+                <div class="col-4 form-group">
+                    <label class="col-form-label" asp-for="Input.Gender"></label>
+                    <select class="form-control" asp-for="Input.Gender" id="gender">
+                        <option value="">-Select an option-</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Transgender">Transgender</option>
+                        <option value="Non-Binary">Non-Binary</option>
+                        <option value="Prefer not to answer">Prefer not to answer</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Input.Gender"></span>
+                </div>
+                <div class="col-4 form-group">
+                    <label class="col-form-label" asp-for="Input.RaceEthnicity"></label>
+                    <select class="form-control" asp-for="Input.RaceEthnicity">
+                        <option value="">-Select an option-</option>
+                        <option value="African American/Black">African American/Black</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Pacific Islander">Pacific Islander</option>
+                        <option value="White">White</option>
+                        <option value="Hispanic">Hispanic/Latino</option>
+                        <option value="Native American">Native American</option>
+                        <option value="Bi-racial">Bi-racial</option>
+                        <option value="Prefer not to answer">Prefer not to answer</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Input.RaceEthnicity"></span>
+                </div>
+                <div class="col-4 form-group">
+                    <label class="col-form-label" asp-for="Input.DOB"></label>
+                    <input class="form-control" type="date" asp-for="Input.DOB" />
+                    <span class="text-danger" asp-validation-for="Input.DOB"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-3 form-group">
+                    <label class="col-form-label" asp-for="Input.Income"></label>
+                    <input class="form-control" asp-for="Input.Income" />
+                    <span class="text-danger" asp-validation-for="Input.Income"></span>
+                </div>
+                <div class="col-5 form-group">
+                    <label class="col-form-label" asp-for="Input.HighestEduCompleted">Highest Level of Education Completed</label>
+                    <select class="form-control" asp-for="Input.HighestEduCompleted">
+                        <option value="">-Select an option-</option>
+                        <option value="Less than high school">Less than high school</option>
+                        <option value="High school graduate/GED">High school graduate/GED</option>
+                        <option value="Vocational/trade/technical">Vocational/trade/technical school</option>
+                        <option value="Some college">Some College</option>
+                        <option value="Bachelor's degree">Bachelor's degree</option>
+                        <option value="Some graduate school">Some graduate school</option>
+                        <option value="Graduate degree">Graduate degree</option>
+                        <option value="Doctoral degree">Doctoral degree</option>
+                        <option value="Prefer not to answer">Prefer not to answer</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Input.HighestEduCompleted"></span>
+                </div>
+                <div class="col-4 form-group">
+                    <label class="col-form-label" asp-for="Input.ResidenceEnvironment"></label>
+                    <select class="form-control" asp-for="Input.ResidenceEnvironment">
+                        <option value="">-Select an option-</option>
+                        <option value="Suburb">Suburb</option>
+                        <option value="Rural">Rural</option>
+                        <option value="Urban">Urban</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Input.ResidenceEnvironment"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label">
+                    Check all those that apply
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input asp-for="Input.CurrentStudent" /> I am currently attending school
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input asp-for="Input.VeteranStatus" /> I am currently in an active military status
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input asp-for="Input.WSUEntrepreneurshipMinor" /> I am currently enrolled in the Weber State University's Entrepreneurship Minor
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input asp-for="Input.WSUEmployee" /> I am a Weber State employee
+                </label>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label">
+                    If you are Weber State student please provide your
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label class="col-form-label" asp-for="Input.WSUNumber"></label>
+                <input class="form-control" asp-for="Input.WSUNumber" />
+            </div>
+            <div class="col-4 mx-auto my-3">
+                <button type="submit" class="btn btn-block text-white" style="border: 1px solid #4E2A67; background-color: #4E2A67">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
