@@ -138,37 +138,40 @@
             </div>
             <div class="form-row">
                 <div class="col-form-label">
-                    Check all those that apply
+                    Check all those that apply:
                 </div>
             </div>
-            <div class="form-group">
-                <label>
-                    <input asp-for="Input.CurrentStudent" /> I am currently attending school
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input asp-for="Input.VeteranStatus" /> I am currently in an active military status
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input asp-for="Input.WSUEntrepreneurshipMinor" /> I am currently enrolled in the Weber State University's Entrepreneurship Minor
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input asp-for="Input.WSUEmployee" /> I am a Weber State employee
-                </label>
+            <div class="col border">
+                <div class="form-group" style="margin-top: 1rem">
+                    <label>
+                        <input asp-for="Input.CurrentStudent" /> I am currently attending school
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input asp-for="Input.VeteranStatus" /> I am currently in an active military status
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input asp-for="Input.WSUEntrepreneurshipMinor" /> I am currently enrolled in the Weber State University's Entrepreneurship Minor
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input asp-for="Input.WSUEmployee" /> I am a Weber State employee
+                    </label>
+                </div>
             </div>
             <div class="form-row">
                 <div class="col-form-label">
-                    If you are Weber State student please provide your
+                    If you are Weber State student please provide your W#:
                 </div>
             </div>
             <div class="form-group col-4">
                 <label class="col-form-label" asp-for="Input.WSUNumber"></label>
                 <input class="form-control" asp-for="Input.WSUNumber" />
+                <span class="text-danger" asp-validation-for="Input.WSUNumber"></span>
             </div>
             <div class="col-4 mx-auto my-3">
                 <button type="submit" class="btn btn-block text-white" style="border: 1px solid #4E2A67; background-color: #4E2A67">Submit</button>

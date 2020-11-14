@@ -43,7 +43,7 @@ namespace MicroFund.Pages.Applicant.Profile
             {
                 if (User.IsInRole(StaticDetails.JudgeRole))
                 {
-                    return Redirect("/Judge/Dashboard");
+                    return RedirectToPage("/Judge/Dashboard");
                 }
                 if (User.IsInRole(StaticDetails.MentorRole))
                 {
@@ -208,9 +208,11 @@ namespace MicroFund.Pages.Applicant.Profile
             [DisplayName("Last Name")]
             public string LastName { get; set; }
             [Required]
+            [EmailAddress]
             public string Email { get; set; }
             [Required]
             [DisplayName("Cell Phone")]
+            [Phone(ErrorMessage = "Please provide a valid phone number.")]
             public string ContactInfoDetail { get; set; }
             [Required]
             public string Street { get; set; }
@@ -232,13 +234,16 @@ namespace MicroFund.Pages.Applicant.Profile
             public DateTime DOB { get; set; }
             public float Income { get; set; }
             [Required]
+            [DisplayName("Level of education completed")]
             public string HighestEduCompleted { get; set; }
             [Required]
+            [DisplayName("Residence Environment")]
             public string ResidenceEnvironment { get; set; }
             public bool CurrentStudent { get; set; }
             public bool VeteranStatus { get; set; }
             public bool WSUEntrepreneurshipMinor { get; set; }
             public bool WSUEmployee { get; set; }
+            [RegularExpression("^W{1}[0-9]{8}", ErrorMessage = "Please provide a valid W#, a W followed by 8 digits")]
             public string WSUNumber { get; set; }
         }
     }
