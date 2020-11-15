@@ -7,21 +7,39 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repository;
+using System.Security.Claims;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
     public class CreateModel : PageModel
     {
-        private readonly DataAccessLayer.Data.ApplicationDbContext _context;
+        private readonly IRepository _repository;
+        public IList<Application> MentorApplications { get; set; }
+        public string CurrentUserId { get; set; }
+        public Dictionary<int, string> ApplicationApplicantPairs { get; set; }
+        public bool IsApproved { get; set; }
 
-        public CreateModel(DataAccessLayer.Data.ApplicationDbContext context)
+        public CreateModel(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["MentorAssignmentId"] = new SelectList(_context.MentorAssignment, "MentorAssignmentId", "MentorId");
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            CurrentUserId = claim.Value;
+
+            var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);
+            var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
+            ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
+
+            //MentorApplications = await _repository.GetMentorApplicationsAsync(CurrentUserId);
+            //ApplicationApplicantPairs = await _repository.GetApplicationIdApplicantNamePairs(MentorApplications);
+            //MentorNote = await _repository.GetMentorNotes(CurrentUserId);
+
             return Page();
         }
 
@@ -37,8 +55,8 @@ namespace MicroFund.Pages.Mentor.Notes
                 return Page();
             }
 
-            _context.MentorNote.Add(MentorNote);
-            await _context.SaveChangesAsync();
+            //_context.MentorNote.Add(MentorNote);
+            //await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

@@ -42,7 +42,7 @@ namespace MicroFundTests
             };
 
             _context.Application.Add(app1);
-            */
+            
 
             var app2 = new Application()
             {
@@ -56,6 +56,69 @@ namespace MicroFundTests
             };
 
             _context.Application.Add(app2);
+            _context.SaveChanges();
+            */
+
+            var note1 = new MentorNote()
+            {
+                MentorAssignmentId = 13,
+                MeetingDate = Convert.ToDateTime("10/15/2020"),
+                Notes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem arcu, varius ultrices turpis nec, vulputate dapibus lacus. Sed consequat quis lectus vitae cursus.",
+                UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
+                UpdatedDate = DateTime.Now
+            };
+
+            var note2 = new MentorNote()
+            {
+                MentorAssignmentId = 14,
+                MeetingDate = Convert.ToDateTime("10/16/2020"),
+                Notes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem arcu, varius ultrices turpis nec, vulputate dapibus lacus. Sed consequat quis lectus vitae cursus.",
+                UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
+                UpdatedDate = DateTime.Now
+            };
+
+            var note3 = new MentorNote()
+            {
+                MentorAssignmentId = 15,
+                MeetingDate = Convert.ToDateTime("10/17/2020"),
+                Notes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem arcu, varius ultrices turpis nec, vulputate dapibus lacus. Sed consequat quis lectus vitae cursus.",
+                UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
+                UpdatedDate = DateTime.Now
+            };
+
+            var note4 = new MentorNote()
+            {
+                MentorAssignmentId = 13,
+                MeetingDate = Convert.ToDateTime("10/20/2020"),
+                Notes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem arcu, varius ultrices turpis nec, vulputate dapibus lacus. Sed consequat quis lectus vitae cursus.",
+                UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
+                UpdatedDate = DateTime.Now
+            };
+
+            var note5 = new MentorNote()
+            {
+                MentorAssignmentId = 13,
+                MeetingDate = Convert.ToDateTime("10/25/2020"),
+                Notes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem arcu, varius ultrices turpis nec, vulputate dapibus lacus. Sed consequat quis lectus vitae cursus.",
+                UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
+                UpdatedDate = DateTime.Now
+            };
+
+            var note6 = new MentorNote()
+            {
+                MentorAssignmentId = 14,
+                MeetingDate = Convert.ToDateTime("10/19/2020"),
+                Notes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lorem arcu, varius ultrices turpis nec, vulputate dapibus lacus. Sed consequat quis lectus vitae cursus.",
+                UpdatedBy = "c8fd0d0f-6360-4c55-bc82-b7f24b69130b",
+                UpdatedDate = DateTime.Now
+            };
+
+            _context.MentorNote.Add(note1);
+            _context.MentorNote.Add(note2);
+            _context.MentorNote.Add(note3);
+            _context.MentorNote.Add(note4);
+            _context.MentorNote.Add(note5);
+            _context.MentorNote.Add(note6);
             _context.SaveChanges();
         }
     }

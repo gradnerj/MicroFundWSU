@@ -16,7 +16,7 @@ namespace MicroFundTests
     [TestClass]
     public class AccountUserTests
     {
-
+        /*
         private IConfigurationRoot _config;
         private DbContextOptions<ApplicationDbContext> _options;
         private readonly ApplicationDbContext _context;
@@ -163,6 +163,6 @@ namespace MicroFundTests
             _context.SaveChanges();
 
         }
-
+        */
     }
 }

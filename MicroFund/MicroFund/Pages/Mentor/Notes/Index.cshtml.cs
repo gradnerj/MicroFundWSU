@@ -7,24 +7,32 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repository;
+using System.Security.Claims;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
     public class IndexModel : PageModel
     {
-        private readonly DataAccessLayer.Data.ApplicationDbContext _context;
+        
+        private readonly IRepository _repository;
+        public string CurrentUserId { get; set; }
 
-        public IndexModel(DataAccessLayer.Data.ApplicationDbContext context)
+        public IndexModel(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IList<MentorNote> MentorNote { get;set; }
 
         public async Task OnGetAsync()
         {
-            MentorNote = await _context.MentorNote
-                .Include(m => m.MentorAssignment).ToListAsync();
+
+            //get current user in order to set updatedby attribute on form
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            CurrentUserId = claim.Value;
+            MentorNote = await _repository.GetMentorNotes(CurrentUserId);
         }
     }
 }

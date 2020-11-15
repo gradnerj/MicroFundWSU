@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Meeting Notes</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,19 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MentorNote[0].MentorAssignment)
+                Company
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MentorNote[0].Notes)
+                App Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MentorNote[0].UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MentorNote[0].UpdatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MentorNote[0].IsArchived)
+                Meeting Date
             </th>
             <th></th>
         </tr>
@@ -35,19 +29,13 @@
 @foreach (var item in Model.MentorNote) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MentorAssignment.MentorId)
+                @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Notes)
+                @Html.DisplayFor(modelItem => item.MentorAssignment.Application.ApplicationStatus.StatusDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsArchived)
+                @Html.DisplayFor(modelItem => item.MeetingDate)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
