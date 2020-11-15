@@ -24,7 +24,7 @@ namespace MicroFund.Pages.Admin.Pitch {
         public float[] AverageCategoryScores { get; set; }
         public void OnGet(int eventid)
         {
-            PEvent = _context.PitchEvents.FirstOrDefault(e => e.PitchId == eventid);
+            PEvent = _context.PitchEvents.FirstOrDefault(e => e.PitchEventId == eventid);
             Pitches = _context.Pitch.Where(p => p.PitchDate == PEvent.PitchDate).Include(p => p.Application);
             var pitchIds = Pitches.Select(p => p.PitchId).ToList();
             var userIds = Pitches.Select(p => p.Application.ApplicantId).ToList();
