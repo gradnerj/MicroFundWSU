@@ -35,7 +35,7 @@ namespace DataAccessLayer.Models
 
 
 
-        public ScoringCategory ScoreCardCategory { get; set; } 
+        public ScoreCardField ScoreCardField { get; set; } 
 
         [StringLength(250)]
         public string Comment { get; set; }
