@@ -19,10 +19,8 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         var pitches = JSON.parse('@Html.Raw(Json.Serialize(Model.Events))');
-        console.log(pitches);
         var evs = [];
         for (var key in pitches) {
-            console.log(pitches[key]);
             evs.push({
                 id: pitches[key]['pitchId'],
                 title: 'Pitch: ' + pitches[key]['pitchId'],
@@ -31,7 +29,8 @@
                     title: 'Pitch: ' + pitches[key]['pitchId'],
                     pitchDate: pitches[key]['pitchDate'],
                     cash: pitches[key]['cash'],
-                    services: pitches[key]['services']
+                    services: pitches[key]['services'],
+                    pitchId: pitches[key]['pitchId']
                 }
             })
         };
@@ -46,7 +45,6 @@
             },
             events: evs,
             eventMouseEnter: function (info) {
-                console.log('eventMouseEnter');
                 var tis = info.el;
                 var popup = info.event.extendedProps.popup;
                 var pDate = new Date(popup.pitchDate);
@@ -57,14 +55,12 @@
             
                 @{ var user = await UserManager.GetUserAsync(User); }
                 var tooltip = '<div class="tooltipevent" style="top:' + ($(tis).offset().top - 5) + 'px;left:' + ($(tis).offset().left + ($(tis).width()) / 2) +
-                    'px"><h4 class="brand" id="tooltipheader">' + '<a href="#">' + popup.title + '</a>' +
+                    'px"><h4 class="brand" id="tooltipheader">' + `<a href="/Admin/Pitch/PitchEvent/?pitchId=${popup.pitchId}">` + popup.title + '</a>' +
                     '</h4> <hr id="skinnybreak" /><div id="tooltipdiv">' + '<b>Date:</b> ' + formatted_pitchDate +
                     '</div><hr id="skinnybreak"/><div id="tooltipdiv"><b>Cash:</b> ' + popup.cash +
                     '</div ><hr id="skinnybreak"/><div id ="tooltipdiv"><b>Services:</b> ' + popup.services + '</div >';
-
                 var $tooltip = $(tooltip).appendTo('body');
                 setTimeout(function () {
-                    console.log('Tool Tip Timed Out');
                     $(info.el).css('z-index', 8);
                     $('.tooltipevent').remove();
                 }, 2500);
