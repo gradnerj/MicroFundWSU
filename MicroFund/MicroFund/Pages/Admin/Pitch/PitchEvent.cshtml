@@ -3,4 +3,37 @@
 @{
 }
 
-<h1>Pitch Event Page: Pitch @Model.PitchId</h1>
+<h1>Scheduled Pitches for @Model.PitchEvent.PitchDate.ToString("MM/dd/yyyy")</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Applicant Name
+            </th>
+            <th>
+                Pitch ID
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            foreach(var p in Model.Pitches) {
+                <tr>
+                    <td>
+                        @p.Application.CompanyName
+                    </td>
+                    <td>
+                        @Model.Applicants.Where(a => a.Id == p.Application.ApplicantId).FirstOrDefault().FullName
+                    </td>
+                    <td>
+                        @p.PitchId
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

@@ -55,7 +55,7 @@
             
                 @{ var user = await UserManager.GetUserAsync(User); }
                 var tooltip = '<div class="tooltipevent" style="top:' + ($(tis).offset().top - 5) + 'px;left:' + ($(tis).offset().left + ($(tis).width()) / 2) +
-                    'px"><h4 class="brand" id="tooltipheader">' + `<a href="/Admin/Pitch/PitchEvent/?pitchId=${popup.pitchId}">` + popup.title + '</a>' +
+                    'px"><h4 class="brand" id="tooltipheader">' + `<a href="/Admin/Pitch/PitchEvent/?pitchEventId=${popup.pitchId}">` + popup.title + '</a>' +
                     '</h4> <hr id="skinnybreak" /><div id="tooltipdiv">' + '<b>Date:</b> ' + formatted_pitchDate +
                     '</div><hr id="skinnybreak"/><div id="tooltipdiv"><b>Cash:</b> ' + popup.cash +
                     '</div ><hr id="skinnybreak"/><div id ="tooltipdiv"><b>Services:</b> ' + popup.services + '</div >';
