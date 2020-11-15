@@ -27,18 +27,20 @@ namespace DataAccessLayer.Models
         [ForeignKey("JudgeId")]
         public IdentityUser Judge { get; set; }
 
+        
         [Required]
-        [Display(Name = "ScoreCardField")]
-        public int ScoreCardFieldId { get; set; }
+        [ForeignKey("ScoreingCategory")]
+        [Display(Name = "ScoreCardCategory")]
+        public int ScoreCardCategoryId { get; set; }
 
-        [Required]
-        [ForeignKey("ScoreCardFieldId")]
-        public ScoreCardField ScoreCardField { get; set; }
+
+
+        public ScoringCategory ScoreCardCategory { get; set; } 
 
         [StringLength(250)]
         public string Comment { get; set; }
 
-        [Required]
+      
         public int Score { get; set; }
 
         [Required]

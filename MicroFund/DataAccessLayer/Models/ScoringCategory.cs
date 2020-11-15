@@ -26,5 +26,8 @@ namespace DataAccessLayer.Models
         [Required]
         [Display(Name = "Is Archived")]
         public bool IsArchived { get; set; }
+    
+        public IEnumerable<ScoreCardField> ScoringFields { get; set; }
     }
+
 }

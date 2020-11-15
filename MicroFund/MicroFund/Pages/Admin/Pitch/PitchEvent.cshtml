@@ -5,6 +5,7 @@
 
 <h1>Scheduled Pitches for @Model.PitchEvent.PitchDate.ToString("MM/dd/yyyy")</h1>
 <table class="table">
+    <a class="btn btn-primary mb-2" asp-page="/Admin/Pitch/PitchEventResults" asp-route-eventid="@Model.PitchEvent.PitchId">View Judge Scorings</a>
     <thead>
         <tr>
             <th>
@@ -15,6 +16,9 @@
             </th>
             <th>
                 Pitch ID
+            </th>
+            <th>
+                Actions
             </th>
         </tr>
     </thead>
@@ -30,6 +34,9 @@
                     </td>
                     <td>
                         @p.PitchId
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-page="/Admin/Pitch/PitchDetails" asp-route-pitchid="@p.PitchId">Details</a>
                     </td>
                 </tr>
             }
