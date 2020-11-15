@@ -22,15 +22,15 @@
         var evs = [];
         for (var key in pitches) {
             evs.push({
-                id: pitches[key]['pitchId'],
-                title: 'Pitch: ' + pitches[key]['pitchId'],
+                id: pitches[key]['pitchEventId'],
+                title: 'Pitch: ' + pitches[key]['pitchEventId'],
                 start: pitches[key]['pitchDate'],
                 popup: {
-                    title: 'Pitch: ' + pitches[key]['pitchId'],
+                    title: 'Pitch: ' + pitches[key]['pitchEventId'],
                     pitchDate: pitches[key]['pitchDate'],
                     cash: pitches[key]['cash'],
                     services: pitches[key]['services'],
-                    pitchId: pitches[key]['pitchId']
+                    pitchId: pitches[key]['pitchEventId']
                 }
             })
         };

@@ -25,7 +25,7 @@ namespace MicroFund.Pages.Admin.Pitch
         public IQueryable<ApplicationUser> Applicants { get; set; }
         public void OnGet(int pitchEventId)
         {
-            PitchEvent = _context.PitchEvents.FirstOrDefault(p => p.PitchId == pitchEventId);
+            PitchEvent = _context.PitchEvents.FirstOrDefault(p => p.PitchEventId == pitchEventId);
             var pitchEventDate = PitchEvent.PitchDate;
             Pitches = _context.Pitch.Where(p => p.PitchDate == pitchEventDate)
                 .Include(a => a.Application)
