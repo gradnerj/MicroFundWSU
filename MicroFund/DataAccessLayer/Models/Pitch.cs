@@ -19,14 +19,6 @@ namespace DataAccessLayer.Models
         public Application Application { get; set; }
 
         [Required]
-        [Display(Name = "PitchEvent")]
-        public int PitchEventId { get; set; }
-
-        [Required]
-        [ForeignKey("PitchEventId")]
-        public PitchEvent PitchEvent { get; set; }
-
-        [Required]
         public DateTime PitchDate { get; set; }
 
         [Required]
