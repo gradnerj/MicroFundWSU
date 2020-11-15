@@ -29,9 +29,9 @@ namespace DataAccessLayer.Models
 
         
         [Required]
-        [ForeignKey("ScoreingCategory")]
-        [Display(Name = "ScoreCardCategory")]
-        public int ScoreCardCategoryId { get; set; }
+        [ForeignKey("ScoreCardField")]
+        [Display(Name = "ScoreCardField")]
+        public int ScoreCardFieldId { get; set; }
 
 
 
