@@ -184,7 +184,7 @@ namespace MicroFund.Pages.Applicant.Profile
                 address.AddressType = await _context.AddressType.FirstOrDefaultAsync(a => a.AddressTypeDescription == "Residential");
 
                 contactInfo.ApplicantId = claim.Value;
-                contactInfo.ContactType = await _context.ContactType.FirstOrDefaultAsync(t => t.ContactTypeDescription == "Cell phone");
+                contactInfo.ContactTypeId =  _context.ContactType.FirstOrDefault(t => t.ContactTypeDescription == "Cell").ContactTypeId;
 
                 demographics.CreationDate = DateTime.Now;
                 demographics.ApplicationUserId = claim.Value;
