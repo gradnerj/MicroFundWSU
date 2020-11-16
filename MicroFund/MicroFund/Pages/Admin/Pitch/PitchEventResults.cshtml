@@ -182,7 +182,7 @@
                 @:pitchAvgs.push('@s');
             }
         }
-        console.log(pitchAvgs);
+        console.log('pitch averages ',pitchAvgs);
 
         var companyNames = []
         
@@ -204,7 +204,7 @@
         for (var i = 0; i < companyNames.length; i++) {
             data = {
                 label: companyNames[i],
-                data: pitchAvgs[i],
+                data: [pitchAvgs[i]],
                 backgroundColor: barColors[i],
                 borderWidth: 1,
                 borderColor: '#777',
@@ -217,7 +217,6 @@
         let pitchAvgChart = new Chart(pitchAvgScores, {
             type: 'bar',
             data: {
-                //labels: companyNames,
                 datasets: bardatasets
             },
             options: {
@@ -242,7 +241,12 @@
                     }
                 },
                 tooltips: {
-                    enabled: true
+                    enabled: true,
+                    callbacks: {
+                        title: function () {
+                            return "Avg. Score";
+                        }
+                    }
                 },
                 scales: {
                     yAxes: [{
