@@ -18,12 +18,25 @@ namespace MicroFund.Pages.Admin.Applications
         }
         public IList<Application> Applications { get; set; }
         public IList<ApplicationUser> Users { get; set; }
+
+        public IList<ApplicationStatus> Statuses { get; set; } 
         public void OnGet()
         {
             Applications = _context.Application
                 .Include(a => a.ApplicationStatus)
                 .AsEnumerable().ToList();
             Users = _context.ApplicationUsers.Where(u => Applications.Select(a => a.ApplicantId).AsEnumerable().ToList().Contains(u.Id)).AsEnumerable().ToList();
+            Statuses = _context.ApplicationStatus.AsEnumerable().ToList();
+        }
+
+        public IActionResult OnPost() {
+            var appId = Request.Form["applicationId"];
+            var statusid = Request.Form["statusid"];
+            var application = _context.Application.FirstOrDefault(a => a.ApplicationId == Int32.Parse(appId));
+            application.ApplicationStatusId = Int32.Parse(statusid);
+            _context.Update(application);
+            _context.SaveChanges();
+            return RedirectToPage();
         }
     }
 }
