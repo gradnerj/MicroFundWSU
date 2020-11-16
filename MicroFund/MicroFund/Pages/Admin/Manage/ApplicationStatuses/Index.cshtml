@@ -5,38 +5,56 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Application Statuses</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Application Statuses</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i>Create New</a>
+        </div>
+    </div>
+    <table class="table" id="applicationSatusesTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationStatus[0].StatusDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationStatus[0].IsArchived)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ApplicationStatus)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsArchived)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@item.ApplicationStatusId">Edit</a> |
+                        <a class="btn btn btn-outline-warning" asp-page="./Details" asp-route-id="@item.ApplicationStatusId">Details</a> |
+                        <a class="btn btn-outline-danger" asp-page="./Delete" asp-route-id="@item.ApplicationStatusId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationStatus[0].StatusDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationStatus[0].IsArchived)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.ApplicationStatus) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsArchived)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ApplicationStatusId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ApplicationStatusId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ApplicationStatusId">Delete</a>
-            </td>
-        </tr>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#applicationSatusesTable').DataTable({
+                "pageLength": 5,
+                "order": [[2, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
 }
-    </tbody>
-</table>
