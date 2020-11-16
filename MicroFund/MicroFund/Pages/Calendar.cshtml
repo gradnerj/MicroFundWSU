@@ -52,14 +52,30 @@
                     month: "short", day: "numeric",
                     hour: "numeric", minute: "numeric"
                 })
-            
-                @{ var user = await UserManager.GetUserAsync(User); }
-                var tooltip = '<div class="tooltipevent" style="top:' + ($(tis).offset().top - 5) + 'px;left:' + ($(tis).offset().left + ($(tis).width()) / 2) +
-                    'px"><h4 class="brand" id="tooltipheader">' + `<a href="/Admin/Pitch/PitchEvent/?pitchEventId=${popup.pitchId}">` + popup.title + '</a>' +
-                    '</h4> <hr id="skinnybreak" /><div id="tooltipdiv">' + '<b>Date:</b> ' + formatted_pitchDate +
-                    '</div><hr id="skinnybreak"/><div id="tooltipdiv"><b>Cash:</b> ' + popup.cash +
-                    '</div ><hr id="skinnybreak"/><div id ="tooltipdiv"><b>Services:</b> ' + popup.services + '</div >';
-                var $tooltip = $(tooltip).appendTo('body');
+                var adminUser = false;
+                var judgeUser = false;
+                @{ var user = await UserManager.GetUserAsync(User);
+                    if(User.IsInRole("Admin")) {
+                        @:adminUser = true;
+                    }else if (User.IsInRole("Judge")) {
+                        @:judgeUser = true;
+                    }
+                }
+                if (adminUser == true) {
+                    var tooltip = '<div class="tooltipevent" style="top:' + ($(tis).offset().top - 5) + 'px;left:' + ($(tis).offset().left + ($(tis).width()) / 2) +
+                        'px"><h4 class="brand" id="tooltipheader">' + `<a href="/Admin/Pitch/PitchEvent/?pitchEventId=${popup.pitchId}">` + popup.title + '</a>' +
+                        '</h4> <hr id="skinnybreak" /><div id="tooltipdiv">' + '<b>Date:</b> ' + formatted_pitchDate +
+                        '</div><hr id="skinnybreak"/><div id="tooltipdiv"><b>Cash:</b> ' + popup.cash +
+                        '</div ><hr id="skinnybreak"/><div id ="tooltipdiv"><b>Services:</b> ' + popup.services + '</div >';
+                    var $tooltip = $(tooltip).appendTo('body');
+                } else if(judgeUser == true) {
+                    var tooltip = '<div class="tooltipevent" style="top:' + ($(tis).offset().top - 5) + 'px;left:' + ($(tis).offset().left + ($(tis).width()) / 2) +
+                        'px"><h4 class="brand" id="tooltipheader">' + `<a href="#">` + popup.title + '</a>' +
+                        '</h4> <hr id="skinnybreak" /><div id="tooltipdiv">' + '<b>Date:</b> ' + formatted_pitchDate +
+                        '</div><hr id="skinnybreak"/><div id="tooltipdiv"><b>Cash:</b> ' + popup.cash +
+                        '</div ><hr id="skinnybreak"/><div id ="tooltipdiv"><b>Services:</b> ' + popup.services + '</div >';
+                    var $tooltip = $(tooltip).appendTo('body');
+                }
                 setTimeout(function () {
                     $(info.el).css('z-index', 8);
                     $('.tooltipevent').remove();
