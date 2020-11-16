@@ -4,7 +4,7 @@
 }
 
 <h1>Scheduled Pitches for @Model.PitchEvent.PitchDate.ToString("MM/dd/yyyy")</h1>
-<table class="table">
+<table class="table" id="pitches">
     <a class="btn btn-primary mb-2" asp-page="/Admin/Pitch/PitchEventResults" asp-route-eventid="@Model.PitchEvent.PitchEventId">View Judge Scorings</a>
     <thead>
         <tr>
@@ -44,3 +44,12 @@
 
     </tbody>
 </table>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+                $('#pitches').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
+    </script>
+}  
