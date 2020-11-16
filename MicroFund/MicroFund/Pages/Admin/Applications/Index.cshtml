@@ -43,7 +43,7 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-outline-info" href="#">Details</a>
+                            <a class="btn btn-outline-info" asp-page="/Admin/Applications/Details" asp-route-applicationid="@Model.Applications.ToList()[i].ApplicationId">Details</a>
                         </td>
                     </tr>
                 }
