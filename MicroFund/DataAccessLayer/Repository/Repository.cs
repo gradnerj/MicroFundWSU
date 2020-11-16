@@ -141,18 +141,15 @@ namespace DataAccessLayer.Repository {
         public int GetStatusIdByName(string status)
         {
             return _context.ApplicationStatus.Where(x => x.StatusDescription.Equals(status)).Select(x => x.ApplicationStatusId).FirstOrDefault();
-        }
-        
+        }        
 
         public async Task<IList<MentorNote>> GetMentorNotes(string mentorId)
         {
             //get mentor notes only assigned to mentor
             var mentorAssignment = GetCurrentMentorAssignments(mentorId);
             var mentorAssignmentIds = mentorAssignment.Select(x => x.MentorAssignmentId).ToList();
-            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId)).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).ToListAsync();
-        }
-
-        
+            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId) && !x.IsArchived).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderByDescending(x => x.MeetingDate).ToListAsync();
+        }        
 
         public List<MentorAssignment> GetCurrentMentorAssignments(string mentorId)
         {

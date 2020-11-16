@@ -8,14 +8,14 @@
 <h1>Details</h1>
 
 <div>
-    <h4>MentorNote</h4>
+    <h4>@Model.MentorNote.MentorAssignment.Application.CompanyName</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorNote.MentorAssignment)
+            Meeting Date
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorNote.MentorAssignment.MentorId)
+            @Html.DisplayFor(model => model.MentorNote.MeetingDate)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MentorNote.Notes)
@@ -27,19 +27,13 @@
             @Html.DisplayNameFor(model => model.MentorNote.UpdatedBy)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorNote.UpdatedBy)
+            @Html.DisplayFor(model => model.UpdatedByName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MentorNote.UpdatedDate)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MentorNote.UpdatedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MentorNote.IsArchived)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorNote.IsArchived)
         </dd>
     </dl>
 </div>

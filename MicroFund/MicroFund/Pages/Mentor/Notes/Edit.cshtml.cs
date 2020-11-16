@@ -8,20 +8,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repository;
+using System.Security.Claims;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
     public class EditModel : PageModel
     {
-        private readonly DataAccessLayer.Data.ApplicationDbContext _context;
-
-        public EditModel(DataAccessLayer.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
+        private ApplicationDbContext _context;
+        private readonly IRepository _repository;
+        public string CurrentUserId { get; set; }
         [BindProperty]
         public MentorNote MentorNote { get; set; }
+
+        public EditModel(DataAccessLayer.Data.ApplicationDbContext context, IRepository repository)
+        {
+            _context = context;
+            _repository = repository;
+        }
+
+        
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,14 +36,21 @@ namespace MicroFund.Pages.Mentor.Notes
                 return NotFound();
             }
 
-            MentorNote = await _context.MentorNote
-                .Include(m => m.MentorAssignment).FirstOrDefaultAsync(m => m.MentorNoteId == id);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            CurrentUserId = claim.Value;
+
+            var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);            
+            var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
+            ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
+
+            MentorNote = _context.MentorNote.Where(x => x.MentorNoteId == id).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).FirstOrDefault();
 
             if (MentorNote == null)
             {
                 return NotFound();
             }
-           ViewData["MentorAssignmentId"] = new SelectList(_context.MentorAssignment, "MentorAssignmentId", "MentorId");
+           
             return Page();
         }
 

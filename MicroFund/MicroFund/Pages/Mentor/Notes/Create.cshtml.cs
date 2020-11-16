@@ -9,20 +9,22 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System.Security.Claims;
+using DataAccessLayer.Models.ViewModels;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
     public class CreateModel : PageModel
     {
+        private ApplicationDbContext _context;
         private readonly IRepository _repository;
         public IList<Application> MentorApplications { get; set; }
         public string CurrentUserId { get; set; }
         public Dictionary<int, string> ApplicationApplicantPairs { get; set; }
-        public bool IsApproved { get; set; }
 
-        public CreateModel(IRepository repository)
+        public CreateModel(IRepository repository, ApplicationDbContext context)
         {
             _repository = repository;
+            _context = context;
         }
 
         public IActionResult OnGet()
@@ -35,10 +37,6 @@ namespace MicroFund.Pages.Mentor.Notes
             var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);
             var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
             ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
-
-            //MentorApplications = await _repository.GetMentorApplicationsAsync(CurrentUserId);
-            //ApplicationApplicantPairs = await _repository.GetApplicationIdApplicantNamePairs(MentorApplications);
-            //MentorNote = await _repository.GetMentorNotes(CurrentUserId);
 
             return Page();
         }
@@ -55,8 +53,15 @@ namespace MicroFund.Pages.Mentor.Notes
                 return Page();
             }
 
-            //_context.MentorNote.Add(MentorNote);
-            //await _context.SaveChangesAsync();
+            MentorNote.MentorAssignment = _context.MentorAssignment.Where(x => x.MentorAssignmentId == MentorNote.MentorAssignmentId).FirstOrDefault();
+            if(MentorNote.IsApproved)
+            {
+                MentorNote.MentorAssignment.ApprovedToPitchDate = DateTime.Now;
+                MentorNote.MentorAssignment.Application = _repository.GetApplicationById(MentorNote.MentorAssignment.ApplicationId);
+                MentorNote.MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Approved for Grant Review");
+            }
+            _context.MentorNote.Add(MentorNote);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

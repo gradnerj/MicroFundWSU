@@ -7,19 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repository;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
     public class DetailsModel : PageModel
     {
-        private readonly DataAccessLayer.Data.ApplicationDbContext _context;
+        private ApplicationDbContext _context;
+        private readonly IRepository _repository;
+        public MentorNote MentorNote { get; set; }
+        public string UpdatedByName { get; set; }
 
-        public DetailsModel(DataAccessLayer.Data.ApplicationDbContext context)
+        public DetailsModel(DataAccessLayer.Data.ApplicationDbContext context, IRepository repository)
         {
             _context = context;
+            _repository = repository;
         }
 
-        public MentorNote MentorNote { get; set; }
+        
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,9 +32,9 @@ namespace MicroFund.Pages.Mentor.Notes
             {
                 return NotFound();
             }
-
-            MentorNote = await _context.MentorNote
-                .Include(m => m.MentorAssignment).FirstOrDefaultAsync(m => m.MentorNoteId == id);
+        
+            MentorNote = _context.MentorNote.Where(x => x.MentorNoteId == id).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).FirstOrDefault();
+            UpdatedByName = _repository.GetUserById(MentorNote.UpdatedBy).FullName;
 
             if (MentorNote == null)
             {
