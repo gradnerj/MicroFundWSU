@@ -4,14 +4,16 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115231601_AddingPitchEventFKToPitch")]
+    partial class AddingPitchEventFKToPitch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -764,9 +766,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ScoreCardCategoryScoringCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ScoreCardFieldId")
                         .HasColumnType("int");
 
@@ -784,7 +783,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("PitchId");
 
-                    b.HasIndex("ScoreCardCategoryScoringCategoryId");
+                    b.HasIndex("ScoreCardFieldId");
 
                     b.ToTable("ScoreCard");
                 });
@@ -1214,10 +1213,11 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.Models.ScoringCategory", "ScoreCardCategory")
+                    b.HasOne("DataAccessLayer.Models.ScoreCardField", "ScoreCardField")
                         .WithMany()
-                        .HasForeignKey("ScoreCardCategoryScoringCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ScoreCardFieldId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.ScoreCardField", b =>

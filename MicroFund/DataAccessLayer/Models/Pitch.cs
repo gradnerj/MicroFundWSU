@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -17,6 +18,12 @@ namespace DataAccessLayer.Models
         [Required]
         [ForeignKey("ApplicationId")]
         public Application Application { get; set; }
+
+        [Display(Name = "PitchEvent")]
+        public int PitchEventId { get; set; }
+
+        [ForeignKey("PitchEventId")]
+        public PitchEvent PitchEvent { get; set; }
 
         [Required]
         public DateTime PitchDate { get; set; }
