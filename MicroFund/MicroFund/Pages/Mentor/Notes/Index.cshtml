@@ -1,0 +1,48 @@
+﻿@page
+@model MicroFund.Pages.Mentor.Notes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Meeting Notes</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company
+            </th>
+            <th>
+                App Status
+            </th>
+            <th>
+                Meeting Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MentorNote) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MentorAssignment.Application.ApplicationStatus.StatusDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.MentorNoteId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.MentorNoteId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

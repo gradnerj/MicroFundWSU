@@ -7,10 +7,6 @@ namespace DataAccessLayer.Repository {
     public interface IRepository {
 
         #region CREATE Methods
-
-
-
-
         #endregion
 
         #region RETRIEVE Methods
@@ -21,6 +17,22 @@ namespace DataAccessLayer.Repository {
 
         ApplicationUser GetUserById(string id);
 
+        
+
+        Application GetApplicationById(int id);
+        Task<IList<Application>> GetAllApplicationsAsync();
+        Task<Dictionary<int, int>> GetAllApplicationIterationsAsync();
+        ApplicationUser GetApplicantByApplicationId(int id);            
+        Task<int> GetIteration(int applicationId, string applicantId, string companyName);        
+        ApplicationUser GetMentorByApplicationId(int id);
+        Task<IList<IdentityUser>> GetAllMentorsAsync();
+        Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync();
+        MentorAssignment GetMentorAssignmentByApplicationId(int id);
+        int GetStatusIdByName(string status);        
+
+        Task<IList<MentorNote>> GetMentorNotes(string mentorId);
+
+        List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
 
         #endregion
 

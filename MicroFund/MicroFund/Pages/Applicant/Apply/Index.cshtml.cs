@@ -29,6 +29,7 @@ namespace MicroFund.Pages.Applicant.Apply
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
+
         
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -394,6 +395,7 @@ namespace MicroFund.Pages.Applicant.Apply
             public string YesNoHasIntelProp { get; set; }
             public string YesNoExternalFunding { get; set; }
             public string YesNoSmallDevCounselor { get; set; }
+
 
         }
     }

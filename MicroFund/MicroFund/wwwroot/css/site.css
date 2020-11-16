@@ -1,7 +1,4 @@
-﻿
-
-
-a.notLinks:hover, a.notLinks:active {
+﻿a.notLinks:hover, a.notLinks:active {
     color: #4E2A67 !important;
     font-size: 125%;
     background-color: lightgray;
@@ -52,13 +49,38 @@ a.notLinks:hover, a.notLinks:active {
 for details on configuring this project to bundle and minify static web assets. */
 
 .bg-purple-wsu {
-    background-color: #4E2A67;
+    background-color: #492365 !important;
 }
 
-/*.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
+.bg-gray-wsu {
+    background-color: #575047 !important;
+}
+
+.bg-pantone666-wsu {
+    background-color: #a391b1 !important;
+}
+
+.bg-pantone2665-wsu {
+    background-color: #7f56c5 !important;
+}
+
+.bg-pantone2587-wsu {
+    background-color: #8446ac !important;
+}
+
+.bg-pantone436-wsu {
+    background-color: #aa989c !important;
+}
+
+.bg-business-wsu {
+    background-color: #483627 !important;
+}
+
+/*DON'T COMMENT THIS OUT. THIS IS FOR THE NAVBAR*/
+.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
     background-color: white !important;
     color: #4E2A67 !important;
-}*/
+}
 
 a.navbar-brand {
   white-space: normal;

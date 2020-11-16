@@ -15,7 +15,7 @@ namespace DataAccessLayer.Models
         [Display(Name = "Mentor")]
         public string MentorId { get; set; }
 
-        [Required]
+        
         [ForeignKey("MentorId")]
         public IdentityUser Mentor { get; set; }
 
@@ -23,7 +23,7 @@ namespace DataAccessLayer.Models
         [Display(Name = "Application")]
         public int ApplicationId { get; set; }
 
-        [Required]
+        
         [ForeignKey("ApplicationId")]
         public Application Application { get; set; }
 

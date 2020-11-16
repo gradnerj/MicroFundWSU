@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/images/MF.png" rel="shortcut icon" type="image/x-icon" />
     <title>@ViewData["Title"] - MicroFund</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.css" />
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -25,8 +27,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        @if (User.IsInRole(Utility.StaticDetails.AdminRole))
-                        {
+                        @if (User.IsInRole(Utility.StaticDetails.AdminRole)) {
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
                                 <div class="dropdown-menu bg-purple-wsu">
@@ -41,9 +42,11 @@
                                     <a class="dropdown-item text-white" asp-page="/Admin/Manage/FollowUpTypes/Index">Follow Up Types</a>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assign Mentor</a>
+                            </li>
                         }
-                        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
-                        {
+                        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole)) {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-page="/Applicant/Profile/Index">Profile</a>
                             </li>
@@ -55,14 +58,12 @@
                             </li>
                         }
                     </ul>
-                    @if (User.IsInRole(Utility.StaticDetails.JudgeRole))
-                    {
+                    @if (User.IsInRole(Utility.StaticDetails.JudgeRole)) {
                         <div class="row" style="text-align:center;">
                             <h3 class="text-white align-middle">&nbsp;&nbsp;&nbsp;Judge Dashboard</h3>
                         </div>
                     }
-                    @if (User.IsInRole(Utility.StaticDetails.MentorRole))
-                    {
+                    @if (User.IsInRole(Utility.StaticDetails.MentorRole)) {
 
                         @*<a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assignments</a>*@
                         <div class="row" style="text-align:center;">
@@ -84,9 +85,12 @@
             &copy; 2020 - MicroFund - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js"></script>
@@ -94,6 +98,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://unpkg.com/@@sgratzl/chartjs-chart-boxplot"></script>
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -14,12 +14,14 @@ namespace DataAccessLayer.Models
         [Display(Name = "MentorAssignment")]
         public int MentorAssignmentId { get; set; }
 
-        [Required]
+        
         [ForeignKey("MentorAssignmentId")]
         public MentorAssignment MentorAssignment { get; set; }
 
         [Required]
-        [StringLength(250)]
+        public DateTime MeetingDate { get; set; }
+
+        [Required]
         public string Notes { get; set; }
 
         [Required]
@@ -31,5 +33,8 @@ namespace DataAccessLayer.Models
 
         [Required]
         public bool IsArchived { get; set; }
+
+        [NotMapped]
+        public bool IsApproved { get; set; }
     }
 }

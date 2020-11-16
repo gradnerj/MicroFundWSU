@@ -1,0 +1,43 @@
+﻿@page
+@model MicroFund.Pages.Mentor.Notes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>@Model.MentorNote.MentorAssignment.Application.CompanyName</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Meeting Date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MentorNote.MeetingDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MentorNote.Notes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MentorNote.Notes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MentorNote.UpdatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UpdatedByName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MentorNote.UpdatedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MentorNote.UpdatedDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.MentorNote.MentorNoteId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

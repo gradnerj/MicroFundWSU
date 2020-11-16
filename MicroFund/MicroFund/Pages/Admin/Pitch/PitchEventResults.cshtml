@@ -1,0 +1,297 @@
+﻿@page
+@model MicroFund.Pages.Admin.Pitch.PitchEventResultsModel
+@using System.Web
+@{
+}
+
+<h2>Results for Pitch Event @Model.PEvent.PitchEventId on @Model.PEvent.PitchDate.ToString("MM/dd/yyyy")</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <canvas id="categoryAverage"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <canvas id="pitchAvgScores"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table" id="pitchtable">
+        <thead>
+            <tr>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    Presenter
+                </th>
+                <th>
+                    Mkt Valid
+                </th>
+                <th>
+                    Value Prop
+                </th>
+                <th>
+                    Target Customer
+                </th>
+                <th>
+                    Competition
+                </th>
+                <th>
+                    Go To Strategy
+                </th>
+                <th>
+                    Financial Projections
+                </th>
+                <th>
+                    Management Team
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Presentation
+                </th>
+                <th>
+                    Total Score
+                </th>
+                <th>
+                    Judge
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var j in Model.Judges.ToList()) {
+                    foreach (var p in Model.Pitches.ToList()) {
+                        if (Model.Scores.Where(s => s.PitchId == p.PitchId && s.JudgeId == j.Id).ToList().Count > 0) {
+                            <tr>
+                                <td>
+                                    @p.Application.CompanyName
+                                </td>
+                                <td>
+                                    @Model.Presenters.FirstOrDefault(u => u.Id == p.Application.ApplicantId)
+                                </td>
+
+                                @foreach (var s in Model.Scores.Where(s => s.PitchId == p.PitchId && s.JudgeId == j.Id).ToList().AsEnumerable()) {
+                                    <td>
+                                        @s.Score
+                                    </td>
+                                }
+
+                                <td>
+                                    @Model.Scores.Where(s => s.PitchId == p.PitchId && s.JudgeId == j.Id).Select(s => s.Score).Sum()
+                                </td>
+                                <td>
+                                    @j.FullName
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{ 
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        let categoryAverage = document.getElementById('categoryAverage').getContext('2d');
+        var categoryNames = [];
+        var avgCategoryScores = [];
+        @{
+            foreach (var c in Model.ScoringCategories) {
+                @:categoryNames.push('@c');
+            }
+            foreach (var a in Model.AverageCategoryScores) {
+                @:avgCategoryScores.push('@a');
+            }
+        }
+        console.log(categoryNames);
+        console.log(avgCategoryScores);
+        let categoryAvgChart = new Chart(categoryAverage, {
+            type: 'bar',
+            data: {
+                labels: categoryNames,
+                datasets: [{
+                    label: 'Avg. Score',
+                    data: avgCategoryScores,
+                    backgroundColor: 'rgba(0, 123, 255, 0.6)',
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Category Score Average',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        let pitchAvgScores = document.getElementById('pitchAvgScores').getContext('2d');
+        var pitchAvgs = []
+        var possibleColors = ['blue', 'green', 'red', 'purple', 'orange', 'violet', 'teal']
+        var barColors = []
+       @{
+           foreach (var s in Model.AveragePitchScores) {
+                @:pitchAvgs.push('@s');
+            }
+        }
+        console.log('pitch averages ',pitchAvgs);
+
+        var companyNames = []
+        
+        @{
+            foreach (var c in Model.CompanyNames) {
+                @:companyNames.push("@Html.Raw(HttpUtility.JavaScriptStringEncode(c))");
+                @: var colorIndex = 0;
+                @:while (!barColors.includes(possibleColors[colorIndex])) {
+                    @:colorIndex = Math.floor((Math.random() * 6));
+                    @:if(!barColors.includes(possibleColors[colorIndex])) { 
+                        @:barColors.push(possibleColors[colorIndex]);
+                    @:}
+                @:}
+              
+
+            }
+        }
+        var bardatasets = []
+        for (var i = 0; i < companyNames.length; i++) {
+            data = {
+                label: companyNames[i],
+                data: [pitchAvgs[i]],
+                backgroundColor: barColors[i],
+                borderWidth: 1,
+                borderColor: '#777',
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000'
+            };
+            bardatasets.push(data);
+        }
+
+        let pitchAvgChart = new Chart(pitchAvgScores, {
+            type: 'bar',
+            data: {
+                datasets: bardatasets
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Pitch ScoreCard Average',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true,
+                    callbacks: {
+                        title: function () {
+                            return "Avg. Score";
+                        }
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+        $(document).ready(function () {
+            $('#pitch-table').dataTable({
+
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select  class="browser-default custom-select form-control-sm"><option value="" selected>Search</option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#pitchtable').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+
+
+    </script>
+}

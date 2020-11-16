@@ -1,6 +1,59 @@
 ﻿@page
 @model MicroFund.Pages.Mentor.Assignments.IndexModel
+
 @{
+    ViewData["Title"] = "Index";
 }
 
-<p>This page is under construction!</p>
+<h1>Mentor Assignments</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Application Number
+            </th>
+            <th>
+                Application Status
+            </th>
+            <th>
+                Mentor
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var app in Model.Applications)
+        {
+            string selectedRow = "";
+            if (app.ApplicationStatus.StatusDescription.Equals("Approved"))
+            {
+                selectedRow = "text-danger font-weight-bold";
+            }
+        <tr>
+            <td>
+                @app.CompanyName
+            </td>
+            <td>
+                @Model.ApplicationIterations[app.ApplicationId]
+            </td>
+            <td>
+                @app.ApplicationStatus.StatusDescription
+            </td>
+            <td class="@selectedRow">
+                @Model.MentorAssignments[app.ApplicationId + ""]
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@app.ApplicationId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@app.ApplicationId">Details</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

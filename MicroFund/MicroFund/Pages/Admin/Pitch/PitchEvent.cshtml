@@ -1,0 +1,55 @@
+﻿@page
+@model MicroFund.Pages.Admin.Pitch.PitchEventModel
+@{
+}
+
+<h1>Scheduled Pitches for @Model.PitchEvent.PitchDate.ToString("MM/dd/yyyy")</h1>
+<table class="table" id="pitches">
+    <a class="btn btn-primary mb-2" asp-page="/Admin/Pitch/PitchEventResults" asp-route-eventid="@Model.PitchEvent.PitchEventId">View Judge Scorings</a>
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Applicant Name
+            </th>
+            <th>
+                Pitch ID
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            foreach(var p in Model.Pitches) {
+                <tr>
+                    <td>
+                        @p.Application.CompanyName
+                    </td>
+                    <td>
+                        @Model.Applicants.Where(a => a.Id == p.Application.ApplicantId).FirstOrDefault().FullName
+                    </td>
+                    <td>
+                        @p.PitchId
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-page="/Admin/Pitch/PitchDetails" asp-route-pitchid="@p.PitchId">Details</a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+                $('#pitches').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
+    </script>
+}  

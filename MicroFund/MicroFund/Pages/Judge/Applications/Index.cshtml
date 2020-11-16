@@ -1,4 +1,56 @@
 ﻿@page
 @model MicroFund.Pages.Judge.Applications.IndexModel
 @{
+    ViewData["Title"] = "Review Applications";
+    string applicationUser = "";
 }
+
+<h1>Review Applications</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewApplicationsVM.ApplicationUsers.FirstOrDefault().FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewApplicationsVM.ApplicationUsers.FirstOrDefault().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewApplicationsVM.Applications.FirstOrDefault().CompanyName)
+            </th>
+            <th>
+                View Application
+            </th>
+            <th>
+                View Scorecard
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model.ReviewApplicationsVM.Applications)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.ReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.ReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => application.CompanyName)
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" asp-page="/Judge/Applications/ViewApplication" asp-route-id="@application.ApplicantId">View</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" asp-page="/Judge/Scorecards/ViewScorecard" asp-route-id="@application.ApplicantId">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

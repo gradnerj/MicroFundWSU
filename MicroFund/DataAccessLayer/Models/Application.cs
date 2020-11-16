@@ -18,6 +18,7 @@ namespace DataAccessLayer.Models
         //[ForeignKey("ApplicantId")]
         //public Applicant Applicant { get; set; }
 
+
         [Required]
         [Display(Name = "ApplicationStatus")]
         public int ApplicationStatusId { get; set; }
