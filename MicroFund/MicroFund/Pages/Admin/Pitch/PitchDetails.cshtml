@@ -2,5 +2,86 @@
 @model MicroFund.Pages.Admin.Pitch.PitchDetailsModel
 @{
 }
-<h2>Details for Pitch from @Model.Pitch.Application.CompanyName</h2>
-<h3>@Model.Pitch.PitchDate</h3>
+<div class="container">
+    <div class="row">
+        <h2>Details for Pitch from @Model.Pitch.Application.CompanyName</h2>
+    </div>
+    <div class="row">
+        <h3>@Model.Pitch.PitchDate</h3>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                Company: @Model.Pitch.Application.CompanyName
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    Name: @Model.Applicant.FullName
+                </div>
+                <hr />
+                <div class="card-text">
+                    PitchDate: @Model.Pitch.PitchDate
+                </div>
+            </div>
+        </div>
+    </div>
+    @{
+        
+        if (Model.Scores.Count() > 0) {
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Mkt Valid
+                            </th>
+                            <th>
+                                Value Prop
+                            </th>
+                            <th>
+                                Target Customer
+                            </th>
+                            <th>
+                                Competition
+                            </th>
+                            <th>
+                                Go To Strategy
+                            </th>
+                            <th>
+                                Financial Projections
+                            </th>
+                            <th>
+                                Management Team
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Presentation
+                            </th>
+                            <th>
+                                Judge
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var j in Model.Judges.ToList()) {
+                            <tr>
+                                @foreach (var s in Model.Scores.ToList()) {
+                                    @if(s.JudgeId == j.Id) { 
+                                    <td>
+                                        @s.Score
+                                    </td>
+                                    }
+                                }
+                                <td>
+                                    @j.FullName
+                                </td>
+                            </tr>
+                         }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</div>

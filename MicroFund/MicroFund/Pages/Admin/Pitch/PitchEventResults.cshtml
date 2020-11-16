@@ -1,5 +1,6 @@
 ﻿@page
 @model MicroFund.Pages.Admin.Pitch.PitchEventResultsModel
+@using System.Web
 @{
 }
 
@@ -17,7 +18,7 @@
         <div class="col">
             <div class="card shadow">
                 <div class="card-body">
-                    <canvas id="pitchAverage"></canvas>
+                    <canvas id="pitchAvgScores"></canvas>
                 </div>
             </div>
         </div>
@@ -43,6 +44,21 @@
                 </th>
                 <th>
                     Competition
+                </th>
+                <th>
+                    Go To Strategy
+                </th>
+                <th>
+                    Financial Projections
+                </th>
+                <th>
+                    Management Team
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Presentation
                 </th>
                 <th>
                     Total Score
@@ -88,16 +104,155 @@
 
 @section Scripts{ 
     <script>
-       
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
         let categoryAverage = document.getElementById('categoryAverage').getContext('2d');
         var categoryNames = [];
         var avgCategoryScores = [];
         @{
-            foreach(var c in Model.ScoringCategories) {
+            foreach (var c in Model.ScoringCategories) {
                 @:categoryNames.push('@c');
+            }
+            foreach (var a in Model.AverageCategoryScores) {
+                @:avgCategoryScores.push('@a');
             }
         }
         console.log(categoryNames);
-       
+        console.log(avgCategoryScores);
+        let categoryAvgChart = new Chart(categoryAverage, {
+            type: 'bar',
+            data: {
+                labels: categoryNames,
+                datasets: [{
+                    label: 'Avg. Score',
+                    data: avgCategoryScores,
+                    backgroundColor: 'rgba(0, 123, 255, 0.6)',
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Category Score Average',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        let pitchAvgScores = document.getElementById('pitchAvgScores').getContext('2d');
+        var pitchAvgs = []
+        var possibleColors = ['blue', 'green', 'red', 'purple', 'orange', 'violet', 'teal']
+        var barColors = []
+       @{
+           foreach (var s in Model.AveragePitchScores) {
+                @:pitchAvgs.push('@s');
+            }
+        }
+        console.log(pitchAvgs);
+
+        var companyNames = []
+        
+        @{
+            foreach (var c in Model.CompanyNames) {
+                @:companyNames.push("@Html.Raw(HttpUtility.JavaScriptStringEncode(c))");
+                @: var colorIndex = 0;
+                @:while (!barColors.includes(possibleColors[colorIndex])) {
+                    @:colorIndex = Math.floor((Math.random() * 6));
+                    @:if(!barColors.includes(possibleColors[colorIndex])) { 
+                        @:barColors.push(possibleColors[colorIndex]);
+                    @:}
+                @:}
+              
+
+            }
+        }
+        var bardatasets = []
+        for (var i = 0; i < companyNames.length; i++) {
+            data = {
+                label: companyNames[i],
+                data: pitchAvgs[i],
+                backgroundColor: barColors[i],
+                borderWidth: 1,
+                borderColor: '#777',
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000'
+            };
+            bardatasets.push(data);
+        }
+
+        let pitchAvgChart = new Chart(pitchAvgScores, {
+            type: 'bar',
+            data: {
+                //labels: companyNames,
+                datasets: bardatasets
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Pitch ScoreCard Average',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
     </script>
 }
