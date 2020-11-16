@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccessLayer.Models {
     public class PitchEvent {
+        [Key]
         public int PitchEventId { get; set; }
         public DateTime PitchDate { get; set; }
         public float Cash { get; set; }

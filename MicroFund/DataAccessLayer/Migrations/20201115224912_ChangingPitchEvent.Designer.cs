@@ -4,14 +4,16 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115224912_ChangingPitchEvent")]
+    partial class ChangingPitchEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -600,9 +602,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("PitchDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PitchEventId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(128)")
@@ -614,8 +613,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("PitchId");
 
                     b.HasIndex("ApplicationId");
-
-                    b.HasIndex("PitchEventId");
 
                     b.ToTable("Pitch");
                 });
@@ -1163,12 +1160,6 @@ namespace DataAccessLayer.Migrations
                     b.HasOne("DataAccessLayer.Models.Application", "Application")
                         .WithMany()
                         .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.PitchEvent", "PitchEvent")
-                        .WithMany()
-                        .HasForeignKey("PitchEventId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
