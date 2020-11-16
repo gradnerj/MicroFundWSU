@@ -73,7 +73,7 @@ namespace DataAccessLayer.Repository {
                     assignmentDict.Add(app.ApplicationId.ToString(), mentor.FullName);
                 } else
                 {
-                    assignmentDict.Add(app.ApplicationId.ToString(), "unassigned");
+                    assignmentDict.Add(app.ApplicationId.ToString(), "");
                 }
                 
             }

@@ -10,14 +10,11 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="mentorNotesTable">
     <thead>
         <tr>
             <th>
                 Company
-            </th>
-            <th>
-                App Status
             </th>
             <th>
                 Meeting Date
@@ -26,23 +23,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.MentorNote) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MentorAssignment.Application.ApplicationStatus.StatusDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeetingDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.MentorNoteId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.MentorNoteId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.MentorNote)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MeetingDate)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.MentorNoteId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.MentorNoteId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#mentorNotesTable').DataTable({
+                "pageLength": 10
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}
