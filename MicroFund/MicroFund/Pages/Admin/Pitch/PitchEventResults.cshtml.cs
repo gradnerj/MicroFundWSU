@@ -35,7 +35,7 @@ namespace MicroFund.Pages.Admin.Pitch {
             Presenters = _context.ApplicationUsers.Where(u => userIds.Contains(u.Id));
             var judgeIds = Scores.Select(s => s.JudgeId).ToList();
             Judges = _context.ApplicationUsers.Where(j => judgeIds.Contains(j.Id));
-            ScoringCategories = Scores.Select(s => s.ScoreCardField.ScoreCardFieldDescription).ToArray();
+            ScoringCategories = Scores.Select(s => s.ScoreCardField.ScoreCardFieldDescription).Distinct().ToArray();
             AverageCategoryScores = new List<float>();
 
             
