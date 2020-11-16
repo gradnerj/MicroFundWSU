@@ -27,7 +27,7 @@ namespace DataAccessLayer.Models
         public Question Question { get; set; }
 
         [Required]
-        [StringLength(250)]
+        [StringLength(750)]
         public string ResponseDescription { get; set; }
 
         [Required]

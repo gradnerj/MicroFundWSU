@@ -1,10 +1,454 @@
 ﻿@page
 @model MicroFund.Pages.Applicant.Apply.IndexModel
 @{
+    bool profileComplete = true;
+    bool companyNotStarted = false;
+    bool noSales = false;
+    bool noWebsite = false;
+    bool noPrototype = false;
+    bool noIntelProp = false;
+    bool noExtFunding = false;
+    bool noDevCounselor = false;
+    var btnText = "Submit";
+    if(Model.ContactInfo == null)
+    {
+        profileComplete = false;
+        btnText = "Complete Profile to Apply";
+    }
+    if (Model.Input.StatusOfBusiness == "My company/service is still a concept.")
+    {
+        companyNotStarted = true;
+    }
+    if (Model.Input.StartedDate.CompareTo(Convert.ToDateTime("1/1/0001 12:00 AM")) == 0){
+        companyNotStarted = true;
+    }
+    if(Model.Input.SalesDescription == "I have not generated any sales.")
+    {
+        noSales = true;
+    }
+    if(Model.Input.WebsiteUrl == "I do not have a website.")
+    {
+        noWebsite = true;
+    }
+    if(Model.Input.PrototypeFile == "I do not have a prototype.")
+    {
+        noPrototype = true;
+    }
+    if(Model.Input.IntelPropDesc == "I do not have any intellectual property.")
+    {
+        noIntelProp = true;
+    }
+    if(Model.Input.HasExternalFunding == "I have not received any external funding.")
+    {
+        noExtFunding = true;
+    }
+    if(Model.Input.SmallBusinessDevCenterCounselorDesc == "I have not met with a Small Business Development Center Counselor.")
+    {
+        noDevCounselor = true;
+    }
+
 }
 
 <div class="container-fluid">
     <div class="row">
+        <img class="d-block mx-auto" src="~/images/WildcatMicrofund_horizontal-01_transparent_purple.png" alt="Wildcat Micro Fund logo" height="200" width="400" />
+    </div>
+    <div class="col-sm-10 mt-2 border mx-auto">
+        <form method="post" class="px-3">
+            <div class="h1 text-center mt-sm-2">
+                Wildcat Micro Fund Application Form
+            </div>
+            <div class="col-12 mb-2">
+                <p>
+                    The objective of the Wildcat Micro Fund is to help you develop your early-stage business or concept and get it
+                    started. Please complete the application below to be considered. If you have any questions or want help
+                    filling out this application, contact Gandolf the Gray, gandolf@wizard.gray.com
+                </p>
+                <p>
+                    To qualify:<br />
+                    You must reside in Weber, Davis, Box Elder, or Morgan County.<br />
+                    Been in business for less than one year.<br />
+                    Sales not more than $3,000 for three successive months.<br />
+                    Have not received more than $25,000 in external funding.
+                </p>
+                <p class="text-danger">
+                    *Before submitting an application you must fill out all required fields on the account profile page and all questions
+                    on the application form.
+                </p>
+                
+                <div class="col-12 border">
+                    @if (profileComplete)
+                    {
+                        <div class="h5 text-left border-bottom my-2 pb-2">
+                            Applicant Information
+                        </div>
+                        <div class="form-row">
+                            <div class="col-1 font-weight-bold">
+                                Name:
+                            </div>
+                            <div class="col">
+                                @Model.Applicant.FullName
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-1 font-weight-bold">
+                                E-mail:
+                            </div>
+                            <div class="col">
+                                @Model.Applicant.Email
+                            </div>
+                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-1 font-weight-bold">
+                                Phone:
+                            </div>
+                            <div class="col">
+                                @Model.ContactInfo.ContactInfoDetail
+                            </div>
+                        </div>
+                    }
+                    <div class="h5 text-left border-bottom mb-2 pb-2">
+                        Company Information
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.CompanyName">Company Name</label>
+                        <input class="form-control" asp-for="Input.CompanyName" />
+                        <span class="text-danger" asp-validation-for="Input.CompanyName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.ProductServiceDescription">Describe your product/service.</label>
+                        <textarea class="form-control" asp-for="Input.ProductServiceDescription"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.ProductServiceDescription"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Is your company already started?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.StatusOfBusiness, "My compnay/service is already started.",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.StatusOfBusiness, "My company/service is still a concept.",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div id="isStartedData" style="@(companyNotStarted ? "display: none" : null)">
+                        <div class="form-group" id="companyStartDate">
+                            <label class="col-form-label" asp-for="Input.StartedDate">Start Date</label>
+                            <input class="from-control" asp-for="Input.StartedDate" />
+                        </div>
+                        <div class="form-row">
+                            <div class="col-form-label">Has your company generated any sales?</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                @Html.RadioButtonFor(m => m.Input.YesNoGeneratedSales, "Yes",
+                                    new { @class = "form-check-input" }) Yes
+                            </div>
+                            <div class="form-check">
+                                @Html.RadioButtonFor(m => m.Input.YesNoGeneratedSales, "No",
+                                    new { @class = "form-check-input" }) No
+                            </div>
+                        </div>
+                        <div class="form-row" id="generatedSalesDesc" style="@(noSales ? "display: none" : null)">
+                            <div class="col form-group">
+                                <label class="col-form-label" asp-for="Input.SalesDescription">Describe your sales per month over the last three months.</label>
+                                <textarea class="form-control" asp-for="Input.SalesDescription"></textarea>
+                                <span class="text-danger" asp-validation-for="Input.SalesDescription"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.Industry">What industry is your company in?</label>
+                        <select class="form-control" asp-for="Input.Industry">
+                            <option value="">-Select an option-</option>
+                            <option value="Retail">Retail</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="E-Commerce">E-Commerce</option>
+                            <option value="Mobile App">Mobile App</option>
+                            <option value="Consumer Services">Consumer Services</option>
+                            <option value="Food & Beverage">Food &amp; Beverage</option>
+                            <option value="Games/Entertainment">Games/Entertainment</option>
+                            <option value="Education">Education</option>
+                            <option value="Business products and services">Business products and services</option>
+                            <option value="Financial Services">Financial Services</option>
+                            <option value="SAAS - Enterprise Software">SAAS - Enterprise Software</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Input.Industry"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Do you have a website?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoHasCompanyWebsite, "Yes",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoHasCompanyWebsite, "No",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-group" id="websiteURL" style="@(noWebsite ? "display: none" : null)">
+                        <label class="col-form-label" asp-for="Input.WebsiteUrl">Provide your website URL</label>
+                        <input class="form-control" asp-for="Input.WebsiteUrl" />
+                        <span class="text-danger" asp-validation-for="Input.WebsiteUrl"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Do you have a prototype?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoHasPrototype, "Yes",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoHasPrototype, "No",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-group" id="prototypeFile" style="@(noPrototype ? "display: none" : null)">
+                        <label class="col-form-label" asp-for="Input.PrototypeFile">Upload your prototype pictures or documentation.</label>
+                        <input class="form-control-file" asp-for="Input.PrototypeFile" />
+                        <span class="text-danger" asp-validation-for="Input.PrototypeFile"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Do you have any intellectual property?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoHasIntelProp, "Yes",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoHasIntelProp, "No",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-group mb-4" id="intelPropertyDesc" style="@(noIntelProp ? "display: none" : null)">
+                        <label class="col-form-label" asp-for="Input.IntelPropDesc">Provide a brief explanation.</label>
+                        <textarea class="form-control" asp-for="Input.IntelPropDesc"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.IntelPropDesc"></span>
+                    </div>
+                    <div class="h5 text-left border-bottom mb-2 pb-2">
+                        Business Plan and Projections
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.MarketOpportunity">
+                            Market Opportunity - What problem are you solving or opportunity is your
+                            company providing for your customer? Why do you think customers will buy it?
+                            How did you determine this? You can ask 15-20 people!(25% of score)
+                        </label>
+                        <textarea class="form-control" asp-for="Input.MarketOpportunity"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.MarketOpportunity"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.TargetMarketDemographic">
+                            Customers/Target Market - Please tell us who you think will buy your
+                            product/service, including their age, sex, and income. How do you know this?(20% of score)
+                        </label>
+                        <textarea class="form-control" asp-for="Input.TargetMarketDemographic"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.TargetMarketDemographic"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.ProjectedSalesDesc">
+                            Sales - Estimate the sales you can make to your customer groups.
+                            How much do you think the sales will increase over six months and 12 months?
+                            How do you plan to make these sales?(15% of score)
+                        </label>
+                        <textarea class="form-control" asp-for="Input.ProjectedSalesDesc"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.CompetitionDesc"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.CompetitionDesc">
+                            Competition - Name and describe other companies that are competing for your
+                            customers' to buy from them. Why do you think their product/service is better or
+                            different from yours? Remember, the competitor's product doesn't have to be identical
+                            to yours, just one that could reasonably do the same thing. Why do you think your
+                            product/service is better or different from other choices?(15% of score)
+                        </label>
+                        <textarea class="form-control" asp-for="Input.CompetitionDesc"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.CompetitionDesc"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.TeamDesc">
+                            Team - Tell us about yourself and why you will be successful. Include your
+                            experience and any helpers you have for your company. Remember, we're buying
+                            YOU and your ability to make your idea happen.(25% of score)
+                        </label>
+                        <textarea class="form-control" asp-for="Input.TeamDesc"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.TeamDesc"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.AmountRequested">
+                            Specify the amount you are requesting? Keep in mind that cash and service
+                            awards typically range between $0 and $2,000.
+                        </label>
+                        <input class="form-control" asp-for="Input.AmountRequested" />
+                        <span class="text-danger" asp-validation-for="Input.AmountRequested"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.PlanForFunds">If awarded, how do you plan to utilize it?</label>
+                        <textarea class="form-control" asp-for="Input.PlanForFunds"></textarea>
+                        <span class="text-danger" asp-validation-for="Input.PlanForFunds"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Have you previously received a grant from the Wildcat Micro Fund?</div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.PreviousMicroFundRecipient, "Yes, I Have previously received a Wildcat Micro Fund grant.", new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.PreviousMicroFundRecipient, "No, I Have not previously received a Wildcat Micro Fund grant.", new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Have you received any external funding?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoExternalFunding, "Yes",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoExternalFunding, "No",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-group" id="externalFundsDesc" style="@(noExtFunding ? "display: none" : null)">
+                        <label class="col-form-label" asp-for="Input.HasExternalFunding">Please provide the amount recieved and where the funds came from.</label>
+                        <input class="form-control" asp-for="Input.HasExternalFunding" />
+                        <span class="text-danger" asp-validation-for="Input.HasExternalFunding"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" asp-for="Input.HearAboutMicroFund">How did you hear about the Wildcat Micro Fund?</label>
+                        <select class="form-control" asp-for="Input.HearAboutMicroFund">
+                            <option value="">-Select an option-</option>
+                            <option value="Small Business Development Center">Small Business Development Center</option>
+                            <option value="Business Resource Center">Business Resource Center</option>
+                            <option value="Word of Mouth/Family & Friends">Word of Mouth/Family &amp; Friends</option>
+                            <option value="Socail Media">Social Media</option>
+                            <option value="Financial Institution">Financial Instituion</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Input.HearAboutMicroFund"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Have you attended a Wildcat Micro Fund Workshop?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.HaveAttendedMFWorkshop, "Yes, I Have attended a Wildcat Micro Fund Workshop.",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.HaveAttendedMFWorkshop, "No, I Have not attended a Wildcat Micro Fund Workshop.",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Have you attended, applied to present, or presented at 1 Million Cups?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.OneMillionCupsExp, "Yes, I Have attended, applied to present, or presented at 1 Million Cups.",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.OneMillionCupsExp, "No, I Have not attended, applied to present, or presented at 1 Million Cups.",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label">Have you met with a Small Business Development Center Counselor?</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoSmallDevCounselor, "Yes",
+                                new { @class = "form-check-input" }) Yes
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Input.YesNoSmallDevCounselor, "No",
+                                new { @class = "form-check-input" }) No
+                        </div>
+                    </div>
+                    <div class="form-group" id="smallDevCounselor" style="@(noDevCounselor ? "display: none" : null)">
+                        <label class="col-form-label" asp-for="Input.SmallBusinessDevCenterCounselorDesc">Where did you meet them?</label>
+                        <select class="form-control" asp-for="Input.SmallBusinessDevCenterCounselorDesc">
+                            <option value="">-Select an option-</option>
+                            <option value="I met with a business development counselor in Ogden">Ogden</option>
+                            <option value="I met with a business development counselor in Kaysville">Kaysville</option>
+                            <option value="I met with a business development counselor in Brigham City">Brigham City</option>
+                            <option value="I met with a business development counselor in another location">Other</option>
+                            <option value="I have not met with a Small Business Development Center Counselor.">Did not meet with a counselor</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Input.SmallBusinessDevCenterCounselorDesc"></span>
+                    </div>
+                </div>
+                <div class="h5 mt-3">
+                    Wildcat Micro Fund Submission Agreement
+                </div>
+                <p>
+                    By submitting this application, I agree to provide feedback and information as requested in a prompt manner
+                    in the future regarding the status of my business, what I have learned and other metrics. The Wildcat Micro
+                    Fund will request information every 3 months for the first year after grant funds are awarded and then semi-annually
+                    for 3 years.<br />
+                </p>
+                <p>
+                    It is also understood that some of the success of your business comes from others donating time and money in your future success. You commit to ‘pay it forward’ to the fund and community in the manner you feel best for yourself.
+                </p>
+                <div class="form-row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="agreeToTerms" id="agreeToTerms" value="acknowledge" />
+                        <label class="form-check-label" for="agreeToTerms">
+                            By clicking here, you agree to the guidelines outlined herein
+                            and certify that all statements contained within are true.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mx-auto my-3">
+                <button type="submit" class="btn btn-block text-white" style="border: 1px solid #4E2A67; background-color: #4E2A67" disabled="@(profileComplete ? null : "disabled")">@btnText</button>
+            </div>
 
+        </form>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+           
+            $('input[name="Input.StatusOfBusiness"]').change(function () {
+                $("#isStartedData").toggle();
+            });
+
+            $('input[name="Input.YesNoGeneratedSales"]').change(function () {
+                $("#generatedSalesDesc").toggle();
+            });
+
+            $('input[name="Input.YesNoHasCompanyWebsite"]').change(function () {
+                $("#websiteURL").toggle();
+            });
+
+            $('input[name="Input.YesNoHasPrototype"]').change(function () {
+                $("#prototypeFile").toggle();
+            });
+
+            $('input[name="Input.YesNoHasIntelProp"]').change(function () {
+                $("#intelPropertyDesc").toggle();
+            });
+
+            $('input[name="Input.YesNoExternalFunding"]').change(function () {
+                $("#externalFundsDesc").toggle();
+            });
+
+            $('input[name="Input.YesNoSmallDevCounselor"]').change(function () {
+                $("#smallDevCounselor").toggle();
+            });
+        });
+    </script>
+}
+

@@ -43,5 +43,7 @@ namespace DataAccessLayer.Models
 
         [Required]
         public bool IsArchived { get; set; }
+
+        public ICollection<Response> Responses { get; set; }
     }
 }

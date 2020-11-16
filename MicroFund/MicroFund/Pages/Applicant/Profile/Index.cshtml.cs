@@ -150,11 +150,11 @@ namespace MicroFund.Pages.Applicant.Profile
             address.State = Input.State;
             address.Zip = Input.Zip;
             address.Country = Input.Country;
-            address.UpdatedBy = applicant.Email;
+            address.UpdatedBy = claim.Value;
             address.UpdatedDate = DateTime.Now;
 
             contactInfo.ContactInfoDetail = Input.ContactInfoDetail;
-            contactInfo.UpdatedBy = applicant.Email;
+            contactInfo.UpdatedBy = claim.Value;
             contactInfo.UpdatedDate = DateTime.Now;
 
             demographics.Gender = Input.Gender;
@@ -168,7 +168,7 @@ namespace MicroFund.Pages.Applicant.Profile
             demographics.WSUEntrepreneurshipMinor = Input.WSUEntrepreneurshipMinor;
             demographics.WSUEmployee = Input.WSUEmployee;
             demographics.WSUNumber = Input.WSUNumber;
-            demographics.UpdatedBy = applicant.Email;
+            demographics.UpdatedBy = claim.Value;
             demographics.UpdatedDate = DateTime.Now;
 
 
