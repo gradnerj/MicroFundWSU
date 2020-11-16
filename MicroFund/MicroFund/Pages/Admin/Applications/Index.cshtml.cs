@@ -35,6 +35,12 @@ namespace MicroFund.Pages.Admin.Applications
             var application = _context.Application.FirstOrDefault(a => a.ApplicationId == Int32.Parse(appId));
             application.ApplicationStatusId = Int32.Parse(statusid);
             _context.Update(application);
+
+            var applicantId = _context.Application.FirstOrDefault(a => a.ApplicationId == Int32.Parse(appId)).ApplicantId;
+            var notification = new Notification();
+            notification.UserID = applicantId;
+            notification.NotificationMessage = "New Application Status: " + _context.ApplicationStatus.FirstOrDefault(s => s.ApplicationStatusId == Int32.Parse(statusid)).StatusDescription;
+            _context.Notifications.Add(notification);
             _context.SaveChanges();
             return RedirectToPage();
         }
