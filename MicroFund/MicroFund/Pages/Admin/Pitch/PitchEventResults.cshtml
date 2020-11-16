@@ -1,0 +1,103 @@
+﻿@page
+@model MicroFund.Pages.Admin.Pitch.PitchEventResultsModel
+@{
+}
+
+<h2>Results for Pitch Event @Model.PEvent.PitchEventId on @Model.PEvent.PitchDate.ToString("MM/dd/yyyy")</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <canvas id="categoryAverage"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <canvas id="pitchAverage"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    Presenter
+                </th>
+                <th>
+                    Mkt Valid
+                </th>
+                <th>
+                    Value Prop
+                </th>
+                <th>
+                    Target Customer
+                </th>
+                <th>
+                    Competition
+                </th>
+                <th>
+                    Total Score
+                </th>
+                <th>
+                    Judge
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var j in Model.Judges.ToList()) {
+                    foreach (var p in Model.Pitches.ToList()) {
+                        if (Model.Scores.Where(s => s.PitchId == p.PitchId && s.JudgeId == j.Id).ToList().Count > 0) {
+                            <tr>
+                                <td>
+                                    @p.Application.CompanyName
+                                </td>
+                                <td>
+                                    @Model.Presenters.FirstOrDefault(u => u.Id == p.Application.ApplicantId)
+                                </td>
+
+                                @foreach (var s in Model.Scores.Where(s => s.PitchId == p.PitchId && s.JudgeId == j.Id).ToList().AsEnumerable()) {
+                                    <td>
+                                        @s.Score
+                                    </td>
+                                }
+
+                                <td>
+                                    @Model.Scores.Where(s => s.PitchId == p.PitchId && s.JudgeId == j.Id).Select(s => s.Score).Sum()
+                                </td>
+                                <td>
+                                    @j.FullName
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{ 
+    <script>
+       
+        let categoryAverage = document.getElementById('categoryAverage').getContext('2d');
+        var categoryNames = [];
+        var avgCategoryScores = [];
+        @{
+            foreach(var c in Model.ScoringCategories) {
+                @:categoryNames.push('@c');
+            }
+        }
+        console.log(categoryNames);
+       
+    </script>
+}

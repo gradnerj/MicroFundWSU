@@ -4,14 +4,16 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201115210406_UpdatedScoreCardAndScoringCategory")]
+    partial class UpdatedScoreCardAndScoringCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -600,9 +602,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("PitchDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PitchEventId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(128)")
@@ -615,14 +614,12 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.HasIndex("PitchEventId");
-
                     b.ToTable("Pitch");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.PitchEvent", b =>
                 {
-                    b.Property<int>("PitchEventId")
+                    b.Property<int>("PitchId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -636,7 +633,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("Services")
                         .HasColumnType("real");
 
-                    b.HasKey("PitchEventId");
+                    b.HasKey("PitchId");
 
                     b.ToTable("PitchEvents");
                 });
@@ -764,10 +761,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ScoreCardCategoryScoringCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ScoreCardFieldId")
+                    b.Property<int>("ScoreCardCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -784,7 +778,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("PitchId");
 
-                    b.HasIndex("ScoreCardCategoryScoringCategoryId");
+                    b.HasIndex("ScoreCardCategoryId");
 
                     b.ToTable("ScoreCard");
                 });
@@ -1168,12 +1162,6 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("DataAccessLayer.Models.PitchEvent", "PitchEvent")
-                        .WithMany()
-                        .HasForeignKey("PitchEventId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Question", b =>
@@ -1216,14 +1204,15 @@ namespace DataAccessLayer.Migrations
 
                     b.HasOne("DataAccessLayer.Models.ScoringCategory", "ScoreCardCategory")
                         .WithMany()
-                        .HasForeignKey("ScoreCardCategoryScoringCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ScoreCardCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.ScoreCardField", b =>
                 {
                     b.HasOne("DataAccessLayer.Models.ScoringCategory", "ScoringCategory")
-                        .WithMany()
+                        .WithMany("ScoringFields")
                         .HasForeignKey("ScoringCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
