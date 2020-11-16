@@ -18,9 +18,12 @@ namespace DataAccessLayer.Models
         [ForeignKey("QuestionCategoryId")]
         public QuestionCategory QuestionCategory { get; set; }
 
+        [Display(Name = "Question Number")]
+        public int QuestionNumber { get; set; }
+
         [Required]
         [Display(Name = "Description")]
-        [StringLength(250)]
+        [StringLength(750)]
         public string QuestionDescription { get; set; }
 
         [Required]
@@ -35,5 +38,7 @@ namespace DataAccessLayer.Models
         [Required]
         [Display(Name = "Is Archived")]
         public bool IsArchived { get; set; }
+
+        public ICollection<Response> Responses { get; set; }
     }
 }

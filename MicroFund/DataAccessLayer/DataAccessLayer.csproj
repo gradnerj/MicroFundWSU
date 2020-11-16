@@ -19,6 +19,10 @@
     <Compile Remove="Migrations\20201107184222_AppUserAsDbSet.Designer.cs" />
     <Compile Remove="Migrations\20201107231915_MovedIsArchivedForUsers.cs" />
     <Compile Remove="Migrations\20201107231915_MovedIsArchivedForUsers.Designer.cs" />
+
+    <Compile Remove="Migrations\20201113152758_addedAddress_Demographics_Contacts_to_ApplicationUser.cs" />
+    <Compile Remove="Migrations\20201113152758_addedAddress_Demographics_Contacts_to_ApplicationUser.Designer.cs" />
+
     
     <Compile Remove="Migrations\20201115225006_AddingPitchEventFKToPitch.cs" />
     <Compile Remove="Migrations\20201115225006_AddingPitchEventFKToPitch.Designer.cs" />
@@ -35,6 +39,7 @@
     <Compile Remove="Migrations\20201115211242_UpdateScoring.Designer.cs" />
     <Compile Remove="Migrations\20201115233240_test.cs" />
     <Compile Remove="Migrations\20201115233240_test.Designer.cs" />
+
 
   </ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -24,6 +25,7 @@ namespace DataAccessLayer.Models
 
         [Required]
         [StringLength(64)]
+        [DisplayName("Street Address")]
         public string Street { get; set; }
 
         [Required]
@@ -34,6 +36,7 @@ namespace DataAccessLayer.Models
         public string State { get; set; }
 
         [Required]
+        [DisplayName("Zip Code")]
         public string Zip { get; set; }
 
         [Required]
