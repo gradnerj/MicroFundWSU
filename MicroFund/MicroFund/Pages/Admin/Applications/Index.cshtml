@@ -91,5 +91,15 @@
             $("#" + status).prop("checked", true);
             $("#appId").prop("value", appId);
         });
+
+        $(document).ready(function () {
+            $('#applicationsTable').DataTable({
+                "pageLength": 8,
+                "order": [[2, "desc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+
     </script>
 }
