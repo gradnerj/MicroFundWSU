@@ -21,7 +21,10 @@ namespace MicroFund.Pages.Admin.Pitch {
         public IQueryable<ApplicationUser> Judges { get; set; }
 
         public string[] ScoringCategories { get; set; }
-        public float[] AverageCategoryScores { get; set; }
+        public List<float> AverageCategoryScores { get; set; }
+
+        public List<float> AveragePitchScores { get; set; }
+        public List<string> CompanyNames { get; set; }
         public void OnGet(int eventid)
         {
             PEvent = _context.PitchEvents.FirstOrDefault(e => e.PitchEventId == eventid);
@@ -33,8 +36,30 @@ namespace MicroFund.Pages.Admin.Pitch {
             var judgeIds = Scores.Select(s => s.JudgeId).ToList();
             Judges = _context.ApplicationUsers.Where(j => judgeIds.Contains(j.Id));
             ScoringCategories = Scores.Select(s => s.ScoreCardField.ScoreCardFieldDescription).ToArray();
-            
+            AverageCategoryScores = new List<float>();
 
+            
+            
+            foreach (var c in ScoringCategories) {
+                var sum = Scores.Where(x => x.ScoreCardField.ScoreCardFieldDescription == c).AsEnumerable().ToList().Sum(s => s.Score);
+                float avg = (float)sum / (float)Scores.Where(x => x.ScoreCardField.ScoreCardFieldDescription == c).AsEnumerable().ToList().Count;
+                AverageCategoryScores.Add(avg);
+                    
+            }
+            AveragePitchScores = new List<float>();
+            var numJudges = Judges.AsEnumerable().ToList().Count;
+            foreach (var p in Presenters.AsEnumerable().ToList()) { 
+                float totalScore = 0;
+                foreach (var c in ScoringCategories) {
+                    totalScore += Scores.FirstOrDefault(s => (s.Pitch.Application.ApplicantId == p.Id) && (s.ScoreCardField.ScoreCardFieldDescription == c)).Score;
+                }
+                totalScore = (float)totalScore / (float)numJudges;
+                AveragePitchScores.Add(totalScore);
+            }
+            CompanyNames = new List<string>();
+            foreach(var p in Pitches.AsEnumerable().ToList()) {
+                CompanyNames.Add(p.Application.CompanyName);
+            }
         }
     }
 }
