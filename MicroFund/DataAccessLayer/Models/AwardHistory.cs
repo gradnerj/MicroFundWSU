@@ -14,23 +14,24 @@ namespace DataAccessLayer.Models
         [Display(Name = "Application")]
         public int ApplicationId { get; set; }
 
-        [Required]
         [ForeignKey("ApplicationId")]
         public Application Application { get; set; }
 
         [Required]
-        [Display(Name = "Expenditure")]
-        public int ExpenditureId { get; set; }
+        [Display(Name = "PitchEvent")]
+        public int PitchEventId { get; set; }
 
-        [Required]
-        [ForeignKey("ExpenditureId")]
-        public Expenditure Expenditure { get; set; }
+        [ForeignKey("PitchEventId")]
+        public PitchEvent PitchEvent { get; set; }
 
         [Required]
         public DateTime AwardDate { get; set; }
 
         [Required]
-        public float Amount { get; set; }
+        public float CashAmount { get; set; }
+
+        [Required]
+        public float ServicesAmount { get; set; }
 
         [Required]
         [StringLength(64)]
@@ -48,7 +49,6 @@ namespace DataAccessLayer.Models
         public string AwardType { get; set; }
 
         [Required]
-        [StringLength(128)]
         public string UpdatedBy { get; set; }
 
         [Required]

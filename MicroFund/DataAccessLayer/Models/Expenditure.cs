@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataAccessLayer.Models
@@ -8,6 +9,14 @@ namespace DataAccessLayer.Models
     public class Expenditure
     {
         public int ExpenditureId { get; set; }
+
+        [Required]
+        [Display(Name = "AwardHistory")]
+        public int AwardHistoryId { get; set; }
+
+        [Required]
+        [ForeignKey("AwardHistoryId")]
+        public AwardHistory AwardHistory { get; set; }
 
         [Required]
         public float Amount { get; set; }
