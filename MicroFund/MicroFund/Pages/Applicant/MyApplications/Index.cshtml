@@ -1,6 +1,46 @@
 ﻿@page
 @model MicroFund.Pages.Applicant.MyApplications.IndexModel
 @{
+    ViewData["Title"] = "View My Applications";
 }
 
-<p>This page is under construction!</p>
+<h1>My Applications</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Submission Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Resubmit Application
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model.ApplicantViewApplicationsVM.Applications.OrderBy(a => a.ApplicationCreationDate))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => application.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => application.ApplicationCreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => application.ApplicationStatus.StatusDescription)
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" asp-page="/Applicant/Apply/Index" asp-route-id="@application.ApplicationId">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

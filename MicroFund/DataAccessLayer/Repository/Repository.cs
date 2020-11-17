@@ -162,6 +162,14 @@ namespace DataAccessLayer.Repository {
             return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId) && x.Application.ApplicationStatus.StatusDescription.Equals("Assigned to Mentor")).Include(x => x.Application).ToList();
         }
 
+        Applicant_MyApplications
+        public async Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id)
+        {
+            return await _context.Application.Where(x => x.ApplicantId == id).Include(x => x.ApplicationStatus).ToListAsync();
+        }
+
+
+
         public async Task<IList<PitchEvent>> GetAllPitchEventsAsync()
         {
             return await _context.PitchEvents.ToListAsync();
@@ -171,6 +179,7 @@ namespace DataAccessLayer.Repository {
         {
             return await _context.Pitch.ToListAsync();
         }
+
 
         #endregion
 

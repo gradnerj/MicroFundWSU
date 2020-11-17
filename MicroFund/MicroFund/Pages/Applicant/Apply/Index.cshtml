@@ -1,7 +1,8 @@
 ﻿@page
 @model MicroFund.Pages.Applicant.Apply.IndexModel
 @{
-    bool profileComplete = true;
+    ViewData["Title"] = "Apply";
+    bool isSubmittable = true;
     bool companyNotStarted = false;
     bool noSales = false;
     bool noWebsite = false;
@@ -9,11 +10,16 @@
     bool noIntelProp = false;
     bool noExtFunding = false;
     bool noDevCounselor = false;
+    bool profileComplete = true;
     var btnText = "Submit";
+    if(Model.ContactInfo == null || !Model.Input.IsSubmittable)
+    {
+        isSubmittable = false;
+    }
     if(Model.ContactInfo == null)
     {
+        btnText = "Complete Profile to Submit";
         profileComplete = false;
-        btnText = "Complete Profile to Apply";
     }
     if (Model.Input.StatusOfBusiness == "My company/service is still a concept.")
     {
@@ -112,12 +118,12 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" asp-for="Input.CompanyName">Company Name</label>
-                        <input class="form-control" asp-for="Input.CompanyName" />
+                        <input class="form-control" asp-for="Input.CompanyName" disabled="@(isSubmittable ? null : "disabled")" />
                         <span class="text-danger" asp-validation-for="Input.CompanyName"></span>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" asp-for="Input.ProductServiceDescription">Describe your product/service.</label>
-                        <textarea class="form-control" asp-for="Input.ProductServiceDescription"></textarea>
+                        <textarea class="form-control" asp-for="Input.ProductServiceDescription" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.ProductServiceDescription"></span>
                     </div>
                     <div class="form-row">
@@ -136,7 +142,7 @@
                     <div id="isStartedData" style="@(companyNotStarted ? "display: none" : null)">
                         <div class="form-group" id="companyStartDate">
                             <label class="col-form-label" asp-for="Input.StartedDate">Start Date</label>
-                            <input class="from-control" asp-for="Input.StartedDate" />
+                            <input class="from-control" asp-for="Input.StartedDate" disabled="@(isSubmittable ? null : "disabled")"/>
                         </div>
                         <div class="form-row">
                             <div class="col-form-label">Has your company generated any sales?</div>
@@ -154,14 +160,14 @@
                         <div class="form-row" id="generatedSalesDesc" style="@(noSales ? "display: none" : null)">
                             <div class="col form-group">
                                 <label class="col-form-label" asp-for="Input.SalesDescription">Describe your sales per month over the last three months.</label>
-                                <textarea class="form-control" asp-for="Input.SalesDescription"></textarea>
+                                <textarea class="form-control" asp-for="Input.SalesDescription" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                                 <span class="text-danger" asp-validation-for="Input.SalesDescription"></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" asp-for="Input.Industry">What industry is your company in?</label>
-                        <select class="form-control" asp-for="Input.Industry">
+                        <select class="form-control" asp-for="Input.Industry" disabled="@(isSubmittable ? null : "disabled")">
                             <option value="">-Select an option-</option>
                             <option value="Retail">Retail</option>
                             <option value="Manufacturing">Manufacturing</option>
@@ -193,7 +199,7 @@
                     </div>
                     <div class="form-group" id="websiteURL" style="@(noWebsite ? "display: none" : null)">
                         <label class="col-form-label" asp-for="Input.WebsiteUrl">Provide your website URL</label>
-                        <input class="form-control" asp-for="Input.WebsiteUrl" />
+                        <input class="form-control" asp-for="Input.WebsiteUrl" disabled="@(isSubmittable ? null : "disabled")"/>
                         <span class="text-danger" asp-validation-for="Input.WebsiteUrl"></span>
                     </div>
                     <div class="form-row">
@@ -211,7 +217,7 @@
                     </div>
                     <div class="form-group" id="prototypeFile" style="@(noPrototype ? "display: none" : null)">
                         <label class="col-form-label" asp-for="Input.PrototypeFile">Upload your prototype pictures or documentation.</label>
-                        <input class="form-control-file" asp-for="Input.PrototypeFile" />
+                        <input class="form-control-file" asp-for="Input.PrototypeFile" disabled="@(isSubmittable ? null : "disabled")"/>
                         <span class="text-danger" asp-validation-for="Input.PrototypeFile"></span>
                     </div>
                     <div class="form-row">
@@ -229,7 +235,7 @@
                     </div>
                     <div class="form-group mb-4" id="intelPropertyDesc" style="@(noIntelProp ? "display: none" : null)">
                         <label class="col-form-label" asp-for="Input.IntelPropDesc">Provide a brief explanation.</label>
-                        <textarea class="form-control" asp-for="Input.IntelPropDesc"></textarea>
+                        <textarea class="form-control" asp-for="Input.IntelPropDesc" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.IntelPropDesc"></span>
                     </div>
                     <div class="h5 text-left border-bottom mb-2 pb-2">
@@ -241,7 +247,7 @@
                             company providing for your customer? Why do you think customers will buy it?
                             How did you determine this? You can ask 15-20 people!(25% of score)
                         </label>
-                        <textarea class="form-control" asp-for="Input.MarketOpportunity"></textarea>
+                        <textarea class="form-control" asp-for="Input.MarketOpportunity" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.MarketOpportunity"></span>
                     </div>
                     <div class="form-group">
@@ -249,7 +255,7 @@
                             Customers/Target Market - Please tell us who you think will buy your
                             product/service, including their age, sex, and income. How do you know this?(20% of score)
                         </label>
-                        <textarea class="form-control" asp-for="Input.TargetMarketDemographic"></textarea>
+                        <textarea class="form-control" asp-for="Input.TargetMarketDemographic" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.TargetMarketDemographic"></span>
                     </div>
                     <div class="form-group">
@@ -258,7 +264,7 @@
                             How much do you think the sales will increase over six months and 12 months?
                             How do you plan to make these sales?(15% of score)
                         </label>
-                        <textarea class="form-control" asp-for="Input.ProjectedSalesDesc"></textarea>
+                        <textarea class="form-control" asp-for="Input.ProjectedSalesDesc" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.CompetitionDesc"></span>
                     </div>
                     <div class="form-group">
@@ -269,7 +275,7 @@
                             to yours, just one that could reasonably do the same thing. Why do you think your
                             product/service is better or different from other choices?(15% of score)
                         </label>
-                        <textarea class="form-control" asp-for="Input.CompetitionDesc"></textarea>
+                        <textarea class="form-control" asp-for="Input.CompetitionDesc" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.CompetitionDesc"></span>
                     </div>
                     <div class="form-group">
@@ -278,7 +284,7 @@
                             experience and any helpers you have for your company. Remember, we're buying
                             YOU and your ability to make your idea happen.(25% of score)
                         </label>
-                        <textarea class="form-control" asp-for="Input.TeamDesc"></textarea>
+                        <textarea class="form-control" asp-for="Input.TeamDesc" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.TeamDesc"></span>
                     </div>
                     <div class="form-group">
@@ -286,12 +292,12 @@
                             Specify the amount you are requesting? Keep in mind that cash and service
                             awards typically range between $0 and $2,000.
                         </label>
-                        <input class="form-control" asp-for="Input.AmountRequested" />
+                        <input class="form-control" asp-for="Input.AmountRequested" disabled="@(isSubmittable ? null : "disabled")"/>
                         <span class="text-danger" asp-validation-for="Input.AmountRequested"></span>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" asp-for="Input.PlanForFunds">If awarded, how do you plan to utilize it?</label>
-                        <textarea class="form-control" asp-for="Input.PlanForFunds"></textarea>
+                        <textarea class="form-control" asp-for="Input.PlanForFunds" disabled="@(isSubmittable ? null : "disabled")"></textarea>
                         <span class="text-danger" asp-validation-for="Input.PlanForFunds"></span>
                     </div>
                     <div class="form-row">
@@ -320,12 +326,12 @@
                     </div>
                     <div class="form-group" id="externalFundsDesc" style="@(noExtFunding ? "display: none" : null)">
                         <label class="col-form-label" asp-for="Input.HasExternalFunding">Please provide the amount recieved and where the funds came from.</label>
-                        <input class="form-control" asp-for="Input.HasExternalFunding" />
+                        <input class="form-control" asp-for="Input.HasExternalFunding" disabled="@(isSubmittable ? null : "disabled")"/>
                         <span class="text-danger" asp-validation-for="Input.HasExternalFunding"></span>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" asp-for="Input.HearAboutMicroFund">How did you hear about the Wildcat Micro Fund?</label>
-                        <select class="form-control" asp-for="Input.HearAboutMicroFund">
+                        <select class="form-control" asp-for="Input.HearAboutMicroFund" disabled="@(isSubmittable ? null : "disabled")">
                             <option value="">-Select an option-</option>
                             <option value="Small Business Development Center">Small Business Development Center</option>
                             <option value="Business Resource Center">Business Resource Center</option>
@@ -377,7 +383,7 @@
                     </div>
                     <div class="form-group" id="smallDevCounselor" style="@(noDevCounselor ? "display: none" : null)">
                         <label class="col-form-label" asp-for="Input.SmallBusinessDevCenterCounselorDesc">Where did you meet them?</label>
-                        <select class="form-control" asp-for="Input.SmallBusinessDevCenterCounselorDesc">
+                        <select class="form-control" asp-for="Input.SmallBusinessDevCenterCounselorDesc" disabled="@(isSubmittable ? null : "disabled")">
                             <option value="">-Select an option-</option>
                             <option value="I met with a business development counselor in Ogden">Ogden</option>
                             <option value="I met with a business development counselor in Kaysville">Kaysville</option>
@@ -400,7 +406,7 @@
                 <p>
                     It is also understood that some of the success of your business comes from others donating time and money in your future success. You commit to ‘pay it forward’ to the fund and community in the manner you feel best for yourself.
                 </p>
-                <div class="form-row">
+                <div class="form-row" style="@(isSubmittable ? null : "display: none")">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="agreeToTerms" id="agreeToTerms" value="acknowledge" />
                         <label class="form-check-label" for="agreeToTerms">
@@ -411,7 +417,7 @@
                 </div>
             </div>
             <div class="col-4 mx-auto my-3">
-                <button type="submit" class="btn btn-block text-white" style="border: 1px solid #4E2A67; background-color: #4E2A67" disabled="@(profileComplete ? null : "disabled")">@btnText</button>
+                <button type="submit" class="btn btn-block text-white" id="submitBtn" style="border: 1px solid #4E2A67; background-color: #4E2A67" disabled>@btnText</button>
             </div>
 
         </form>
@@ -420,6 +426,15 @@
 @section scripts{
     <script>
         $(document).ready(function () {
+
+            $('input[name="agreeToTerms"]').click(function () {
+                if ($(this).prop("checked") == false) {
+                    $("#submitBtn").prop('disabled', true);
+                }
+                else {
+                    $("#submitBtn").prop('disabled', false);
+                }
+            });
            
             $('input[name="Input.StatusOfBusiness"]').change(function () {
                 $("#isStartedData").toggle();

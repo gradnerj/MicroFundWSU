@@ -35,8 +35,12 @@ namespace DataAccessLayer.Repository {
 
         List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
 
+        Applicant_MyApplications
+        Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id);
+
         Task<IList<PitchEvent>> GetAllPitchEventsAsync();
         Task<IList<Pitch>> GetAllPitchesAsync();
+
 
         #endregion
 

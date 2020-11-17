@@ -64,6 +64,7 @@ namespace MicroFund.Pages.Applicant.Apply
                     if(id != null)
                     {
                         Application = await _context.Application
+                            .Include(a => a.ApplicationStatus)
                             .Include(a => a.Responses)
                                 .ThenInclude(r => r.Question)
                             .FirstOrDefaultAsync(a => a.ApplicationId == id);
@@ -92,6 +93,14 @@ namespace MicroFund.Pages.Applicant.Apply
                             Application.Responses.FirstOrDefault(r => r.Question.QuestionNumber == 20).ResponseDescription,
                             Application.Responses.FirstOrDefault(r => r.Question.QuestionNumber == 21).ResponseDescription
                             );
+                        if(Application.ApplicationStatus.StatusDescription != "In Remediation")
+                        {
+                            Input.IsSubmittable = false;
+                        }
+                        else
+                        {
+                            Input.IsSubmittable = true;
+                        }
                     }
                     else
                     {
@@ -113,7 +122,8 @@ namespace MicroFund.Pages.Applicant.Apply
                             SmallBusinessDevCenterCounselorDesc = "I have not met with a Small Business Development Center Counselor.",
                             PreviousMicroFundRecipient = "No, I Have not previously received a Wildcat Micro Fund grant.",
                             HaveAttendedMFWorkshop = "No, I Have not attended a Wildcat Micro Fund Workshop.",
-                            OneMillionCupsExp = "No, I Have not attended, applied to present, or presented at 1 Million Cups."
+                            OneMillionCupsExp = "No, I Have not attended, applied to present, or presented at 1 Million Cups.",
+                            IsSubmittable = true
                         };
                     }
                 }
@@ -323,6 +333,7 @@ namespace MicroFund.Pages.Applicant.Apply
             public string StatusOfBusiness { get; set; }
 
             [Required]
+            [DataType(DataType.Date)]
             public DateTime StartedDate { get; set; }
 
             [Required(ErrorMessage = "Sales description is required.")]
@@ -395,6 +406,7 @@ namespace MicroFund.Pages.Applicant.Apply
             public string YesNoHasIntelProp { get; set; }
             public string YesNoExternalFunding { get; set; }
             public string YesNoSmallDevCounselor { get; set; }
+            public bool IsSubmittable { get; set; }
 
 
         }
