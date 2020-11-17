@@ -22,11 +22,11 @@ namespace MicroFund.Pages.Judge.Applications
             _context = context;
         }
 
-        public ReviewApplicationsVM ReviewApplicationsVM { get; set; }
+        public JudgeReviewApplicationsVM JudgeReviewApplicationsVM { get; set; }
 
         public async Task OnGetAsync()
         {
-            ReviewApplicationsVM = new ReviewApplicationsVM
+            JudgeReviewApplicationsVM = new JudgeReviewApplicationsVM
             {
                 ApplicationUsers = await _repository.GetAllUsersAsync(),
                 Applications = await _repository.GetAllApplicationsAsync()
