@@ -20,6 +20,7 @@ namespace DataAccessLayer.Repository {
         
 
         Application GetApplicationById(int id);
+        Task<IList<Application>> GetAllApplicationsToAssignAsync();
         Task<IList<Application>> GetAllApplicationsAsync();
         Task<Dictionary<int, int>> GetAllApplicationIterationsAsync();
         ApplicationUser GetApplicantByApplicationId(int id);            

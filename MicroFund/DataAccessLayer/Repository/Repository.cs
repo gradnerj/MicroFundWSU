@@ -58,12 +58,18 @@ namespace DataAccessLayer.Repository {
             return await _context.Application.Include(x => x.ApplicationStatus).ToListAsync();
         }
 
+        public async Task<IList<Application>> GetAllApplicationsToAssignAsync()
+        {
+            return await _context.Application.Where(x => x.ApplicationStatusId > 3).Include(x => x.ApplicationStatus).ToListAsync();
+        }
+
         public async Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync()
         {
             var assignmentDict = new Dictionary<string, string>();
-            var applications = await GetAllApplicationsAsync();
+            //var applications = await GetAllApplicationsAsync();
+            var applications = await _context.Application.Where(x => x.ApplicationStatusId > 3).ToListAsync();
 
-            foreach( var app in applications)
+            foreach ( var app in applications)
             {
                 var mentorId = await _context.MentorAssignment.Where(x => x.ApplicationId == app.ApplicationId).Select(x => x.MentorId).FirstOrDefaultAsync();
                 if(mentorId != null) 
