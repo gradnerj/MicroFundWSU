@@ -34,6 +34,8 @@ namespace DataAccessLayer.Repository {
 
         List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
 
+        Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id);
+
         #endregion
 
         #region UPDATE Methods

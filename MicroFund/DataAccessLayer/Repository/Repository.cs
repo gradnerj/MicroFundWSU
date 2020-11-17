@@ -156,6 +156,13 @@ namespace DataAccessLayer.Repository {
             return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId) && x.Application.ApplicationStatus.StatusDescription.Equals("Assigned to Mentor")).Include(x => x.Application).ToList();
         }
 
+        public async Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id)
+        {
+            return await _context.Application.Where(x => x.ApplicantId == id).Include(x => x.ApplicationStatus).ToListAsync();
+        }
+
+
+
         #endregion
 
         #region UPDATE Methods

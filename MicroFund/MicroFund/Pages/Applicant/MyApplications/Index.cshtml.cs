@@ -4,7 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DataAccessLayer.Data;
-using DataAccessLayer.Models;
+using DataAccessLayer.Models.ViewModels;
+using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -16,15 +17,14 @@ namespace MicroFund.Pages.Applicant.MyApplications
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly IRepository _repository;
         
-        [BindProperty]
-        public IEnumerable<Application> Applications { get; set; }
-        [BindProperty]
-        public ApplicationUser Applicant { get; set; }
+        public ApplicantViewApplicationsVM ApplicantViewApplicationsVM { get; set; }
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context, IRepository repository)
         {
             _context = context;
+            _repository = repository;
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -52,10 +52,14 @@ namespace MicroFund.Pages.Applicant.MyApplications
                         return RedirectToPage("/Account/Login");
                     }
 
-                    Applicant = await _context.ApplicationUsers.FirstOrDefaultAsync(a => a.Id == claim.Value);
+                    ApplicantViewApplicationsVM = new ApplicantViewApplicationsVM
+                    {
+                        ApplicationUser = _repository.GetUserById(claim.Value),
+                        Applications = await _repository.GetAllApplicationsByApplicationUserId(claim.Value)
+                    };
                 }
+            
             }
-
             return Page();
         }
     }
