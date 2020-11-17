@@ -10,6 +10,7 @@ namespace DataAccessLayer.Models.ViewModels
         public ApplicationUser ApplicationUser { get; set; }
         public IEnumerable<Response> Responses { get; set; }
         public IEnumerable<Question> Questions { get; set; }
-        
+        public IEnumerable<ContactInfo> ContactInfos { get; set; }
+
     }
 }

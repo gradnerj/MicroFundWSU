@@ -26,6 +26,7 @@ namespace MicroFund.Pages.Judge.Applications
             var application = _context.Application.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
             var applicationUser = _context.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault();
             var responses = _context.Response.Where(x => x.ApplicationId == applicationId);
+            var contactInfos = _context.ContactInfo.Where(x => x.ApplicantId == application.ApplicantId);
 
             var questions = new List<Question>();
 
@@ -40,7 +41,8 @@ namespace MicroFund.Pages.Judge.Applications
                 Application = application,
                 ApplicationUser = applicationUser,
                 Responses = responses,
-                Questions = questions
+                Questions = questions,
+                ContactInfos = contactInfos
             };
 }
     }
