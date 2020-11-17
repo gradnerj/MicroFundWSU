@@ -1,0 +1,45 @@
+﻿@page
+@model MicroFund.Pages.Admin.Applications.DetailsModel
+@{
+}
+
+<div class="container">
+    <h3>Application for @Model.Application.CompanyName</h3>
+    <table class="table" id="applicationTable">
+        <thead>
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Answer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var r in Model.Responses) {
+                    <tr>
+                        <th scope="row">
+                            @r.Question.QuestionDescription
+                        </th>
+                        <td>
+                            @r.ResponseDescription
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('#applicationTable').DataTable({
+                "pageLength": 8,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}

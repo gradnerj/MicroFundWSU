@@ -2,7 +2,6 @@
 @model MicroFund.Pages.Judge.Applications.IndexModel
 @{
     ViewData["Title"] = "Review Applications";
-    string applicationUser = "";
 }
 
 <h1>Review Applications</h1>
@@ -14,41 +13,35 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ReviewApplicationsVM.ApplicationUsers.FirstOrDefault().FullName)
+                Full Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReviewApplicationsVM.ApplicationUsers.FirstOrDefault().Email)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReviewApplicationsVM.Applications.FirstOrDefault().CompanyName)
+                Company Name
             </th>
             <th>
                 View Application
-            </th>
-            <th>
-                View Scorecard
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var application in Model.ReviewApplicationsVM.Applications)
+        @foreach (var application in Model.JudgeReviewApplicationsVM.Applications)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => Model.ReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().FullName)
+                    @Html.DisplayFor(modelItem => Model.JudgeReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().FullName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => Model.ReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().Email)
+                    @Html.DisplayFor(modelItem => Model.JudgeReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => application.CompanyName)
                 </td>
                 <td>
-                    <a class="btn btn-outline-dark" asp-page="/Judge/Applications/ViewApplication" asp-route-id="@application.ApplicantId">View</a>
-                </td>
-                <td>
-                    <a class="btn btn-outline-dark" asp-page="/Judge/Scorecards/ViewScorecard" asp-route-id="@application.ApplicantId">View</a>
+                    <a class="btn btn-outline-dark" asp-page="/Judge/Applications/ViewApplication" asp-route-id="@application.ApplicationId">View</a>
                 </td>
             </tr>
         }

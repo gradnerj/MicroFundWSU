@@ -35,7 +35,7 @@ namespace MicroFund.Pages.Mentor.Assignments
             
             Mentors = await _repository.GetAllMentorsAsync();
             MentorAssignments = await _repository.GetAllMentorAssignmentsAsync();
-            Applications = await _repository.GetAllApplicationsAsync();
+            Applications = await _repository.GetAllApplicationsToAssignAsync();
             ApplicationIterations = await _repository.GetAllApplicationIterationsAsync();
         }
     }

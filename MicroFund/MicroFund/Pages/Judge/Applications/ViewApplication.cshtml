@@ -1,0 +1,58 @@
+﻿@page
+@model MicroFund.Pages.Judge.Applications.ViewApplicationModel
+@{
+    ViewData["Title"] = "Application View";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <img class="d-block mx-auto" src="~/images/WildcatMicrofund_horizontal-01_transparent_purple.png" alt="Wildcat Micro Fund logo" height="200" width="400" />
+    </div>
+    <div class="col-sm-10 mt-2 border mx-auto">
+        <div class="h1 text-center mt-sm-2">
+            Wildcat Micro Fund Application Form
+        </div>
+        <div class="col-12 mb-2">
+            <div class="col-12 border">
+                <div class="h5 text-left border-bottom my-2 pb-2">
+                    Applicant Information
+                </div>
+                <div class="form-row">
+                    <div class="col-1 font-weight-bold">
+                        Name:
+                    </div>
+                    <div class="col">
+                        @Model.JudgeViewApplicationVM.ApplicationUser.FullName
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-1 font-weight-bold">
+                        E-mail:
+                    </div>
+                    <div class="col">
+                        @Model.JudgeViewApplicationVM.ApplicationUser.Email
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-1 font-weight-bold">
+                        Phone:
+                    </div>
+                    <div class="col">
+                        @Model.JudgeViewApplicationVM.ContactInfos.FirstOrDefault().ContactInfoDetail
+                    </div>
+                </div>
+                <div class="h5 text-left border-bottom mb-2 pb-2">
+                    Company Information
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Company Name</label>
+                    @Model.JudgeViewApplicationVM.Application.CompanyName
+                </div>
+            </div>
+            <p class="text-danger">
+                *This is still a work in progress and will display the application in its entirety before the project deadline.
+            </p>
+        </div>
+    </div>
+</div>
+                    

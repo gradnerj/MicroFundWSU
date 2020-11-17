@@ -1,4 +1,56 @@
 ﻿@page
 @model MicroFund.Pages.Judge.Scorecards.IndexModel
 @{
+    //need to get company name, applicant name, pitch Id Pitch date Actions would be score
 }
+
+@{
+    ViewData["Title"] = "Pitches";
+}
+
+<h1>Pitches</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Applicant Name
+            </th>
+            <th>
+                Pitch Id
+            </th>
+            <th>
+                Pitch Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pitch in Model.JudgeViewPitchesVM.Pitches)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.JudgeViewPitchesVM.Pitches.FirstOrDefault().Application.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.JudgeViewPitchesVM.ApplicationUsers.Where(x => x.Id == pitch.Application.ApplicantId).FirstOrDefault().FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => pitch.PitchDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.JudgeViewPitchesVM.PitchEvents.Where(x => x.PitchEventId == pitch.PitchEventId).FirstOrDefault().PitchDate)
+            </td>
+            <td>
+                <a class="btn btn-outline-dark" asp-page="/Judge/ScoreCards/PitchScorecard" asp-route-id="@pitch.PitchId">View</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

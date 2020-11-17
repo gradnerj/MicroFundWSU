@@ -20,6 +20,7 @@ namespace DataAccessLayer.Repository {
         
 
         Application GetApplicationById(int id);
+        Task<IList<Application>> GetAllApplicationsToAssignAsync();
         Task<IList<Application>> GetAllApplicationsAsync();
         Task<Dictionary<int, int>> GetAllApplicationIterationsAsync();
         ApplicationUser GetApplicantByApplicationId(int id);            
@@ -34,7 +35,12 @@ namespace DataAccessLayer.Repository {
 
         List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
 
+        Applicant_MyApplications
         Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id);
+
+        Task<IList<PitchEvent>> GetAllPitchEventsAsync();
+        Task<IList<Pitch>> GetAllPitchesAsync();
+
 
         #endregion
 

@@ -8,52 +8,60 @@
 <h1>Mentor Assignments</h1>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Company Name
-            </th>
-            <th>
-                Application Number
-            </th>
-            <th>
-                Application Status
-            </th>
-            <th>
-                Mentor
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var app in Model.Applications)
-        {
-            string selectedRow = "";
-            if (app.ApplicationStatus.StatusDescription.Equals("Approved"))
+<div class="container">
+    <table class="table" id="mentorAssignmentsTable">
+        <thead>
+            <tr>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    Application Number
+                </th>
+                <th>
+                    Application Status
+                </th>
+                <th>
+                    Mentor
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model.Applications)
             {
-                selectedRow = "text-danger font-weight-bold";
+                <tr>
+                    <td>
+                        @app.CompanyName
+                    </td>
+                    <td>
+                        @Model.ApplicationIterations[app.ApplicationId]
+                    </td>
+                    <td>
+                        @app.ApplicationStatus.StatusDescription
+                    </td>
+                    <td>
+                        @Model.MentorAssignments[app.ApplicationId + ""]
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@app.ApplicationId">Edit</a> |
+                        <a class="btn btn btn-outline-warning" asp-page="./Details" asp-route-id="@app.ApplicationId">Details</a>
+                    </td>
+                </tr>
             }
-        <tr>
-            <td>
-                @app.CompanyName
-            </td>
-            <td>
-                @Model.ApplicationIterations[app.ApplicationId]
-            </td>
-            <td>
-                @app.ApplicationStatus.StatusDescription
-            </td>
-            <td class="@selectedRow">
-                @Model.MentorAssignments[app.ApplicationId + ""]
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@app.ApplicationId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@app.ApplicationId">Details</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#mentorAssignmentsTable').DataTable({
+                "pageLength": 10
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}
