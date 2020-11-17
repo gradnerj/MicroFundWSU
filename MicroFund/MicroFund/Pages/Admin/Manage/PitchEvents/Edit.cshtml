@@ -1,0 +1,46 @@
+﻿@page
+@model MicroFund.Pages.Admin.Manage.PitchEvents.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>PitchEvent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PitchEvent.PitchEventId" />
+            <div class="form-group">
+                <label asp-for="PitchEvent.PitchDate" class="control-label"></label>
+                <input asp-for="PitchEvent.PitchDate" class="form-control" />
+                <span asp-validation-for="PitchEvent.PitchDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PitchEvent.Cash" class="control-label"></label>
+                <input asp-for="PitchEvent.Cash" class="form-control" />
+                <span asp-validation-for="PitchEvent.Cash" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PitchEvent.Services" class="control-label"></label>
+                <input asp-for="PitchEvent.Services" class="form-control" />
+                <span asp-validation-for="PitchEvent.Services" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
