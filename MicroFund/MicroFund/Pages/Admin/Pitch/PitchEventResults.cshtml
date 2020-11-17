@@ -102,6 +102,40 @@
     </table>
 </div>
 
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    Presenter
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Pitches.ToList())
+            {
+                <tr>
+                    <td>
+                        @p.Application.CompanyName
+                    </td>
+                    <td>
+                        @Model.Presenters.FirstOrDefault(u => u.Id == p.Application.ApplicantId)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-page="./AwardPitch" asp-route-pitchId="@p.PitchId">Award Pitch</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 @section Scripts{ 
     <script>
         function getRandomColor() {

@@ -1,0 +1,147 @@
+﻿@page
+@model MicroFund.Pages.Admin.Pitch.AwardPitchModel
+@inject UserManager<IdentityUser> userManager
+@{
+}
+<h2>Pitch Award For @Model.ApplicationCompanyName</h2>
+<div>
+    <div>
+        <div>
+            <p>
+                Pitch Event Total Funds: @(Model.Pitch.PitchEvent.Cash + Model.Pitch.PitchEvent.Services)
+            </p>
+            <p>
+                Pitch Event Remaining Funds: @Model.RemainingPitchEventFunds
+            </p>
+        </div>
+        <div>
+            <p>
+                Pitch Event Cash Funds: @Model.Pitch.PitchEvent.Cash
+            </p>
+            <p>
+                Pitch Event Remaining Cash Funds: @Model.RemainingPitchEventCash
+            </p>
+        </div>
+        <div>
+            <p>
+                Pitch Event Services Funds: @Model.Pitch.PitchEvent.Services
+            </p>
+            <p>
+                Pitch Event Remaining Services Funds: @Model.RemainingPitchEventServices
+            </p>
+        </div>
+    </div>
+    <div class="pt-3">
+        <h3>Previous Awards</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Company Name
+                    </th>
+                    <th>
+                        Awarded Amount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var award in Model.PreviousAwards)
+                {
+                    <tr>
+                        <td>
+                            @award.Application.CompanyName
+                        </td>
+                        <td>
+                            @(award.CashAmount + award.ServicesAmount)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <h3>New Award</h3>
+        </div>
+        <div class="col-8 pt-3">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.CashAmount"></label>
+                    <input type="text" class="form-control" name="PitchId" value="@Model.Pitch.PitchId" hidden>
+                    <input type="text" class="form-control" name="UserId" value="@userManager.GetUserId(User)" hidden>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="AwardHistory.CashAmount" />
+                    <span class="text-danger" asp-validation-for="AwardHistory.CashAmount"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.ServicesAmount"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="AwardHistory.ServicesAmount" />
+                    <span class="text-danger" asp-validation-for="AwardHistory.ServicesAmount"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.Agreement"></label>
+                </div>
+                <div class="col-9">
+                    <textarea class="form-control" asp-for="AwardHistory.Agreement" id="txtDesc" style="height:200px"></textarea>
+                    <span class="text-danger" asp-validation-for="AwardHistory.Agreement"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.ReqNumber"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="AwardHistory.ReqNumber" />
+                    <span class="text-danger" asp-validation-for="AwardHistory.ReqNumber"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.MailedDate"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="AwardHistory.MailedDate" />
+                    <span class="text-danger" asp-validation-for="AwardHistory.MailedDate"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.Provider"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="AwardHistory.Provider" />
+                    <span class="text-danger" asp-validation-for="AwardHistory.Provider"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AwardHistory.AwardType"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="AwardHistory.AwardType" />
+                    <span class="text-danger" asp-validation-for="AwardHistory.AwardType"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-9 offset-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary form-control">Submit Award</button>
+                        </div>
+                        <div class="col-6">
+                            <a asp-page="./PitchEventResults" asp-route-eventid="@Model.Pitch.PitchEventId" class="btn btn-success form-control">Back to Results</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
