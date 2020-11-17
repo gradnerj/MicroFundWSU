@@ -34,6 +34,9 @@ namespace DataAccessLayer.Repository {
 
         List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
 
+        Task<IList<PitchEvent>> GetAllPitchEventsAsync();
+        Task<IList<Pitch>> GetAllPitchesAsync();
+
         #endregion
 
         #region UPDATE Methods
