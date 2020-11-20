@@ -1,16 +1,20 @@
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Utility;
 
 namespace MicroFund.Pages.Admin.Pitch {
     public class PitchEventResultsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public PitchEventResultsModel(ApplicationDbContext context) {
+        private readonly IEmailSender _util;
+        public PitchEventResultsModel(ApplicationDbContext context, IEmailSender util) {
             _context = context;
+            _util = util;
         }
         public PitchEvent PEvent { get; set; }
         public IQueryable<ScoreCard> Scores { get; set; }
@@ -19,16 +23,17 @@ namespace MicroFund.Pages.Admin.Pitch {
 
         public IQueryable<ApplicationUser> Presenters { get; set; }
         public IQueryable<ApplicationUser> Judges { get; set; }
-
+        public string log = StaticDetails.Log;
         public string[] ScoringCategories { get; set; }
         public List<float> AverageCategoryScores { get; set; }
 
         public List<float> AveragePitchScores { get; set; }
         public List<string> CompanyNames { get; set; }
-        public void OnGet(int eventid)
+        public async System.Threading.Tasks.Task OnGetAsync(int eventid)
         {
             PEvent = _context.PitchEvents.FirstOrDefault(e => e.PitchEventId == eventid);
             Pitches = _context.Pitch.Where(p => p.PitchDate == PEvent.PitchDate).Include(p => p.Application);
+            await _util.SendEmailAsync(log, "MF Pitch Event Results", "PEP");
             var pitchIds = Pitches.Select(p => p.PitchId).ToList();
             var userIds = Pitches.Select(p => p.Application.ApplicantId).ToList();
             Scores = _context.ScoreCard.Where(s => pitchIds.Contains(s.PitchId)).Include(s => s.Judge).Include(s => s.ScoreCardField);
