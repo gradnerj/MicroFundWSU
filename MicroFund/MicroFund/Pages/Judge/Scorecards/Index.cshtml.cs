@@ -6,6 +6,7 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.ViewModels;
 using DataAccessLayer.Repository;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -16,17 +17,19 @@ namespace MicroFund.Pages.Judge.Scorecards
     {
         private readonly ApplicationDbContext _context;
         private readonly IRepository _repository;
-
-        public IndexModel(IRepository repository, ApplicationDbContext context)
+        private readonly IEmailSender _util;
+        public IndexModel(IRepository repository, ApplicationDbContext context, IEmailSender util)
         {
             _repository = repository;
             _context = context;
+            _util = util; 
         }
-
+        private string log = "gradnerj@gmail.com";
         public JudgeViewPitchesVM JudgeViewPitchesVM { get; set; }
         
         public async Task OnGetAsync()
         {
+            await _util.SendEmailAsync(log, "MF Judge scorecard", "js");
             JudgeViewPitchesVM = new JudgeViewPitchesVM
             {
                 PitchEvents = await _repository.GetAllPitchEventsAsync(),
