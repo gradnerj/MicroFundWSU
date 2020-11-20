@@ -44,11 +44,11 @@ namespace MicroFund.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
-
+        
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
+        private readonly string InputEmail = "jeffreygradner@mail.weber.edu";
         public class InputModel
         {
             [Required]
@@ -72,6 +72,9 @@ namespace MicroFund.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            var _util = _emailSender;
+            await _util.SendEmailAsync(InputEmail, "MF Register", "RP");
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
