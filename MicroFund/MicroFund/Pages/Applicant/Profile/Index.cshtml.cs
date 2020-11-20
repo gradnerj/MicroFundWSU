@@ -9,6 +9,7 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using EllipticCurve;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -27,35 +28,41 @@ namespace MicroFund.Pages.Applicant.Profile
         public Address Address { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public Demographics Demographics { get; set; }
-
-        public IndexModel(ApplicationDbContext context)
+        private readonly IEmailSender _util;
+        public IndexModel(ApplicationDbContext context, IEmailSender util)
         {
             _context = context;
+            _util = util;
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
             if (!User.Identity.IsAuthenticated)
             {
+                await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                 return RedirectToPage("/Account/Login");
+                
             }
             else
             {
                 if (User.IsInRole(StaticDetails.JudgeRole))
                 {
+                    await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                     return RedirectToPage("/Judge/Dashboard");
                 }
                 if (User.IsInRole(StaticDetails.MentorRole))
                 {
+                    await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                     return RedirectToPage("/Mentor/Dashboard");
                 }
                 else
                 {
                     var claimsIdentity = (ClaimsIdentity)this.User.Identity;
                     var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-                    if(claim.Value == null)
+                    await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
+                    if (claim.Value == null)
                     {
+                        await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                         return RedirectToPage("/Account/Login");
                     }
 
@@ -64,10 +71,12 @@ namespace MicroFund.Pages.Applicant.Profile
                     
                     if(Address == null)
                     {
+                        await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                         Input = new InputModel { FirstName = Applicant.FirstName, LastName = Applicant.LastName, Email = Applicant.Email };
                     }
                     else
                     {
+                        await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                         ContactInfo = await _context.ContactInfo.FirstOrDefaultAsync(c => c.ApplicantId == claim.Value);
                         Demographics = await _context.Demographics.FirstOrDefaultAsync(d => d.ApplicationUserId == claim.Value);
 
@@ -111,14 +120,14 @@ namespace MicroFund.Pages.Applicant.Profile
             {
                 return RedirectToPage("/Account/Login");
             }
-
+            await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
             if (!ModelState.IsValid)
             {
                 Applicant = await _context.ApplicationUsers.FirstOrDefaultAsync(a => a.Id == claim.Value);
                 Address = await _context.Address.FirstOrDefaultAsync(a => a.ApplicantId == claim.Value);
                 ContactInfo = await _context.ContactInfo.FirstOrDefaultAsync(c => c.ApplicantId == claim.Value);
                 Demographics = await _context.Demographics.FirstOrDefaultAsync(d => d.ApplicationUserId == claim.Value);
-
+                await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                 return Page();
             }
 
@@ -174,6 +183,7 @@ namespace MicroFund.Pages.Applicant.Profile
 
             if (demographics.ApplicationUserId != null)
             {
+                await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                 _context.Address.Update(address);
                 _context.ContactInfo.Update(contactInfo);
                 _context.Demographics.Update(demographics);

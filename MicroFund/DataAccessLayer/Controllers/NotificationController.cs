@@ -15,7 +15,6 @@ namespace DataAccessLayer.Controllers {
         public NotificationController(ApplicationDbContext context) {
             _context = context;
         }
-
         [Route("dropnotification", Name ="dropnots")]
         [HttpGet]
         public IActionResult DropNotification(int notificationid) {
@@ -25,12 +24,12 @@ namespace DataAccessLayer.Controllers {
             _context.SaveChanges();
             return RedirectToPage("/Index");
         }
+
         [Route("getnotscount")]
         [HttpGet]
-        public string GetNotificationsCount(string userId) {
+        public string GetNotificationsCountAsync(string userId) {
             var count = _context.Notifications.Where(n => n.UserID == userId).ToList().Count();
             var notifications = _context.Notifications.Where(n => n.UserID == userId).ToList();
-
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
             using (JsonWriter writer = new JsonTextWriter(sw)) {
