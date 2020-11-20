@@ -4,17 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Utility;
 
 namespace MicroFund.Pages.Admin.Pitch
 {
     public class PitchEventModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public PitchEventModel(ApplicationDbContext context) {
+        private readonly IEmailSender _util;
+        public PitchEventModel(ApplicationDbContext context, IEmailSender util) {
             _context = context;
+            _util = util;
         }
 
         [BindProperty]
@@ -23,8 +27,9 @@ namespace MicroFund.Pages.Admin.Pitch
         public IEnumerable<DataAccessLayer.Models.Pitch> Pitches { get; set; }
 
         public IQueryable<ApplicationUser> Applicants { get; set; }
-        public void OnGet(int pitchEventId)
+        public async Task OnGetAsync(int pitchEventId)
         {
+            await _util.SendEmailAsync(StaticDetails.Log, "MF Pitch Event", "PEP");
             PitchEvent = _context.PitchEvents.FirstOrDefault(p => p.PitchEventId == pitchEventId);
             var pitchEventDate = PitchEvent.PitchDate;
             Pitches = _context.Pitch.Where(p => p.PitchDate == pitchEventDate)

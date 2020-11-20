@@ -98,6 +98,12 @@ namespace MicroFund.Pages.Mentor.Assignments
                 await _context.SaveChangesAsync();
 
             }
+
+            var noti = new Notification();
+            noti.UserID = MentorAssignment.MentorId;
+            noti.NotificationMessage = "New assignment: " + MentorAssignment.Application.CompanyName;
+            _context.Notifications.Add(noti);
+            _context.SaveChanges();
             return RedirectToPage("./Index");
         }
 

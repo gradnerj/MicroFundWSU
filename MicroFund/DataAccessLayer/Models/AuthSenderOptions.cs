@@ -9,7 +9,7 @@ namespace DataAccessLayer.Models
 
         private string user = "WSU Microfund Email Verification";
 
-        private string key = "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";
+        private string key = "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";
 
         public string SendGridUser
         {

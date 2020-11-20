@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Utility;
+using System.Web;
+using Microsoft.AspNetCore.Identity;
 
 namespace MicroFund.Pages.Applicant.Apply
 {
@@ -18,16 +21,22 @@ namespace MicroFund.Pages.Applicant.Apply
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
-
+        private readonly IEmailSender _util;
+        private readonly UserManager<IdentityUser> _userManager;
         [BindProperty]
         public InputModel Input { get; set; }
         public ApplicationUser Applicant { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public Application Application { get; set; }
 
-        public IndexModel(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment) {
+        public IndexModel(ApplicationDbContext context, 
+            IEmailSender util, 
+            IWebHostEnvironment hostingEnvironment,
+            UserManager<IdentityUser> userManager) {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+            _util = util;
+            _userManager = userManager;
         }
 
         
@@ -59,9 +68,9 @@ namespace MicroFund.Pages.Applicant.Apply
 
                     Applicant = await _context.ApplicationUsers.FirstOrDefaultAsync(a => a.Id == claim.Value);
                     ContactInfo = await _context.ContactInfo.FirstOrDefaultAsync(c => c.ApplicantId == claim.Value);
-
+                    await _util.SendEmailAsync(StaticDetails.Log, "MF Apply Get", "apply");
                     //if id is not null updating a previous application
-                    if(id != null)
+                    if (id != null)
                     {
                         Application = await _context.Application
                             .Include(a => a.ApplicationStatus)
@@ -135,8 +144,19 @@ namespace MicroFund.Pages.Applicant.Apply
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            await _util.SendEmailAsync(StaticDetails.Log, "MF Apply Post", "apply");
 
-            if(claim.Value == null)
+            var admins = await _userManager.GetUsersInRoleAsync("Admin");
+            var adminIds = admins.Select(a => a.Id).ToList();
+            foreach(var aId in adminIds) {
+                var noti = new Notification();
+                noti.NotificationMessage = "New Application for" + Input.CompanyName;
+                noti.UserID = aId;
+                _context.Notifications.Add(noti);
+            }
+            _context.SaveChanges();
+
+            if (claim.Value == null)
             {
                 return RedirectToPage("/Account/Login");
             }

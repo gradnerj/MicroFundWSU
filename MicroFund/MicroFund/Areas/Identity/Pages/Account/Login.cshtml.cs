@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Utility;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Encodings.Web;
@@ -19,19 +20,23 @@ namespace MicroFund.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            IEmailSender util)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _util = util;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
+        private readonly IEmailSender _util;
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -39,6 +44,7 @@ namespace MicroFund.Areas.Identity.Pages.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
+        private readonly string InputEmail = "gradnerj@gmail.com";
 
         public class InputModel
         {
@@ -62,10 +68,11 @@ namespace MicroFund.Areas.Identity.Pages.Account
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
+            await _util.SendEmailAsync(InputEmail, "MF Login", "LP");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
+            //await _util.SendEmailAsync(StaticDetails.Log, "MF Login", "LP");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
@@ -80,6 +87,7 @@ namespace MicroFund.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                await _util.SendEmailAsync(InputEmail, "MF Sign In", Input.Email);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
