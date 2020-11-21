@@ -182,6 +182,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
                     b.Property<int>("ApplicationId")
                         .HasColumnType("int");
 
@@ -192,17 +195,14 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<float>("CashAmount")
-                        .HasColumnType("real");
+                    b.Property<int>("ExpenditureId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("MailedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("PitchEventId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Provider")
                         .HasColumnType("nvarchar(64)")
@@ -211,12 +211,10 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("ReqNumber")
                         .HasColumnType("int");
 
-                    b.Property<float>("ServicesAmount")
-                        .HasColumnType("real");
-
                     b.Property<string>("UpdatedBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -225,7 +223,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.HasIndex("PitchEventId");
+                    b.HasIndex("ExpenditureId");
 
                     b.ToTable("AwardHistory");
                 });
@@ -365,9 +363,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
-                    b.Property<int>("AwardHistoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -383,8 +378,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("ExpenditureId");
-
-                    b.HasIndex("AwardHistoryId");
 
                     b.ToTable("Expenditure");
                 });
@@ -1104,9 +1097,9 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.Models.PitchEvent", "PitchEvent")
+                    b.HasOne("DataAccessLayer.Models.Expenditure", "Expenditure")
                         .WithMany()
-                        .HasForeignKey("PitchEventId")
+                        .HasForeignKey("ExpenditureId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -1116,15 +1109,6 @@ namespace DataAccessLayer.Migrations
                     b.HasOne("DataAccessLayer.Models.ContactType", "ContactType")
                         .WithMany()
                         .HasForeignKey("ContactTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DataAccessLayer.Models.Expenditure", b =>
-                {
-                    b.HasOne("DataAccessLayer.Models.AwardHistory", "AwardHistory")
-                        .WithMany()
-                        .HasForeignKey("AwardHistoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

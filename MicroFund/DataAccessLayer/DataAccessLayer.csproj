@@ -39,6 +39,16 @@
     <Compile Remove="Migrations\20201115211242_UpdateScoring.Designer.cs" />
     <Compile Remove="Migrations\20201115233240_test.cs" />
     <Compile Remove="Migrations\20201115233240_test.Designer.cs" />
+    <Compile Remove="Migrations\20201121201606_FixingFollowUpModel.cs" />
+    <Compile Remove="Migrations\20201121201606_FixingFollowUpModel.Designer.cs" />
+    <Compile Remove="Migrations\20201121202036_FixingFollowUp.cs" />
+    <Compile Remove="Migrations\20201121202036_FixingFollowUp.Designer.cs" />
+    <Compile Remove="Migrations\20201121210851_FixingFollowup.cs" />
+    <Compile Remove="Migrations\20201121210851_FixingFollowup.Designer.cs" />
+    <Compile Remove="Migrations\20201121211412_attemptingFix.cs" />
+    <Compile Remove="Migrations\20201121211412_attemptingFix.Designer.cs" />
+    <Compile Remove="Migrations\20201121212602_FixingFollowUp.cs" />
+    <Compile Remove="Migrations\20201121212602_FixingFollowUp.Designer.cs" />
 
 
   </ItemGroup>
