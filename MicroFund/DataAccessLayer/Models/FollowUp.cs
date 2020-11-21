@@ -19,12 +19,12 @@ namespace DataAccessLayer.Models
         public Application Application { get; set; }
 
         [Required]
-        [Display(Name = "FollowUpType")]
-        public int FollowUpTypeId { get; set; }
+        [Display(Name = "QuestionCategory")]
+        public int QuestionCategoryId { get; set; }
 
         [Required]
-        [ForeignKey("FollowUpTypeId")]
-        public FollowUpType FollowUpType { get; set; }
+        [ForeignKey("QuestionCategoryId")]
+        public QuestionCategory QuestionCategory { get; set; }
 
         [Required]
         public DateTime FollowUpDate { get; set; }
