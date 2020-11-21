@@ -6,7 +6,7 @@ namespace DataAccessLayer.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
+            /*migrationBuilder.DropForeignKey(
                 name: "FK_ScoreCard_ScoringCategory_ScoreCardCategoryScoringCategoryId",
                 table: "ScoreCard");
 
@@ -16,7 +16,7 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropColumn(
                 name: "ScoreCardCategoryScoringCategoryId",
-                table: "ScoreCard");
+                table: "ScoreCard");*/
 
             migrationBuilder.AlterColumn<string>(
                 name: "ResponseDescription",
@@ -36,7 +36,7 @@ namespace DataAccessLayer.Migrations
                 oldType: "nvarchar(250)",
                 oldMaxLength: 250);
 
-            migrationBuilder.CreateIndex(
+            /*migrationBuilder.CreateIndex(
                 name: "IX_ScoreCard_ScoreCardFieldId",
                 table: "ScoreCard",
                 column: "ScoreCardFieldId");
@@ -47,7 +47,7 @@ namespace DataAccessLayer.Migrations
                 column: "ScoreCardFieldId",
                 principalTable: "ScoreCardField",
                 principalColumn: "ScoreCardFieldId",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict);*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
