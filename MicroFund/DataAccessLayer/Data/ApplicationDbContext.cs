@@ -42,8 +42,8 @@ namespace DataAccessLayer.Data {
         public DbSet<ContactType> ContactType { get; set; }
         public DbSet<Expenditure> Expenditure { get; set; }
         public DbSet<ExternalFunding> ExternalFunding { get; set; }
-        public DbSet<FollowUp> FollowUp { get; set; }
-        public DbSet<FollowUpType> FollowUpType { get; set; }
+        /*public DbSet<FollowUp> FollowUp { get; set; }
+        public DbSet<FollowUpType> FollowUpType { get; set; }*/
         public DbSet<MentorAssignment> MentorAssignment { get; set; }
         public DbSet<MentorNote> MentorNote { get; set; }
         public DbSet<Pitch> Pitch { get; set; }

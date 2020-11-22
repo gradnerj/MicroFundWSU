@@ -1,30 +1,37 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MicroFund.Pages.Admin.FollowUp
+namespace MicroFund.Pages.Applicant.FollowUp
 {
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public IndexModel(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public IndexModel(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public List<AwardHistory> AwardHistories30Days { get; set; }
-        public List<AwardHistory> AwardHistories60Days { get; set; }
-        public List<AwardHistory> AwardHistories { get; set; }
+        List<AwardHistory> Award30DayFollowUp { get; set; }
+        List<AwardHistory> Award60DayFollowUp { get; set; }
+        List<AwardHistory> AwardHistories { get; set; }
+
         public void OnGet()
         {
-            List<Application> Applications = _context.Application.ToList();
-            AwardHistories30Days = new List<AwardHistory>();
-            AwardHistories60Days = new List<AwardHistory>();
+            string userId = _userManager.GetUserId(User);
+            //Gets all the applications of the current user
+            List<Application> Applications = _context.Application.Where(a => a.ApplicantId == userId).ToList();
+            Award30DayFollowUp = new List<AwardHistory>();
+            Award60DayFollowUp = new List<AwardHistory>();
             AwardHistories = new List<AwardHistory>();
             //This retrieves the earliest award for each application and puts them into the AwardHistories list
             foreach (var application in Applications)
@@ -43,13 +50,14 @@ namespace MicroFund.Pages.Admin.FollowUp
             {
                 if ((DateTime.Now - awardHistory.AwardDate).TotalDays >= 30)
                 {
-                    AwardHistories30Days.Add(awardHistory);
+                    Award30DayFollowUp.Add(awardHistory);
                     if ((DateTime.Now - awardHistory.AwardDate).TotalDays >= 60)
                     {
-                        AwardHistories60Days.Add(awardHistory);
+                        Award60DayFollowUp.Add(awardHistory);
                     }
                 }
             }
+
         }
     }
 }

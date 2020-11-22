@@ -103,7 +103,7 @@
 </div>
 
 <div>
-    <table class="table">
+    <table class="table" id="toAwards">
         <thead>
             <tr>
                 <th>
@@ -325,7 +325,10 @@
             $('.dataTables_length').addClass('bs-select');
         });
 
-
+        $(document).ready(function () {
+            $('#toAwards').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
 
     </script>
 }
