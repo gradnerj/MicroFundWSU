@@ -1,0 +1,53 @@
+﻿@page
+@model MicroFund.Pages.Admin.FollowUp.Details30DaysModel
+@{
+    ViewData["Title"] = Model.Application.CompanyName + " 30 day Follow-Up";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>@(Model.Application.CompanyName +  " 30 day Follow-Up")</h2>
+        </div>
+    </div>
+    <table class="table" id="followUps30Days">
+        <thead>
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Response
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.Responses)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.Question.QuestionDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => r.ResponseDescription)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a class="btn btn btn-outline-primary" asp-page="./Index">Back to Follow-ups</a>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#followUps30Days').DataTable({
+                "pageLength": 10,
+                "order": [[1, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}

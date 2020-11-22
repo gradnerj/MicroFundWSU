@@ -90,6 +90,51 @@ namespace MicroFund.Pages.Admin.Pitch
                 .SelectMany(v => v.Errors)
                 .Select(e => e.ErrorMessage));
             _context.AwardHistory.Add(AwardHistory);
+
+            //Creating 30 and 60 day Follow-up responses if there are none already created for the application
+            List<Question> Questions30DayFollowUp = _context.Question.Where(q => q.QuestionCategoryId == 2).ToList();
+            List<Response> Responses = _context.Response.Where(r => r.ApplicationId == Pitch.ApplicationId).ToList();
+            bool AddResponses = true;
+            foreach (var q in Questions30DayFollowUp)
+            {
+                foreach (var r in Responses)
+                {
+                    if (r.QuestionId == q.QuestionId)
+                    {
+                        AddResponses = false;
+                    }
+                }
+            }
+            if (AddResponses)
+            {
+                foreach (var q in Questions30DayFollowUp)
+                {
+                    Response TempResponse = new Response
+                    {
+                        ApplicationId = Pitch.ApplicationId,
+                        QuestionId = q.QuestionId,
+                        ResponseDescription = "N/A",
+                        UpdatedBy = Request.Form["UserId"],
+                        UpdatedDate = DateTime.Now,
+                        IsArchived = false
+                    };
+                    _context.Response.Add(TempResponse);
+                }
+                List<Question> Questions60DayFollowUp = _context.Question.Where(q => q.QuestionCategoryId == 4).ToList();
+                foreach (var q in Questions60DayFollowUp)
+                {
+                    Response TempResponse = new Response
+                    {
+                        ApplicationId = Pitch.ApplicationId,
+                        QuestionId = q.QuestionId,
+                        ResponseDescription = "N/A",
+                        UpdatedBy = Request.Form["UserId"],
+                        UpdatedDate = DateTime.Now,
+                        IsArchived = false
+                    };
+                    _context.Response.Add(TempResponse);
+                }
+            }
             _context.SaveChanges();
 
             return RedirectToPage(new { pitchId = Pitch.PitchId });

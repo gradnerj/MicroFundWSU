@@ -49,6 +49,10 @@
     <Compile Remove="Migrations\20201121211412_attemptingFix.Designer.cs" />
     <Compile Remove="Migrations\20201121212602_FixingFollowUp.cs" />
     <Compile Remove="Migrations\20201121212602_FixingFollowUp.Designer.cs" />
+    <Compile Remove="Migrations\20201121231557_AddingNullableFollowUpToResponse.cs" />
+    <Compile Remove="Migrations\20201121231557_AddingNullableFollowUpToResponse.Designer.cs" />
+    <Compile Remove="Migrations\20201121234403_RemovingFollowUp_TheyHaveBeenAddedToQuestions.cs" />
+    <Compile Remove="Migrations\20201121234403_RemovingFollowUp_TheyHaveBeenAddedToQuestions.Designer.cs" />
 
 
   </ItemGroup>
