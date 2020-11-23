@@ -1,4 +1,129 @@
 ﻿@page
 @model MicroFund.Pages.Applicant.FollowUp.IndexModel
 @{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row pb-4 pt-4">
+        <h2 style="width:75%">30 Day Follow-ups</h2>
+        <input style="width:25%" type="button" class="btn btn-outline-dark" id="followUps30Btn" value="Collapse" />
+        <hr />
+    </div>
+    <div id="followUps30Div" style="display:block">
+        <table class="table" id="followUps30Days">
+            <thead>
+                <tr>
+                    <th>
+                        Award Date
+                    </th>
+                    <th>
+                        Company Name
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in @Model.Award30DayFollowUp)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.AwardDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.Application.CompanyName)
+                        </td>
+                        <td>
+                            <a class="btn btn btn-outline-success" asp-page="./AnswerFollowUp" asp-route-applicationId="@a.ApplicationId" asp-route-followUpTypeNum="30">Update</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row pb-4 pt-4">
+        <h2 style="width:75%">60 Day Follow-ups</h2>
+        <input style="width:25%" type="button" class="btn btn-outline-dark" id="followUps60Btn" value="Collapse" />
+        <hr />
+    </div>
+    <div id="followUps60Div" style="display:block">
+        <table class="table" id="followUps60Days">
+            <thead>
+                <tr>
+                    <th>
+                        Award Date
+                    </th>
+                    <th>
+                        Company Name
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model.Award60DayFollowUp)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.AwardDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.Application.CompanyName)
+                        </td>
+                        <td>
+                            <a class="btn btn btn-outline-success" asp-page="./AnswerFollowUp" asp-route-applicationId="@a.ApplicationId" asp-route-followUpTypeNum="60">Update</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#followUps30Days').DataTable({
+                "pageLength": 5,
+                "order": [[2, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#followUps60Days').DataTable({
+                "pageLength": 5,
+                "order": [[2, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+    <script type="text/javascript">
+        document.getElementById("followUps30Btn").onclick = function () {
+            if (document.getElementById("followUps30Div").style.display == "none") {
+                document.getElementById("followUps30Div").style.display = "block";
+                document.getElementById("followUps30Btn").value = "Collapse";
+            }
+            else {
+                document.getElementById("followUps30Div").style.display = "none";
+                document.getElementById("followUps30Btn").value = "Show";
+            }
+
+        }
+
+        document.getElementById("followUps60Btn").onclick = function () {
+            if (document.getElementById("followUps60Div").style.display == "none") {
+                document.getElementById("followUps60Div").style.display = "block";
+                document.getElementById("followUps60Btn").value = "Collapse";
+            }
+            else {
+                document.getElementById("followUps60Div").style.display = "none";
+                document.getElementById("followUps60Btn").value = "Show";
+            }
+
+        }
+    </script>
 }

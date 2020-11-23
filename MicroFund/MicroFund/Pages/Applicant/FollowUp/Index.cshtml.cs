@@ -21,9 +21,9 @@ namespace MicroFund.Pages.Applicant.FollowUp
             _userManager = userManager;
         }
 
-        List<AwardHistory> Award30DayFollowUp { get; set; }
-        List<AwardHistory> Award60DayFollowUp { get; set; }
-        List<AwardHistory> AwardHistories { get; set; }
+        public List<AwardHistory> Award30DayFollowUp { get; set; }
+        public List<AwardHistory> Award60DayFollowUp { get; set; }
+        /*public List<AwardHistory> AwardHistories { get; set; }*/
 
         public void OnGet()
         {
@@ -32,7 +32,7 @@ namespace MicroFund.Pages.Applicant.FollowUp
             List<Application> Applications = _context.Application.Where(a => a.ApplicantId == userId).ToList();
             Award30DayFollowUp = new List<AwardHistory>();
             Award60DayFollowUp = new List<AwardHistory>();
-            AwardHistories = new List<AwardHistory>();
+            /*AwardHistories = new List<AwardHistory>();*/
             //This retrieves the earliest award for each application and puts them into the AwardHistories list
             foreach (var application in Applications)
             {
@@ -41,11 +41,19 @@ namespace MicroFund.Pages.Applicant.FollowUp
                 if (TempAward != null)
                 {
                     TempAward.Application = _context.Application.FirstOrDefault(a => a.ApplicationId == TempAward.ApplicationId);
-                    AwardHistories.Add(TempAward);
+                    //Filters awards into two categories depending on how old they are
+                    if ((DateTime.Now - TempAward.AwardDate).TotalDays >= 30)
+                    {
+                        Award30DayFollowUp.Add(TempAward);
+                        if ((DateTime.Now - TempAward.AwardDate).TotalDays >= 60)
+                        {
+                            Award60DayFollowUp.Add(TempAward);
+                        }
+                    }
                 }
             }
 
-            //Filters awards into two categories depending on how old they are
+            /*//Filters awards into two categories depending on how old they are
             foreach (var awardHistory in AwardHistories)
             {
                 if ((DateTime.Now - awardHistory.AwardDate).TotalDays >= 30)
@@ -56,7 +64,7 @@ namespace MicroFund.Pages.Applicant.FollowUp
                         Award60DayFollowUp.Add(awardHistory);
                     }
                 }
-            }
+            }*/
 
         }
     }

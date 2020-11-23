@@ -4,13 +4,16 @@
 @{
 }
 
+
+<h2>Pitch Award for @Model.ApplicationCompanyName</h2>
+<hr />
 <div class="container">
     <div class="row pb-4 pt-4">
         <h2 style="width:75%">Funding Summary</h2>
         <input style="width:25%" type="button" class="btn btn-outline-dark" id="fundingSummaryBtn" value="Collapse" />
         <hr />
     </div>
-    <div id="fundingSummaryDiv"  style="display:block">
+    <div id="fundingSummaryDiv" style="display:block">
         <table class="table" id="fundingSummary">
             <thead>
                 <tr>
@@ -121,7 +124,7 @@
 
 <div class="container">
     <div class="row pb-4 pt-4">
-        <h2 style="width:75%">New Award</h2>
+        <h2 style="width:75%">New Award for @Model.ApplicationCompanyName</h2>
         <input style="width:25%" type="button" class="btn btn-outline-dark" id="newAwardBtn" value="Collapse" />
         <hr />
     </div>
@@ -198,10 +201,10 @@
                     <div class="col-9 offset-3">
                         <div class="row">
                             <div class="col-6">
-                                <button type="submit" class="btn btn-primary form-control">Submit Award</button>
+                                <button type="submit" class="btn btn-outline-success form-control">Submit Award</button>
                             </div>
                             <div class="col-6">
-                                <a asp-page="./PitchEventResults" asp-route-eventid="@Model.Pitch.PitchEventId" class="btn btn-success form-control">Back to Results</a>
+                                <a asp-page="./PitchEventResults" asp-route-eventid="@Model.Pitch.PitchEventId" class="btn btn-outline-primary form-control">Back to Results</a>
                             </div>
                         </div>
                     </div>
@@ -224,8 +227,7 @@
 </script>
 <script type="text/javascript">
     document.getElementById("fundingSummaryBtn").onclick = function () {
-        if (document.getElementById("fundingSummaryDiv").style.display == "none")
-        {
+        if (document.getElementById("fundingSummaryDiv").style.display == "none") {
             document.getElementById("fundingSummaryDiv").style.display = "block";
             document.getElementById("fundingSummaryBtn").value = "Collapse";
         }
