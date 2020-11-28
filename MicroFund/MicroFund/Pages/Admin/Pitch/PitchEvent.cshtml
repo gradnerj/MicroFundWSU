@@ -17,6 +17,7 @@
             <th>
                 Pitch ID
             </th>
+            <th>View Application</th>
             <th>
                 Actions
             </th>
@@ -34,6 +35,9 @@
                     </td>
                     <td>
                         @p.PitchId
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-page="/Admin/Applications/Details" asp-route-applicationid="@p.ApplicationId">View Application</a>
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-page="/Admin/Pitch/PitchDetails" asp-route-pitchid="@p.PitchId">Details</a>
