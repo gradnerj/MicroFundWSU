@@ -25,8 +25,9 @@ namespace MicroFund.Pages {
                     return RedirectToPage("/Judge/Dashboard/Index");
                 }
                 else if (User.IsInRole(Utility.StaticDetails.AdminRole)) {
-                   
-                    return RedirectToPage("/Calendar");
+
+                    //return RedirectToPage("/Calendar");
+                    return RedirectToPage("/Admin/Dashboard/Index");
                 }
                 else
                 {
