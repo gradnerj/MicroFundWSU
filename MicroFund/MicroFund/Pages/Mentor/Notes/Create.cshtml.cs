@@ -9,7 +9,7 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+using DataAccessLayer.Models.ViewModels;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
@@ -17,16 +17,14 @@ namespace MicroFund.Pages.Mentor.Notes
     {
         private ApplicationDbContext _context;
         private readonly IRepository _repository;
-        private readonly UserManager<IdentityUser> _userManager;
-        public IList<Application> MentorApplications { get; set; }
         public string CurrentUserId { get; set; }
-        public Dictionary<int, string> ApplicationApplicantPairs { get; set; }
+        [BindProperty]
+        public MentorNote MentorNote { get; set; }
 
-        public CreateModel(IRepository repository, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CreateModel(IRepository repository, ApplicationDbContext context)
         {
             _repository = repository;
             _context = context;
-            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -40,11 +38,13 @@ namespace MicroFund.Pages.Mentor.Notes
             var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
             ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
 
-            return Page();
-        }
+            MentorNote = new MentorNote()
+            {
+                MeetingDate = DateTime.Now
+            };
 
-        [BindProperty]
-        public MentorNote MentorNote { get; set; }
+            return Page();
+        }        
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -61,18 +61,6 @@ namespace MicroFund.Pages.Mentor.Notes
                 MentorNote.MentorAssignment.ApprovedToPitchDate = DateTime.Now;
                 MentorNote.MentorAssignment.Application = _repository.GetApplicationById(MentorNote.MentorAssignment.ApplicationId);
                 MentorNote.MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Approved for Grant Review");
-
-                var admins = await _userManager.GetUsersInRoleAsync("Admin");
-                foreach (var a in admins)
-                {
-                    var notification = new Notification
-                    {
-                        UserID = a.Id,
-                        NotificationMessage = "New Request for Pitch"
-                    };
-                    _context.Notifications.Add(notification);
-                    _context.SaveChanges();
-                }
             }
             _context.MentorNote.Add(MentorNote);
             await _context.SaveChangesAsync();

@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="MentorNote.MeetingDate" class="control-label"></label>
-                <input asp-for="MentorNote.MeetingDate" class="form-control" />
+                <input asp-for="MentorNote.MeetingDate" class="form-control" asp-format="{0:yyyy-MM-dTHH:mm}"/>
                 <span asp-validation-for="MentorNote.MeetingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
