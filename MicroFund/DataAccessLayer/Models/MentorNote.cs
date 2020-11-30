@@ -24,6 +24,9 @@ namespace DataAccessLayer.Models
         [Required]
         public string Notes { get; set; }
 
+        [Display(Name = "File Attachment")]
+        public string MentorNoteFileAttachment { get; set; }
+
         [Required]
         [StringLength(128)]
         public string UpdatedBy { get; set; }
