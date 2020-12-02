@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.ViewModels;
+using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,25 +19,37 @@ namespace MicroFund.Pages.Judge.Scorecards
     {
         private readonly ApplicationDbContext _context;
 
-        public int PitchId;
         public string score = "";
         public string comment = "";
         private readonly IEmailSender _util;
-        public PitchScorecardModel(ApplicationDbContext context, IEmailSender util) {
+        private readonly IRepository _repository;
+        public PitchScorecardModel(IRepository repository, ApplicationDbContext context, IEmailSender util) {
             _context = context;
             _util = util;
+            _repository = repository;
         }
 
         [BindProperty]
         public List<ScoreCardField> ScoreCardFields { get; set; }
 
         public ScoreCard ScoreCard { get; set; }
+        public JudgeViewPitchesVM JudgeViewPitchesVM { get; set; }
+        public int PitchId { get; set; }
 
         public async Task OnGetAsync(int id)
         {
             PitchId = id;
             await _util.SendEmailAsync(StaticDetails.Log, "MF Pitch SC get", "PSC");
             ScoreCardFields = await _context.ScoreCardField.Where(x => x.ScoringCategoryId == 1).ToListAsync();
+
+            JudgeViewPitchesVM = new JudgeViewPitchesVM
+            {
+                PitchEvents = await _repository.GetAllPitchEventsAsync(),
+                Pitches = _context.Pitch.Include(a => a.Application).ToList().AsEnumerable(),
+                ApplicationUsers = await _repository.GetAllUsersAsync()
+            };
+
+
         }
 
         public async Task<IActionResult> OnPostAsync()
