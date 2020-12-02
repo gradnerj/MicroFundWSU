@@ -20,11 +20,25 @@ namespace MicroFund.Pages.Admin.Manage.Questions
         }
 
         public IList<Question> Question { get;set; }
+        public IList<QuestionCategory> Category { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? QuestionCategory)
         {
-            Question = await _context.Question
-                .Include(q => q.QuestionCategory).ToListAsync();
+            Category = await _context.QuestionCategory.ToListAsync(); 
+
+            if (QuestionCategory == null)
+            { 
+                Question = await _context.Question
+                    .Include(q => q.QuestionCategory).ToListAsync();
+            }
+            else
+            {
+                Question = await _context.Question
+                    .Include(q => q.QuestionCategory).Where(x => x.QuestionCategory.QuestionCategoryId == QuestionCategory).ToListAsync();
+
+            }
+
+            return Page();
         }
     }
 }
