@@ -39,7 +39,15 @@
             @Html.DisplayNameFor(model => model.MentorNote.MentorNoteFileAttachment)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MentorNote.MentorNoteFileAttachment)
+            @if (Model.MentorNote.MentorNoteFileAttachment != null)
+            {
+            <form method="post">
+                <button type="submit" class="btn-info" asp-page-handler="download" asp-route-noteId="@Model.MentorNote.MentorNoteId">
+                    Download @Model.FileName
+                </button>
+            </form>
+            }
+            
         </dd>
     </dl>
 </div>

@@ -62,17 +62,20 @@ namespace MicroFund.Pages.Mentor.Notes
 
             MentorNote.MentorAssignment = _context.MentorAssignment.Where(x => x.MentorAssignmentId == MentorNote.MentorAssignmentId).FirstOrDefault();
 
-            string fileName = Guid.NewGuid().ToString() + "$" + files[0].FileName;
-            var uploads = Path.Combine(webRootPath, @"fileattachments\mentornotes");
-           // var extension = Path.GetExtension(files[0].FileName);
-
-            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+            if(files.Count != 0)
             {
-                files[0].CopyTo(fileStream);
+                string fileName = Guid.NewGuid().ToString() + "$&$%" + files[0].FileName;
+                var uploads = Path.Combine(webRootPath, @"fileattachments\mentornotes");
+                // var extension = Path.GetExtension(files[0].FileName);
 
-            }
+                using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
 
-            MentorNote.MentorNoteFileAttachment = @"\fileattachments\mentornotes\" + fileName;
+                }
+
+                MentorNote.MentorNoteFileAttachment = @"\fileattachments\mentornotes\" + fileName;
+            }     
 
             if (MentorNote.IsApproved)
             {
