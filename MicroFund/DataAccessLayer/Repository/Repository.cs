@@ -1,18 +1,13 @@
 ﻿using DataAccessLayer.Data;
-using DataAccessLayer.Migrations;
 using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Repository {
+namespace DataAccessLayer.Repository
+{
     public class Repository : IRepository {
         private ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
