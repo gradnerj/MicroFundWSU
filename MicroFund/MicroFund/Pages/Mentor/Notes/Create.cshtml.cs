@@ -10,6 +10,8 @@ using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System.Security.Claims;
 using DataAccessLayer.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
@@ -17,14 +19,16 @@ namespace MicroFund.Pages.Mentor.Notes
     {
         private ApplicationDbContext _context;
         private readonly IRepository _repository;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         public string CurrentUserId { get; set; }
         [BindProperty]
         public MentorNote MentorNote { get; set; }
 
-        public CreateModel(IRepository repository, ApplicationDbContext context)
+        public CreateModel(IRepository repository, ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _repository = repository;
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult OnGet()
@@ -46,8 +50,6 @@ namespace MicroFund.Pages.Mentor.Notes
             return Page();
         }        
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -55,8 +57,24 @@ namespace MicroFund.Pages.Mentor.Notes
                 return Page();
             }
 
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+
             MentorNote.MentorAssignment = _context.MentorAssignment.Where(x => x.MentorAssignmentId == MentorNote.MentorAssignmentId).FirstOrDefault();
-            if(MentorNote.IsApproved)
+
+            string fileName = Guid.NewGuid().ToString() + "$" + files[0].FileName;
+            var uploads = Path.Combine(webRootPath, @"fileattachments\mentornotes");
+           // var extension = Path.GetExtension(files[0].FileName);
+
+            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+            {
+                files[0].CopyTo(fileStream);
+
+            }
+
+            MentorNote.MentorNoteFileAttachment = @"\fileattachments\mentornotes\" + fileName;
+
+            if (MentorNote.IsApproved)
             {
                 MentorNote.MentorAssignment.ApprovedToPitchDate = DateTime.Now;
                 MentorNote.MentorAssignment.Application = _repository.GetApplicationById(MentorNote.MentorAssignment.ApplicationId);
