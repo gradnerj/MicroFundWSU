@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Utility;
 using System.Web;
 using Microsoft.AspNetCore.Identity;
+using DataAccessLayer.Repository;
 
 namespace MicroFund.Pages.Applicant.Apply
 {
@@ -22,6 +23,7 @@ namespace MicroFund.Pages.Applicant.Apply
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IEmailSender _util;
+        private readonly IRepository _repo;
         private readonly UserManager<IdentityUser> _userManager;
         [BindProperty]
         public InputModel Input { get; set; }
@@ -32,11 +34,13 @@ namespace MicroFund.Pages.Applicant.Apply
         public IndexModel(ApplicationDbContext context, 
             IEmailSender util, 
             IWebHostEnvironment hostingEnvironment,
+            IRepository repo,
             UserManager<IdentityUser> userManager) {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
             _util = util;
             _userManager = userManager;
+            _repo = repo;
         }
 
         
@@ -245,6 +249,13 @@ namespace MicroFund.Pages.Applicant.Apply
             application.Responses.FirstOrDefault(r => r.Question.QuestionNumber == 20).ResponseDescription = Input.OneMillionCupsExp;
             application.Responses.FirstOrDefault(r => r.Question.QuestionNumber == 21).ResponseDescription = Input.SmallBusinessDevCenterCounselorDesc;
             
+            foreach(var a in admins)
+            {
+                await _util.SendEmailAsync(a.Email, "New MicroFund Application", application.CompanyName + " has just applied!");
+            }
+            
+
+
             _context.Application.Update(application);
             await _context.SaveChangesAsync();
 
