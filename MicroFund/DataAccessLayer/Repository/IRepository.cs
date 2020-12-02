@@ -11,6 +11,7 @@ namespace DataAccessLayer.Repository {
 
         #region RETRIEVE Methods
         Task<IList<ApplicationUser>> GetAllUsersAsync();
+        Task<Dictionary<string, string>> GetUsersByRoleAsync(string roleName);
         Task<Dictionary<string, string>> GetAllUserRolesAsync();
 
         Task<string> GetUserRoleAsync(string id);

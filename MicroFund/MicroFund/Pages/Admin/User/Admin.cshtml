@@ -1,12 +1,14 @@
 ﻿@page
-@model MicroFund.Pages.Admin.User.IndexModel
+@model MicroFund.Pages.Admin.User.AdminModel
 @inject UserManager<IdentityUser> UserManager
 @{
 }
+
+
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>All Users</h2>
+            <h2>Admins</h2>
 
             <a class="btn btn-outline-success" asp-page="/Admin/User/Index">All Users</a>
             <a class="btn btn-outline-success" asp-page="/Admin/User/Admin">Admins</a>
@@ -39,7 +41,8 @@
         </thead>
         <tbody>
             @{
-                foreach (var user in Model.ApplicationUsers) {
+                foreach (var user in Model.ApplicationUsers)
+                {
 
                     <tr>
                         <td>
@@ -56,9 +59,12 @@
                             <a class="btn btn-outline-danger" asp-page="/Admin/User/Delete" asp-route-id="@user.Id">Delete</a>
                             <form method="post">
                                 @{
-                                    if (user.LockoutEnd > DateTime.Now) {
+                                    if (user.LockoutEnd > DateTime.Now)
+                                    {
                                         <button type="submit" class="btn btn-outline-warning" asp-page-handler="lockUnlock" asp-route-id="@user.Id">Unlock</button>
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         <button type="submit" class="btn btn-outline-warning" asp-page-handler="lockUnlock" asp-route-id="@user.Id">Lock</button>
                                     }
                                 }
@@ -71,7 +77,7 @@
     </table>
 </div>
 
-@section Scripts{ 
+@section Scripts{
     <script>
         $(document).ready(function () {
             $('#userTable').DataTable({

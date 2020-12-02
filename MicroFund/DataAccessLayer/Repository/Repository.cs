@@ -31,7 +31,21 @@ namespace DataAccessLayer.Repository {
 
             foreach (var appUser in users) {
                 var role = await _userManager.GetRolesAsync(appUser);
-                rolesDict.Add(appUser.Email, role.FirstOrDefault());
+                rolesDict.Add(appUser.Email, role.FirstOrDefault()); 
+
+            }
+            return rolesDict;
+        }
+        public async Task<Dictionary<string, string>> GetUsersByRoleAsync(string roleName)
+        {
+            var rolesDict = new Dictionary<string, string>();
+            var users = await GetAllUsersAsync();
+
+            foreach (var appUser in users)
+            {
+                var role = await _userManager.GetRolesAsync(appUser);
+                if (role.FirstOrDefault() == roleName)
+                { rolesDict.Add(appUser.Email, role.FirstOrDefault()); }
             }
             return rolesDict;
         }
