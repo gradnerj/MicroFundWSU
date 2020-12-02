@@ -41,6 +41,7 @@ namespace MicroFund.Pages.Admin.Applications
         public async System.Threading.Tasks.Task<IActionResult> OnPostAsync() {
             var appId = Request.Form["applicationId"];
             var statusid = Request.Form["statusid"];
+            var comments = Request.Form["comment"];
             var application = _context.Application.FirstOrDefault(a => a.ApplicationId == Int32.Parse(appId));
             application.ApplicationStatusId = Int32.Parse(statusid);
             _context.Update(application);
@@ -49,7 +50,8 @@ namespace MicroFund.Pages.Admin.Applications
             var notification = new Notification();
             notification.UserID = applicantId;
             notification.NotificationMessage = "New Application Status: " + _context.ApplicationStatus.FirstOrDefault(s => s.ApplicationStatusId == Int32.Parse(statusid)).StatusDescription;
-            await _util.SendEmailAsync(_context.ApplicationUsers.FirstOrDefault(u => u.Id == applicantId).Email, "MicroFund Application Status Update", "Your Application is now in status: " + _context.ApplicationStatus.FirstOrDefault(s => s.ApplicationStatusId == Int32.Parse(statusid)).StatusDescription);
+            var applicantEmail = _context.ApplicationUsers.FirstOrDefault(u => u.Id == applicantId).Email;
+            await _util.SendEmailAsync(applicantEmail, "MicroFund Application Status Update", "Your Application is now in status: " + _context.ApplicationStatus.FirstOrDefault(s => s.ApplicationStatusId == Int32.Parse(statusid)).StatusDescription + ". Reviewer Comments: " + comments);
 
 
             _context.Notifications.Add(notification);

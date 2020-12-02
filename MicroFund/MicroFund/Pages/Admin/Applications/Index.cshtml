@@ -72,17 +72,23 @@
                 <form class="form" method="post">
                     <input type="hidden" for="applicationId" name="applicationId" value="" id="appId" />
                     @{
-                        foreach (var s in Model.Statuses) {
+                        foreach (var s in Model.Statuses)
+                        {
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" value="@s.ApplicationStatusId" name="statusid" id="@s.ApplicationStatusId" />
                                 <label class="form-check-label" for="@s.ApplicationStatusId">@s.StatusDescription</label>
                             </div>
                         }
                     }
-                <div class="form-group">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+                    <hr />
+                    <label>Comments</label>
+                    <div class="form-group">
+                        <textarea name="comment" id="comment" style="width:100%"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </form>
             </div>
         </div>
