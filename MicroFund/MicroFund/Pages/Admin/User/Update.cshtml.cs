@@ -31,7 +31,14 @@ namespace MicroFund.Pages.Admin.User {
         }
 
         public async Task<IActionResult> OnPostAsync() {
-            _context.ApplicationUsers.Update(AppUser);
+
+            var user = _context.ApplicationUsers.FirstOrDefault(u => u.Id == AppUser.Id);
+            if(user.Email != AppUser.Email)
+            {
+                user.Email = AppUser.Email;
+                _context.ApplicationUsers.Update(user);
+            }
+            
             
             var oldRole = await _userManager.GetRolesAsync(AppUser);
             if(oldRole.FirstOrDefault() != UserRole) {
