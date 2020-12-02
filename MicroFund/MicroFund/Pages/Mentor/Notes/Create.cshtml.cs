@@ -9,7 +9,7 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System.Security.Claims;
-using DataAccessLayer.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
@@ -17,14 +17,16 @@ namespace MicroFund.Pages.Mentor.Notes
     {
         private ApplicationDbContext _context;
         private readonly IRepository _repository;
+        private readonly UserManager<IdentityUser> _userManager;
         public IList<Application> MentorApplications { get; set; }
         public string CurrentUserId { get; set; }
         public Dictionary<int, string> ApplicationApplicantPairs { get; set; }
 
-        public CreateModel(IRepository repository, ApplicationDbContext context)
+        public CreateModel(IRepository repository, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _repository = repository;
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -59,6 +61,18 @@ namespace MicroFund.Pages.Mentor.Notes
                 MentorNote.MentorAssignment.ApprovedToPitchDate = DateTime.Now;
                 MentorNote.MentorAssignment.Application = _repository.GetApplicationById(MentorNote.MentorAssignment.ApplicationId);
                 MentorNote.MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Approved for Grant Review");
+
+                var admins = await _userManager.GetUsersInRoleAsync("Admin");
+                foreach (var a in admins)
+                {
+                    var notification = new Notification
+                    {
+                        UserID = a.Id,
+                        NotificationMessage = "New Request for Pitch"
+                    };
+                    _context.Notifications.Add(notification);
+                    _context.SaveChanges();
+                }
             }
             _context.MentorNote.Add(MentorNote);
             await _context.SaveChangesAsync();
