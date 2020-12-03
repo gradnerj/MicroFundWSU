@@ -69,7 +69,7 @@ namespace DataAccessLayer.Repository
 
         public async Task<IList<Application>> GetAllApplicationsToAssignAsync()
         {
-            return await _context.Application.Where(x => x.ApplicationStatusId > 3).Include(x => x.ApplicationStatus).ToListAsync();
+            return await _context.Application.Where(x => x.ApplicationStatusId > 3).Include(x => x.ApplicationStatus).OrderBy(x => x.ApplicationStatusId).ThenBy(x => x.CompanyName).ToListAsync();
         }
 
         public async Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync()
