@@ -136,39 +136,6 @@ namespace MicroFund.Pages.Mentor.Notes
             return _context.MentorNote.Any(e => e.MentorNoteId == id);
         }
 
-        /**
-         * This helper method returns the file attachment for the given mentor note id
-         */
-        public IActionResult OnPostDownload(int noteId)
-        {
-            //get mentor note in question
-            MentorNote mentorNote = _context.MentorNote.Where(x => x.MentorNoteId == noteId).FirstOrDefault();
-            //get local path
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            //use helper method to get file byte array
-            byte[] fileBytes = GetFile(webRootPath + mentorNote.MentorNoteFileAttachment);
-
-            //retrieve original file name to display 
-            string filePathOriginal = mentorNote.MentorNoteFileAttachment;
-            string[] nameArray = filePathOriginal.Split("$&$%");
-            string fileDisplayName = nameArray[1];
-
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileDisplayName);
-        }
-
-        /*
-         * This helper method returns the given file path as a file byte array
-         */
-        private byte[] GetFile(string s)
-        {
-            FileStream fs = System.IO.File.OpenRead(s);
-            byte[] data = new byte[fs.Length];
-            int br = fs.Read(data, 0, data.Length);
-            if (br != fs.Length)
-            {
-                throw new IOException(s);
-            }
-            return data;
-        }
+      
     }
 }

@@ -31,12 +31,7 @@
             <div class="form-group">
                 @if (Model.MentorNote.MentorNoteFileAttachment != null)
                 {
-
-                     <button type="submit" class="btn-info mb-2" asp-page-handler="download" asp-route-noteId="@Model.MentorNote.MentorNoteId">
-                        Download @Model.FileName
-                     </button>
-                     <br />
-                     <label>Replace File</label>
+                     <label>Replace File Attachment</label>
                 }
                 else
                 {
