@@ -29,6 +29,7 @@ namespace DataAccessLayer.Repository {
         ApplicationUser GetMentorByApplicationId(int id);
         Task<IList<IdentityUser>> GetAllMentorsAsync();
         Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync();
+        List<MentorAssignment> GetAllMentorAssignmentsByMentorId(string mentorId);
         MentorAssignment GetMentorAssignmentByApplicationId(int id);
         int GetStatusIdByName(string status);        
 

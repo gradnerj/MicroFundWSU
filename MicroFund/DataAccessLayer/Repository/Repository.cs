@@ -161,10 +161,15 @@ namespace DataAccessLayer.Repository
         public async Task<IList<MentorNote>> GetMentorNotes(string mentorId)
         {
             //get mentor notes only assigned to mentor
-            var mentorAssignment = GetCurrentMentorAssignments(mentorId);
+            var mentorAssignment = GetAllMentorAssignmentsByMentorId(mentorId);
             var mentorAssignmentIds = mentorAssignment.Select(x => x.MentorAssignmentId).ToList();
-            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId) && !x.IsArchived).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderByDescending(x => x.MeetingDate).ToListAsync();
-        }        
+            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId) && !x.IsArchived).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderBy(x => x.MentorAssignment.Application.ApplicationStatusId).ThenBy(x => x.MentorAssignment.Application.CompanyName).ThenByDescending(x => x.MeetingDate).ToListAsync();
+        } 
+
+        public List<MentorAssignment> GetAllMentorAssignmentsByMentorId(string mentorId)
+        {
+            return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId)).Include(x => x.Application).ToList();
+        }
 
         public List<MentorAssignment> GetCurrentMentorAssignments(string mentorId)
         {

@@ -10,10 +10,17 @@
         <div class="col-6">
             <h2>Meeting Notes</h2>
         </div>
+
         <div class="col-6 text-right">
             <a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Create New</a>
         </div>
     </div>
+    <form method="post">
+        <div class="form-group">
+            <label class="control-label">Company </label>
+            <select asp-for="@Model.SelectedCompany" class="form-control" asp-items="ViewBag.CompanyDropDown" ID="ddlCompany" OnSelectedIndexChanged="OnSelectedIndexChange"></select>
+        </div>
+    </form>
     <table class="table" id="mentorNotesTable">
         <thead>
             <tr>
@@ -23,18 +30,29 @@
                 <th>
                     Meeting Date
                 </th>
+                <th>
+                    Status
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.MentorNote)
+            @foreach (var item in Model.MentorNotes)
             {
-                <tr>
+                string inactiveRow = "";
+                if (item.MentorAssignment.Application.ApplicationStatusId != 5)
+                {
+                    inactiveRow = "table-secondary";
+                }
+                <tr class="@inactiveRow">
                     <td>
                         @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.MeetingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MentorAssignment.Application.ApplicationStatus.StatusDescription)
                     </td>
                     <td>
                         <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
@@ -49,9 +67,11 @@
 
 @section Scripts{
     <script>
+
         $(document).ready(function () {
             $('#mentorNotesTable').DataTable({
-                "pageLength": 10
+                "pageLength": 10,
+                "order":[]
             });
             $('.dataTables_length').addClass('bs-select');
         });
