@@ -6,44 +6,62 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Pitch Events</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i>Create New</a>
+        </div>
+    </div>
+    <table class="table" id="pitcheventstable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PitchEvent[0].PitchDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PitchEvent[0].Cash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PitchEvent[0].Services)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PitchEvent)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PitchDate)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Cash)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.Services)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@item.PitchEventId">Edit</a> |
+                        <a class="btn btn btn-outline-warning" asp-route-id="@item.PitchEventId">Details</a> |
+                        <a class="btn btn-outline-danger" asp-page="./Delete" asp-route-id="@item.PitchEventId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PitchEvent[0].PitchDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PitchEvent[0].Cash)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PitchEvent[0].Services)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.PitchEvent) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PitchDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cash)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Services)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.PitchEventId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.PitchEventId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.PitchEventId">Delete</a>
-            </td>
-        </tr>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#pitcheventstable').DataTable({
+                "pageLength": 5,
+                "order": [[2, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
 }
-    </tbody>
-</table>
