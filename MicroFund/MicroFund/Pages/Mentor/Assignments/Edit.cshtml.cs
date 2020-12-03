@@ -31,26 +31,29 @@ namespace MicroFund.Pages.Mentor.Assignments
         [BindProperty]
         public MentorAssignment MentorAssignment { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int appId)
         {
             //get current user in order to set updatedby attribute on form
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             CurrentUserId = claim.Value;
 
-            //set application object
-            Application = _repository.GetApplicationById(id);
-            //set mentor object
-            Mentor = _repository.GetMentorByApplicationId(id);
-            //get application number of application and business
+            //get application
+            Application = _repository.GetApplicationById(appId);
+            //get mentor
+            Mentor = _repository.GetMentorByApplicationId(appId);
+            //get application iteration number
             Iteration = await _repository.GetIteration(Application.ApplicationId, Application.ApplicantId, Application.CompanyName);            
 
             if(Mentor != null)
             {
                 MentorAssignment = await _context.MentorAssignment
                .Include(m => m.Application)
-               .Include(m => m.Mentor).FirstOrDefaultAsync(m => m.MentorAssignmentId == id);
-            }          
+               .Include(m => m.Mentor).FirstOrDefaultAsync(m => m.ApplicationId == appId);
+            }else
+            {
+                MentorAssignment = new MentorAssignment();
+            }         
 
            ViewData["MentorId"] = new SelectList(await _repository.GetAllMentorsAsync(), "Id", "FullName");
             return Page();
@@ -59,14 +62,14 @@ namespace MicroFund.Pages.Mentor.Assignments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
-        {                      
-            //if editing existing assignment
+        {
+            //if updating mentor
             if(MentorAssignment.MentorAssignmentId > 0)
             {
                 //get application
                 MentorAssignment.Application = _repository.GetApplicationById(MentorAssignment.ApplicationId);
 
-                //update status ONLY IF current status is Approved to avoid regressing status of application in later stages
+                //update status only if current status is Approved to avoid regressing status of application in later stages
                 if(MentorAssignment.Application.ApplicationStatusId == _repository.GetStatusIdByName("Approved"))
                 {
                     MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Assigned to Mentor");                    
@@ -88,9 +91,9 @@ namespace MicroFund.Pages.Mentor.Assignments
                     }
                 }
 
-            } else //if adding new assignment
+            } else //if first time adding mentor
             {
-                //get application in order to update status
+                //get application
                 MentorAssignment.Application = _repository.GetApplicationById(MentorAssignment.ApplicationId);
                 //update status
                 MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Assigned to Mentor");
