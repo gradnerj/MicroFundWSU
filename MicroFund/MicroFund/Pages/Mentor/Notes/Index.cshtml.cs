@@ -19,6 +19,8 @@ namespace MicroFund.Pages.Mentor.Notes
         private readonly IRepository _repository;
         public string CurrentUserId { get; set; }
         public string SelectedCompany { get; set; }
+        public List<MentorAssignment> MentorAssignments { get; set; }
+        public List<String> CompanyNames { get; set; }
 
         public IndexModel(IRepository repository, ApplicationDbContext context)
         {
@@ -28,21 +30,28 @@ namespace MicroFund.Pages.Mentor.Notes
 
         public IList<MentorNote> MentorNotes { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? selected)
         {
 
             //get current user in order to set updatedby attribute on form
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             CurrentUserId = claim.Value;
-            MentorNotes = await _repository.GetMentorNotes(CurrentUserId);
+            
 
             //get all mentor assignments for the current logged in user/mentor
-            var mentorAssignments = _repository.GetAllMentorAssignmentsByMentorId(CurrentUserId);
+            MentorAssignments = _repository.GetAllMentorAssignmentsByMentorId(CurrentUserId);
             //get a list of all company names assigned to this user/mentor
-            var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
-            //create dropdown
-            ViewData["CompanyDropDown"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
+            CompanyNames = MentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
+
+            if(selected == null || selected == -1)
+            {
+                MentorNotes = await _repository.GetMentorNotes(CurrentUserId);
+            } else 
+            {
+                MentorNotes = _context.MentorNote.Where(x => x.MentorAssignment.MentorId.Equals(CurrentUserId) && x.MentorAssignmentId == selected).ToList();
+            }
+            
         }
 
 

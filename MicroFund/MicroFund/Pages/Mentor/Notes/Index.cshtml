@@ -15,12 +15,13 @@
             <a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Create New</a>
         </div>
     </div>
-    <form method="post">
-        <div class="form-group">
-            <label class="control-label">Company </label>
-            <select asp-for="@Model.SelectedCompany" class="form-control" asp-items="ViewBag.CompanyDropDown" ID="ddlCompany" OnSelectedIndexChanged="OnSelectedIndexChange"></select>
-        </div>
-    </form>
+    <div class="mt-1 mb-3">
+        <a class="btn btn-outline-success" asp-page="" asp-route-selected="-1">All</a>
+        @foreach (var name in Model.MentorAssignments)
+        {
+            <a class="btn btn-outline-success" asp-page="" asp-route-selected="@name.MentorAssignmentId">@name.Application.CompanyName</a>
+        }
+    </div>
     <table class="table" id="mentorNotesTable">
         <thead>
             <tr>
@@ -70,7 +71,7 @@
 
         $(document).ready(function () {
             $('#mentorNotesTable').DataTable({
-                "pageLength": 10,
+                "pageLength": 25,
                 "order":[]
             });
             $('.dataTables_length').addClass('bs-select');
