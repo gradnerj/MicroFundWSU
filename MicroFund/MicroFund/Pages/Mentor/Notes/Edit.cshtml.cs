@@ -90,7 +90,7 @@ namespace MicroFund.Pages.Mentor.Notes
                 var uploads = Path.Combine(webRootPath, @"fileattachments\mentornotes");
 
 
-                var originalFile = _context.MentorNote.Where(x => x.MentorNoteId == MentorNote.MentorNoteId).Select(x => x.MentorNoteFileAttachment).FirstOrDefault(); ;
+                var originalFile = _context.MentorNote.Where(x => x.MentorNoteId == MentorNote.MentorNoteId).Select(x => x.MentorNoteFileAttachment).FirstOrDefault();
                 
                 var filePath = webRootPath + originalFile;
                 if (System.IO.File.Exists(filePath))
@@ -108,6 +108,11 @@ namespace MicroFund.Pages.Mentor.Notes
 
                 //update mentornote object
                 MentorNote.MentorNoteFileAttachment = @"\fileattachments\mentornotes\" + fileName;
+            } else if(files.Count == 0)
+            {
+                var originalFile = _context.MentorNote.Where(x => x.MentorNoteId == MentorNote.MentorNoteId).Select(x => x.MentorNoteFileAttachment).FirstOrDefault();
+                //update mentornote object
+                MentorNote.MentorNoteFileAttachment = originalFile;
             }
 
             _context.Attach(MentorNote).State = EntityState.Modified;
