@@ -2,24 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLayer.Models.ViewModels;
+using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DataAccessLayer.Models;
-using DataAccessLayer.Data;
-using DataAccessLayer.Repository;
-using DataAccessLayer.Models.ViewModels;
 
 namespace MicroFund.Pages.Judge.Applications
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
         private readonly IRepository _repository;
 
-        public IndexModel(IRepository repository, ApplicationDbContext context)
+        public IndexModel(IRepository repository)
         {
             _repository = repository;
-            _context = context;
         }
 
         public JudgeReviewApplicationsVM JudgeReviewApplicationsVM { get; set; }
@@ -34,3 +30,4 @@ namespace MicroFund.Pages.Judge.Applications
         }
     }
 }
+

@@ -28,34 +28,34 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         @*
-                        @if (User.IsInRole(Utility.StaticDetails.AdminRole))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
-                                <div class="dropdown-menu bg-purple-wsu">
-                                    <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/AddressTypes/Index">Address Types</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ContactTypes/Index">Contact Types</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatuses/Index">Application Status</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/Questions/Index">Questions</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/QuestionCategories/Index">Question Categories</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoreCardFields/Index">Score Card Fields</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoringCategories/Index">Scoring Categories</a>
-                                    @*<a class="dropdown-item text-white" asp-page="/Admin/Manage/FollowUpTypes/Index">Follow Up Types</a>
-                                    <a class="dropdown-item text-white" asp-page="/Admin/Manage/PitchEvents/Index">Pitch Events</a>
-                                </div>
-                            </li>
+                            @if (User.IsInRole(Utility.StaticDetails.AdminRole))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
+                                    <div class="dropdown-menu bg-purple-wsu">
+                                        <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/AddressTypes/Index">Address Types</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ContactTypes/Index">Contact Types</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatuses/Index">Application Status</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/Questions/Index">Questions</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/QuestionCategories/Index">Question Categories</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoreCardFields/Index">Score Card Fields</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoringCategories/Index">Scoring Categories</a>
+                                        @*<a class="dropdown-item text-white" asp-page="/Admin/Manage/FollowUpTypes/Index">Follow Up Types</a>
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/PitchEvents/Index">Pitch Events</a>
+                                    </div>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Admin/FollowUp/Index">Follow-Ups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Admin/Applications/Index">Review Applications</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assign Mentor</a>
-                            </li>
-                        }
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-page="/Admin/FollowUp/Index">Follow-Ups</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-page="/Admin/Applications/Index">Review Applications</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assign Mentor</a>
+                                </li>
+                            }
                         *@
                         @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
                         {
@@ -122,6 +122,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://unpkg.com/@@sgratzl/chartjs-chart-boxplot"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
 
 
     @RenderSection("Scripts", required: false)

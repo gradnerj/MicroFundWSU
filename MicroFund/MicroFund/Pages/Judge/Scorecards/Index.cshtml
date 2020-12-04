@@ -1,7 +1,6 @@
 ﻿@page
 @model MicroFund.Pages.Judge.Scorecards.IndexModel
 @{
-    //need to get company name, applicant name, pitch Id Pitch date Actions would be score
 }
 
 @{
@@ -40,7 +39,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.JudgeViewPitchesVM.Pitches.FirstOrDefault().Application.CompanyName)
+                        @Html.DisplayFor(modelItem => pitch.Application.CompanyName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => Model.JudgeViewPitchesVM.ApplicationUsers.Where(x => x.Id == pitch.Application.ApplicantId).FirstOrDefault().FullName)

@@ -25,15 +25,15 @@ namespace MicroFund.Pages.Judge.Applications
             var applicationId = id;
             var application = _context.Application.Where(x => x.ApplicationId == applicationId).FirstOrDefault();
             var applicationUser = _context.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault();
-            var responses = _context.Response.Where(x => x.ApplicationId == applicationId);
-            var contactInfos = _context.ContactInfo.Where(x => x.ApplicantId == application.ApplicantId);
+            var responses = _context.Response.Where(x => x.ApplicationId == applicationId).ToList();
+            var contactInfos = _context.ContactInfo.Where(x => x.ApplicantId == application.ApplicantId).ToList();
 
             var questions = new List<Question>();
 
             foreach (var response in responses)
             {
-                var matchedQuestion = _context.Question.Where(x => x.QuestionId == response.QuestionId);
-                questions.Add((Question)matchedQuestion);
+                var matchedQuestion = _context.Question.Where(x => x.QuestionId == response.QuestionId).FirstOrDefault();
+                questions.Add(matchedQuestion);
             }
 
             JudgeViewApplicationVM = new JudgeViewApplicationVM
