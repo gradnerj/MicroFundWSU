@@ -2,7 +2,8 @@
 @model MicroFund.Pages.Mentor.Assignments.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Mentor Assignments";
+    ViewData["Dashboard"] = "Mentor Dashboard";
 }
 
 <h1>Mentor Assignments</h1>
@@ -46,7 +47,7 @@
                         @Model.MentorAssignments[app.ApplicationId + ""]
                     </td>
                     <td>
-                        <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@app.ApplicationId">Edit</a> |
+                        <a class="btn btn-outline-success" asp-page="./Edit" asp-route-appId="@app.ApplicationId">Edit</a> |
                         <a class="btn btn btn-outline-warning" asp-page="./Details" asp-route-id="@app.ApplicationId">Details</a>
                     </td>
                 </tr>
@@ -59,7 +60,8 @@
     <script>
         $(document).ready(function () {
             $('#mentorAssignmentsTable').DataTable({
-                "pageLength": 10
+                "pageLength": 25,
+                "order": []
             });
             $('.dataTables_length').addClass('bs-select');
         });

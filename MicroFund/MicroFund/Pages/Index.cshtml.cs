@@ -18,16 +18,21 @@ namespace MicroFund.Pages {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             } else
             {
-                if (User.IsInRole(Utility.StaticDetails.MentorRole)) {
-                    return RedirectToPage("/Mentor/Dashboard/Index");
-                }
-                else if (User.IsInRole(Utility.StaticDetails.JudgeRole)) {
-                    return RedirectToPage("/Judge/Dashboard/Index");
-                }
-                else if (User.IsInRole(Utility.StaticDetails.AdminRole)) {
-
-                    //return RedirectToPage("/Calendar");
+                if (User.IsInRole(Utility.StaticDetails.AdminRole))
+                {
                     return RedirectToPage("/Admin/Dashboard/Index");
+                }
+                else if (User.IsInRole(Utility.StaticDetails.JudgeRole))
+                {
+                    return RedirectToPage("/Judge/Dashboard/Index");
+                } 
+                else if (User.IsInRole(Utility.StaticDetails.MentorRole)) 
+                {
+                    return RedirectToPage("/Mentor/Dashboard/Index");
+                } 
+                else if(User.IsInRole(Utility.StaticDetails.ApplicantRole))
+                {
+                    return RedirectToPage("/Applicant/Dashboard/Index");
                 }
                 else
                 {

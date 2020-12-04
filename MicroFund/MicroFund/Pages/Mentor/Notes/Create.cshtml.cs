@@ -9,7 +9,9 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+using DataAccessLayer.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
@@ -17,63 +19,87 @@ namespace MicroFund.Pages.Mentor.Notes
     {
         private ApplicationDbContext _context;
         private readonly IRepository _repository;
-        private readonly UserManager<IdentityUser> _userManager;
-        public IList<Application> MentorApplications { get; set; }
+        private readonly IWebHostEnvironment _hostingEnvironment;
         public string CurrentUserId { get; set; }
-        public Dictionary<int, string> ApplicationApplicantPairs { get; set; }
+        [BindProperty]
+        public MentorNote MentorNote { get; set; }
 
-        public CreateModel(IRepository repository, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CreateModel(IRepository repository, ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _repository = repository;
             _context = context;
-            _userManager = userManager;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult OnGet()
         {
-
+            //get current user data
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            //pass to form to provide UpdatedBy data
             CurrentUserId = claim.Value;
 
+            //get all mentor assignments for the current logged in user/mentor
             var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);
+            //get a list of all company names assigned to this user/mentor
             var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
+            //create dropdown
             ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
 
+            //set datetime for default date on form
+            MentorNote = new MentorNote()
+            {
+                MeetingDate = DateTime.Now
+            };
+
             return Page();
-        }
+        }        
 
-        [BindProperty]
-        public MentorNote MentorNote { get; set; }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
-            }
+            }            
 
+            //find and set mentor assignment to mentor note object
             MentorNote.MentorAssignment = _context.MentorAssignment.Where(x => x.MentorAssignmentId == MentorNote.MentorAssignmentId).FirstOrDefault();
-            if(MentorNote.IsApproved)
-            {
-                MentorNote.MentorAssignment.ApprovedToPitchDate = DateTime.Now;
-                MentorNote.MentorAssignment.Application = _repository.GetApplicationById(MentorNote.MentorAssignment.ApplicationId);
-                MentorNote.MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Approved for Grant Review");
 
-                var admins = await _userManager.GetUsersInRoleAsync("Admin");
-                foreach (var a in admins)
+            //get any files added to the form
+            var files = HttpContext.Request.Form.Files;
+            //if a file was uploaded
+            if (files.Count != 0)
+            {
+                //get local path data
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                //create unique file name
+                string fileName = Guid.NewGuid().ToString() + "$&$%" + files[0].FileName;
+                //combine with local path
+                var uploads = Path.Combine(webRootPath, @"fileattachments\mentornotes");
+
+                //save to server
+                using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                 {
-                    var notification = new Notification
-                    {
-                        UserID = a.Id,
-                        NotificationMessage = "New Request for Pitch"
-                    };
-                    _context.Notifications.Add(notification);
-                    _context.SaveChanges();
+                    files[0].CopyTo(fileStream);
+
                 }
+
+                //update mentornote object
+                MentorNote.MentorNoteFileAttachment = @"\fileattachments\mentornotes\" + fileName;
+            }     
+
+            //if mentor flagged application as approved for pitch event
+            if (MentorNote.IsApproved)
+            {
+                //set date mentor flagged application ready for pitch event
+                MentorNote.MentorAssignment.ApprovedToPitchDate = DateTime.Now;
+                //get application in question
+                MentorNote.MentorAssignment.Application = _repository.GetApplicationById(MentorNote.MentorAssignment.ApplicationId);
+                //update application's status
+                MentorNote.MentorAssignment.Application.ApplicationStatusId = _repository.GetStatusIdByName("Approved for Grant Review");
             }
+
+            //add to table and save
             _context.MentorNote.Add(MentorNote);
             await _context.SaveChangesAsync();
 

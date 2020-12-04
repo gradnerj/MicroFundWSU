@@ -19,6 +19,7 @@ namespace DataAccessLayer.Models
         public MentorAssignment MentorAssignment { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy h:mm tt}")]
         public DateTime MeetingDate { get; set; }
 
         [Required]
@@ -28,13 +29,16 @@ namespace DataAccessLayer.Models
         public string MentorNoteFileAttachment { get; set; }
 
         [Required]
+        [Display(Name = "Updated By")]
         [StringLength(128)]
         public string UpdatedBy { get; set; }
 
         [Required]
+        [Display(Name = "Updated Date")]
         public DateTime UpdatedDate { get; set; }
 
         [Required]
+        [Display(Name = "Is Archived")]
         public bool IsArchived { get; set; }
 
         [NotMapped]

@@ -10,6 +10,8 @@ using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace MicroFund.Pages.Mentor.Notes
 {
@@ -17,19 +19,22 @@ namespace MicroFund.Pages.Mentor.Notes
     {
         private ApplicationDbContext _context;
         private readonly IRepository _repository;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         public string CurrentUserId { get; set; }
         [BindProperty]
         public MentorNote MentorNote { get; set; }
+        public string FileName { get; set; }
 
-        public EditModel(DataAccessLayer.Data.ApplicationDbContext context, IRepository repository)
+        public EditModel(DataAccessLayer.Data.ApplicationDbContext context, IRepository repository, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
             _repository = repository;
+            _hostingEnvironment = hostingEnvironment;
         }
 
-        
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
@@ -40,17 +45,26 @@ namespace MicroFund.Pages.Mentor.Notes
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             CurrentUserId = claim.Value;
 
-            var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);            
+            var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);
             var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
             ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
 
             MentorNote = _context.MentorNote.Where(x => x.MentorNoteId == id).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).FirstOrDefault();
 
+            //if there is a file attached to this note
+            if (MentorNote.MentorNoteFileAttachment != null)
+            {
+                //get the actual file name (sans guid)
+                string fullName = MentorNote.MentorNoteFileAttachment;
+                string[] nameArray = fullName.Split("$&$%");
+                FileName = nameArray[1];
+            }
+
             if (MentorNote == null)
             {
                 return NotFound();
             }
-           
+
             return Page();
         }
 
@@ -61,6 +75,44 @@ namespace MicroFund.Pages.Mentor.Notes
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            //get any files added to the form
+            var files = HttpContext.Request.Form.Files;
+            //if a file was uploaded
+            if (files.Count != 0)
+            {
+                //get local path data
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                //create unique file name
+                string fileName = Guid.NewGuid().ToString() + "$&$%" + files[0].FileName;
+                //combine with local path
+                var uploads = Path.Combine(webRootPath, @"fileattachments\mentornotes");
+
+
+                var originalFile = _context.MentorNote.Where(x => x.MentorNoteId == MentorNote.MentorNoteId).Select(x => x.MentorNoteFileAttachment).FirstOrDefault();
+                
+                var filePath = webRootPath + originalFile;
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                
+
+                //save to server
+                using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
+
+                }
+
+                //update mentornote object
+                MentorNote.MentorNoteFileAttachment = @"\fileattachments\mentornotes\" + fileName;
+            } else if(files.Count == 0)
+            {
+                var originalFile = _context.MentorNote.Where(x => x.MentorNoteId == MentorNote.MentorNoteId).Select(x => x.MentorNoteFileAttachment).FirstOrDefault();
+                //update mentornote object
+                MentorNote.MentorNoteFileAttachment = originalFile;
             }
 
             _context.Attach(MentorNote).State = EntityState.Modified;
@@ -88,5 +140,7 @@ namespace MicroFund.Pages.Mentor.Notes
         {
             return _context.MentorNote.Any(e => e.MentorNoteId == id);
         }
+
+      
     }
 }

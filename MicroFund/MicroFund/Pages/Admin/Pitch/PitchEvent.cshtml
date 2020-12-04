@@ -1,6 +1,7 @@
 ﻿@page
 @model MicroFund.Pages.Admin.Pitch.PitchEventModel
 @{
+    ViewData["Dashboard"] = "Admin Dashboard";
 }
 
 <h1>Scheduled Pitches for @Model.PitchEvent.PitchDate.ToString("MM/dd/yyyy")</h1>

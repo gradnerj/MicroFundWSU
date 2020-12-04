@@ -49,9 +49,9 @@ namespace DataAccessLayer.Repository
             return await _context.ApplicationUsers.ToListAsync();
         }
 
-        public async Task<string> GetUserRoleAsync(string id) {
-            var role =  await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(id));
-            return role.FirstOrDefault().ToString();
+        public async Task<IList<string>> GetUserRolesAsync(string id) {
+            var roles =  await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(id));
+            return roles;
         }
 
         public ApplicationUser GetUserById(string id) {
@@ -69,7 +69,7 @@ namespace DataAccessLayer.Repository
 
         public async Task<IList<Application>> GetAllApplicationsToAssignAsync()
         {
-            return await _context.Application.Where(x => x.ApplicationStatusId > 3).Include(x => x.ApplicationStatus).ToListAsync();
+            return await _context.Application.Where(x => x.ApplicationStatusId > 3).Include(x => x.ApplicationStatus).OrderBy(x => x.ApplicationStatusId).ThenBy(x => x.CompanyName).ToListAsync();
         }
 
         public async Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync()
@@ -161,10 +161,15 @@ namespace DataAccessLayer.Repository
         public async Task<IList<MentorNote>> GetMentorNotes(string mentorId)
         {
             //get mentor notes only assigned to mentor
-            var mentorAssignment = GetCurrentMentorAssignments(mentorId);
+            var mentorAssignment = GetAllMentorAssignmentsByMentorId(mentorId);
             var mentorAssignmentIds = mentorAssignment.Select(x => x.MentorAssignmentId).ToList();
-            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId) && !x.IsArchived).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderByDescending(x => x.MeetingDate).ToListAsync();
-        }        
+            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId) && !x.IsArchived).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderBy(x => x.MentorAssignment.Application.ApplicationStatusId).ThenBy(x => x.MentorAssignment.Application.CompanyName).ThenByDescending(x => x.MeetingDate).ToListAsync();
+        } 
+
+        public List<MentorAssignment> GetAllMentorAssignmentsByMentorId(string mentorId)
+        {
+            return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId)).Include(x => x.Application).ToList();
+        }
 
         public List<MentorAssignment> GetCurrentMentorAssignments(string mentorId)
         {

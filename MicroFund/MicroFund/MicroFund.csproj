@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fileattachments\mentornotes\" />
+  </ItemGroup>
+
 </Project>

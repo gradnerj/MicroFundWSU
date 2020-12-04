@@ -1,8 +1,8 @@
 ﻿@page
-@model MicroFund.Pages.Admin.Dashboard.IndexModel
+@model MicroFund.Pages.Applicant.Dashboard.IndexModel
 @{
-    ViewData["Title"] = "Admin Dashboard";
-    ViewData["Dashboard"] = "Admin Dashboard";
+    ViewData["Title"] = "Applicant Dashboard";
+    ViewData["Dashboard"] = "Applicant Dashboard";
 }
 
 <style>
@@ -18,26 +18,10 @@
     <div class="col-6">
         <div class="row">
             <div class="col-6 offset-2">
-                <a asp-page="/Admin/Applications/Index" class="btn p-4 m-1 text-white text-center bg-gray-wsu" style="width:250px;">Review Applications</a>
-                <a asp-page="/Mentor/Assignments/Index" class="btn p-4 m-1 text-white text-center bg-gray-wsu" style="width:250px;">Assign Mentors</a>
-                <a asp-page="/Admin/FollowUp/Index" class="btn p-4 m-1 text-white text-center bg-gray-wsu" style="width:250px;">Follow-Ups</a>
-                <div class="btn-group dropright" style="width:258px !important;">
-                    <button type="button" class="btn dropdown-toggle p-4 m-1 text-white text-center bg-gray-wsu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage
-                    </button>
-                    <div class="dropdown-menu bg-gray-wsu">
-                        <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/AddressTypes/Index">Address Types</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ContactTypes/Index">Contact Types</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatuses/Index">Application Status</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/Questions/Index">Questions</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/QuestionCategories/Index">Question Categories</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoreCardFields/Index">Score Card Fields</a>
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoringCategories/Index">Scoring Categories</a>
-                        @*<a class="dropdown-item text-white" asp-page="/Admin/Manage/FollowUpTypes/Index">Follow Up Types</a>*@
-                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/PitchEvents/Index">Pitch Events</a>
-                    </div>
-                </div>
+                <a class="btn p-4 m-1 text-white text-center bg-gray-wsu" asp-page="/Applicant/Profile/Index" style="width:100%;">Profile</a>
+                <a class="btn p-4 m-1 text-white text-center bg-gray-wsu" asp-page="/Applicant/FollowUp/Index" style="width:100%;">Follow-Ups</a>
+                <a class="btn p-4 m-1 text-white text-center bg-gray-wsu" asp-page="/Applicant/MyApplications/Index" style="width:100%;">Applications</a>
+                <a class="btn p-4 m-1 text-white text-center bg-gray-wsu" asp-page="/Applicant/Apply/Index" style="width:100%;">Apply</a>
             </div>
         </div>
     </div>
@@ -92,3 +76,4 @@
         </div>
     </div>
 </div>
+

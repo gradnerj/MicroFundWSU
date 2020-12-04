@@ -27,104 +27,90 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        @*
-                            @if (User.IsInRole(Utility.StaticDetails.AdminRole))
-                            {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropDown" data-toggle="dropdown">Manage</a>
-                                    <div class="dropdown-menu bg-purple-wsu">
-                                        <a class="dropdown-item text-white" asp-page="/Admin/User/Index">Users</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/AddressTypes/Index">Address Types</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ContactTypes/Index">Contact Types</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ApplicationStatuses/Index">Application Status</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/Questions/Index">Questions</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/QuestionCategories/Index">Question Categories</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoreCardFields/Index">Score Card Fields</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/ScoringCategories/Index">Scoring Categories</a>
-                                        @*<a class="dropdown-item text-white" asp-page="/Admin/Manage/FollowUpTypes/Index">Follow Up Types</a>
-                                        <a class="dropdown-item text-white" asp-page="/Admin/Manage/PitchEvents/Index">Pitch Events</a>
-                                    </div>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-page="/Admin/FollowUp/Index">Follow-Ups</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-page="/Admin/Applications/Index">Review Applications</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assign Mentor</a>
-                                </li>
-                            }
-                        *@
-                        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
+                        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole) ||
+                    User.IsInRole(Utility.StaticDetails.AdminRole) ||
+                    User.IsInRole(Utility.StaticDetails.MentorRole) ||
+                    User.IsInRole(Utility.StaticDetails.JudgeRole))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Applicant/Profile/Index">Profile</a>
+                            <li>
+                                <div class="row" style="text-align:left;">
+                                    <h3 class="text-white" style="margin-bottom:-4px;">&nbsp;&nbsp;&nbsp;@ViewData["Dashboard"]</h3>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Applicant/FollowUp/Index">Follow-Ups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Applicant/MyApplications/Index">My Applications</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-page="/Applicant/Apply/Index">Apply</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle ml-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Go to
+                                </a>
+                                <div class="dropdown-menu  bg-purple-wsu" aria-labelledby="navbarDropdown">
+                                    @if (User.IsInRole(Utility.StaticDetails.AdminRole))
+                                    {
+                                        <a class="dropdown-item text-white" asp-page="/Admin/Dashboard/Index">Admin Dashboard</a>
+                                    }
+                                    @if (User.IsInRole(Utility.StaticDetails.JudgeRole))
+                                    {
+                                        <a class="dropdown-item text-white" asp-page="/Judge/Dashboard/Index">Judge Dashboard</a>
+                                    }
+                                    @if (User.IsInRole(Utility.StaticDetails.MentorRole))
+                                    {
+                                        <a class="dropdown-item text-white" asp-page="/Mentor/Dashboard/Index">Mentor Dashboard</a>
+                                    }
+                                    @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
+                                    {
+                                        <a class="dropdown-item text-white" asp-page="/Applicant/Dashboard/Index">Applicant Dashboard</a>
+                                    }
+                                </div>
                             </li>
                         }
+                        @*
+        @if (User.IsInRole(Utility.StaticDetails.ApplicantRole))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-page="/Applicant/Profile/Index">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-page="/Applicant/FollowUp/Index">Follow-Ups</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-page="/Applicant/MyApplications/Index">My Applications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-page="/Applicant/Apply/Index">Apply</a>
+            </li>
+        }
+                        *@
                     </ul>
-                    @if (User.IsInRole(Utility.StaticDetails.JudgeRole))
-                    {
-                        <div class="row" style="text-align:center;">
-                            <h3 class="text-white align-middle" style="margin-bottom:-4px;">&nbsp;&nbsp;&nbsp;Judge Dashboard</h3>
-                        </div>
-                    }
-                    @if (User.IsInRole(Utility.StaticDetails.MentorRole))
-                    {
-
-                        @*<a class="nav-link text-white" asp-page="/Mentor/Assignments/Index">Assignments</a>*@
-                        <div class="row" style="text-align:center;">
-                            <h3 class="text-white align-middle" style="margin-bottom:-4px;">&nbsp;&nbsp;&nbsp;Mentor Dashboard</h3>
-                        </div>
-                    }
-                    @if (User.IsInRole(Utility.StaticDetails.AdminRole))
-                    {
-                        <div class="row" style="text-align:center;">
-                            <h3 class="text-white align-middle" style="margin-bottom:-4px;">&nbsp;&nbsp;&nbsp;Admin Dashboard</h3>
-                        </div>
-                    }
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container mt-5">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - MicroFund - <a asp-area="" asp-page="/Privacy">Privacy</a> - <a asp-area="" asp-page="/About">About</a>
+            </nav>
+        </header>
+        <div class="container mt-5">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2020 - MicroFund - <a asp-area="" asp-page="/Privacy">Privacy</a> - <a asp-area="" asp-page="/About">About</a>
+            </div>
+        </footer>
 
 
 
-    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="https://unpkg.com/@@sgratzl/chartjs-chart-boxplot"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+        @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/main.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/interaction/main.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="https://unpkg.com/@@sgratzl/chartjs-chart-boxplot"></script>
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=5oc190zry16spqr5fi6idy6nzmctxja2rv1875qa7sfcq27a"></script>
 
 
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>

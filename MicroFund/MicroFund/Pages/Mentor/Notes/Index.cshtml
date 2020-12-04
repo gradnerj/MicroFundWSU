@@ -2,17 +2,26 @@
 @model MicroFund.Pages.Mentor.Notes.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Mentor Notes";
+    ViewData["Dashboard"] = "Mentor Dashboard";
 }
 
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h2>Meeting Notes</h2>
+            <h2>Mentor Notes</h2>
         </div>
+
         <div class="col-6 text-right">
             <a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Create New</a>
         </div>
+    </div>
+    <div class="mt-1 mb-3">
+        <a class="btn btn-outline-success" asp-page="" asp-route-selected="-1">All</a>
+        @foreach (var name in Model.MentorAssignments)
+        {
+            <a class="btn btn-outline-success" asp-page="" asp-route-selected="@name.MentorAssignmentId">@name.Application.CompanyName</a>
+        }
     </div>
     <table class="table" id="mentorNotesTable">
         <thead>
@@ -23,18 +32,29 @@
                 <th>
                     Meeting Date
                 </th>
+                <th>
+                    Status
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.MentorNote)
+            @foreach (var item in Model.MentorNotes)
             {
-                <tr>
+                string inactiveRow = "";
+                if (item.MentorAssignment.Application.ApplicationStatusId != 5)
+                {
+                    inactiveRow = "table-secondary";
+                }
+                <tr class="@inactiveRow">
                     <td>
                         @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.MeetingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MentorAssignment.Application.ApplicationStatus.StatusDescription)
                     </td>
                     <td>
                         <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
@@ -49,9 +69,11 @@
 
 @section Scripts{
     <script>
+
         $(document).ready(function () {
             $('#mentorNotesTable').DataTable({
-                "pageLength": 10
+                "pageLength": 25,
+                "order":[]
             });
             $('.dataTables_length').addClass('bs-select');
         });
