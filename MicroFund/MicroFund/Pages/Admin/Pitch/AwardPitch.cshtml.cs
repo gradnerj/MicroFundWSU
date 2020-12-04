@@ -28,7 +28,7 @@ namespace MicroFund.Pages.Admin.Pitch
         public float RemainingPitchEventFunds { get; set; }
         public float RemainingPitchEventCash { get; set; }
         public float RemainingPitchEventServices { get; set; }
-
+        public int? SelectedPitch { get; set; }
 
         public IActionResult OnGet(int? pitchId)
         {
@@ -37,6 +37,8 @@ namespace MicroFund.Pages.Admin.Pitch
             {
                 return NotFound();
             }
+
+            SelectedPitch = pitchId;
 
             //Find Pitch and return NotFound if it doesn't exist
             Pitch = _context.Pitch.FirstOrDefault(p => p.PitchId == pitchId);

@@ -93,6 +93,7 @@
                     <th>
                         Awarded Services
                     </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -113,6 +114,9 @@
                         </td>
                         <td>
                             @award.ServicesAmount
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" asp-page="./EditPitch" asp-route-id="@award.AwardHistoryId" asp-route-SelectedPitch="@Model.SelectedPitch">Edit</a>
                         </td>
                     </tr>
                 }
