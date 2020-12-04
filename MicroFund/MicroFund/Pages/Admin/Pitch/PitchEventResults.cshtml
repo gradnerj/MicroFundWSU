@@ -2,6 +2,7 @@
 @model MicroFund.Pages.Admin.Pitch.PitchEventResultsModel
 @using System.Web
 @{
+    ViewData["Dashboard"] = "Admin Dashboard";
 }
 
 <h2>Results for Pitch Event @Model.PEvent.PitchEventId on @Model.PEvent.PitchDate.ToString("MM/dd/yyyy")</h2>
