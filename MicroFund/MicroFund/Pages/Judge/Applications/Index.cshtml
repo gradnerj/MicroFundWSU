@@ -5,32 +5,35 @@
     ViewData["Dashboard"] = "Judge Dashboard";
 }
 
-<h1>Review Applications</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Full Name
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Company Name
-            </th>
-            <th>
-                View Application
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var application in Model.JudgeReviewApplicationsVM.Applications)
-        {
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Review Applications</h2>
+        </div>
+        <div class="col-6 text-right">
+            <!--<a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i>Create New</a>-->
+        </div>
+    </div>
+    <table class="table" id="applicants">
+        <thead>
+            <tr>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Company Name
+                </th>
+                <th>
+                    View Application
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var application in Model.JudgeReviewApplicationsVM.Applications)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => Model.JudgeReviewApplicationsVM.ApplicationUsers.Where(x => x.Id == application.ApplicantId).FirstOrDefault().FullName)
@@ -45,6 +48,19 @@
                     <a class="btn btn-outline-dark" asp-page="/Judge/Applications/ViewApplication" asp-route-id="@application.ApplicationId">View</a>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#applicants').DataTable({
+                "pageLength": 5,
+                "order": [[0, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}

@@ -5,55 +5,161 @@
     ViewData["Dashboard"] = "Judge Dashboard";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <img class="d-block mx-auto" src="~/images/WildcatMicrofund_horizontal-01_transparent_purple.png" alt="Wildcat Micro Fund logo" height="200" width="400" />
-    </div>
-    <div class="col-sm-10 mt-2 border mx-auto">
-        <div class="h1 text-center mt-sm-2">
-            Wildcat Micro Fund Application Form
+<div class="container">
+    <h3>Application for @Model.JudgeViewApplicationVM.Application.CompanyName</h3>
+    <table class="table" id="applicationTable">
+        <thead>
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Answer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var response in Model.JudgeViewApplicationVM.Responses)
+                {
+                    <tr>
+                        <th scope="row">
+                            @response.Question.QuestionDescription
+                        <td>
+                            @response.ResponseDescription
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#applicationTable').DataTable({
+                "pageLength": 8,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}
+
+@*<div class="container-fluid">
+        <div class="row">
+            <img class="d-block mx-auto" src="~/images/WildcatMicrofund_horizontal-01_transparent_purple.png" alt="Wildcat Micro Fund logo" height="200" width="400" />
         </div>
-        <div class="col-12 mb-2">
-            <div class="col-12 border">
-                <div class="h5 text-left border-bottom my-2 pb-2">
-                    Applicant Information
-                </div>
-                <div class="form-row">
-                    <div class="col-1 font-weight-bold">
-                        Name:
+        <div class="col-sm-10 mt-2 border mx-auto">
+            <div class="h1 text-center mt-sm-2">
+                Wildcat Micro Fund Application
+            </div>
+            <div class="col-12 mb-2">
+                <div class="col-12 border">
+                    <div class="h5 text-left border-bottom my-2 pb-2">
+                        Applicant Information
                     </div>
-                    <div class="col">
+                    <div>
+                        <label class="col-form-label font-weight-bold">Name:  </label>
                         @Model.JudgeViewApplicationVM.ApplicationUser.FullName
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-1 font-weight-bold">
-                        E-mail:
-                    </div>
-                    <div class="col">
+                    <div>
+                        <label class="col-form-label font-weight-bold">E-mail: </label>
                         @Model.JudgeViewApplicationVM.ApplicationUser.Email
                     </div>
-                </div>
-                <div class="form-row mb-3">
-                    <div class="col-1 font-weight-bold">
-                        Phone:
-                    </div>
-                    <div class="col">
+                    <div>
+                        <label class="col-form-label font-weight-bold">Phone:  </label>
                         @Model.JudgeViewApplicationVM.ContactInfos.FirstOrDefault().ContactInfoDetail
                     </div>
-                </div>
-                <div class="h5 text-left border-bottom mb-2 pb-2">
-                    Company Information
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label">Company Name</label>
-                    @Model.JudgeViewApplicationVM.Application.CompanyName
+                    <hr />
+                    <div class="h5 text-left border-bottom mb-2 pb-2">
+                        Company Information
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Company Name:  </label>
+                        @Model.JudgeViewApplicationVM.Application.CompanyName
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Product/Service Description:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 21).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Started:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 23).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Industry:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 22).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Website:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 20).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Prototype:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 19).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Intellectual Property:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 18).FirstOrDefault().ResponseDescription
+                    </div>
+                    <hr />
+                    <div class="h5 text-left border-bottom mb-2 pb-2">
+                        Business Plan and Projections
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Market Opportunity:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 15).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Customers/Target Market:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 19).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Sales:  </label>
+                        $@Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 10).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Competition:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 12).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Team Description:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 11).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Amount Requested:  </label>
+                        $@Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 10).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Award Plans:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 9).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Previously Received Grant:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 8).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">External Funding:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 16).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Heard About Micro Fund From:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 7).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Attended Micro Fund Workshop:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 6).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Attended/Applied/Presented at 1 Million Cups:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 24).FirstOrDefault().ResponseDescription
+                    </div>
+                    <div>
+                        <label class="col-form-label font-weight-bold">Met with Small Business Development Center Counselor:  </label>
+                        @Model.JudgeViewApplicationVM.Responses.Where(x => x.QuestionId == 7).FirstOrDefault().ResponseDescription
+                    </div>
                 </div>
             </div>
-            <p class="text-danger">
-                *This is still a work in progress and will display the application in its entirety before the project deadline.
-            </p>
         </div>
-    </div>
-</div>
-                    
+    </div>*@

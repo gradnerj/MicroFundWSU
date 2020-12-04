@@ -68,7 +68,6 @@
     </div>
 </div>
 
-
 <div class="container">
     <div class="row pb-4 pt-4">
         <h2 style="width:75%">Previous Awards</h2>
@@ -76,6 +75,15 @@
         <hr />
     </div>
     <div id="previousAwardsDiv" style="display:block">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <canvas id="previousAwardsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
         <table class="table" id="previousAwards">
             <thead>
                 <tr>
@@ -219,51 +227,132 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#fundingSummary').DataTable();
-        $('.dataTables_length').addClass('bs-select');
-    });
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#fundingSummary').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
 
-    $(document).ready(function () {
-        $('#previousAwards').DataTable();
-        $('.dataTables_length').addClass('bs-select');
-    });
-</script>
-<script type="text/javascript">
-    document.getElementById("fundingSummaryBtn").onclick = function () {
-        if (document.getElementById("fundingSummaryDiv").style.display == "none") {
-            document.getElementById("fundingSummaryDiv").style.display = "block";
-            document.getElementById("fundingSummaryBtn").value = "Collapse";
-        }
-        else {
-            document.getElementById("fundingSummaryDiv").style.display = "none";
-            document.getElementById("fundingSummaryBtn").value = "Show";
-        }
+        $(document).ready(function () {
+            $('#previousAwards').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+    <script type="text/javascript">
+        document.getElementById("fundingSummaryBtn").onclick = function () {
+            if (document.getElementById("fundingSummaryDiv").style.display == "none") {
+                document.getElementById("fundingSummaryDiv").style.display = "block";
+                document.getElementById("fundingSummaryBtn").value = "Collapse";
+            }
+            else {
+                document.getElementById("fundingSummaryDiv").style.display = "none";
+                document.getElementById("fundingSummaryBtn").value = "Show";
+            }
 
-    }
-
-    document.getElementById("previousAwardsBtn").onclick = function () {
-        if (document.getElementById("previousAwardsDiv").style.display == "none") {
-            document.getElementById("previousAwardsDiv").style.display = "block";
-            document.getElementById("previousAwardsBtn").value = "Collapse";
-        }
-        else {
-            document.getElementById("previousAwardsDiv").style.display = "none";
-            document.getElementById("previousAwardsBtn").value = "Show";
         }
 
-    }
+        document.getElementById("previousAwardsBtn").onclick = function () {
+            if (document.getElementById("previousAwardsDiv").style.display == "none") {
+                document.getElementById("previousAwardsDiv").style.display = "block";
+                document.getElementById("previousAwardsBtn").value = "Collapse";
+            }
+            else {
+                document.getElementById("previousAwardsDiv").style.display = "none";
+                document.getElementById("previousAwardsBtn").value = "Show";
+            }
 
-    document.getElementById("newAwardBtn").onclick = function () {
-        if (document.getElementById("newAwardDiv").style.display == "none") {
-            document.getElementById("newAwardDiv").style.display = "block";
-            document.getElementById("newAwardBtn").value = "Collapse";
-        }
-        else {
-            document.getElementById("newAwardDiv").style.display = "none";
-            document.getElementById("newAwardBtn").value = "Show";
         }
 
-    }
-</script>
+        document.getElementById("newAwardBtn").onclick = function () {
+            if (document.getElementById("newAwardDiv").style.display == "none") {
+                document.getElementById("newAwardDiv").style.display = "block";
+                document.getElementById("newAwardBtn").value = "Collapse";
+            }
+            else {
+                document.getElementById("newAwardDiv").style.display = "none";
+                document.getElementById("newAwardBtn").value = "Show";
+            }
+
+        }
+
+        let previousAwards = document.getElementById('previousAwardsChart').getContext('2d');
+        var awardDate = [];
+        var awardAmount = [];
+        @{
+            foreach(var award in Model.PreviousAwards) {
+                @: awardDate.push(moment('@award.AwardDate').format("MMM DD YYYY"));
+
+            }
+            foreach(var award in Model.PreviousAwards) {
+                @: awardAmount.push('@(award.CashAmount + award.ServicesAmount)');
+            }
+        }
+
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+
+        console.log(awardDate);
+        console.log(awardAmount);
+        let chart = new Chart(previousAwards,
+            {
+                type: 'bar',
+                data:
+                {
+                    labels: awardDate,
+                    datasets: [{
+                        label: 'Award Amount',
+                        data: awardAmount,
+                        backgroundColor: 'rgba(80, 234, 52, 0.5)',
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 3,
+                        hoverBorderColor: '#000'
+                    }]
+                },
+                options:
+                {
+                    title:
+                    {
+                        display: true,
+                        text: 'Previous Awards',
+                        fontSize: 25
+                    },
+                    legend:
+                    {
+                        display: true,
+                        position: 'right',
+                        labels:
+                        {
+                            fontColor: '#000'
+                        }
+                    },
+                    layout:
+                    {
+                        padding:
+                        {
+                            left: 50,
+                            right: 0,
+                            bottom: 0,
+                            top: 0
+                        }
+                    },
+                    tooltips:
+                    {
+                        enabled: true
+                    },
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+    </script>
+}
