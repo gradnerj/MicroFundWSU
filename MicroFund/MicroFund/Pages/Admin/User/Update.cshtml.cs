@@ -4,6 +4,7 @@ using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,13 +22,16 @@ namespace MicroFund.Pages.Admin.User {
         [BindProperty]
         public ApplicationUser AppUser { get; set; }
         [BindProperty]
-        public string UserRole { get; set; }
+        public IList<string> UserRoles { get; set; }
+        [BindProperty]
+        public List<string> AreChecked { get; set; }
 
 
         public async Task OnGetAsync(string id)
         {
             AppUser =  _repo.GetUserById(id);
-            UserRole = await _repo.GetUserRoleAsync(id);
+            UserRoles = await _repo.GetUserRolesAsync(id);
+            AreChecked = new List<string>();
         }
 
         public async Task<IActionResult> OnPostAsync() {
@@ -39,13 +43,27 @@ namespace MicroFund.Pages.Admin.User {
                 _context.ApplicationUsers.Update(user);
             }
             
-            
-            var oldRole = await _userManager.GetRolesAsync(AppUser);
-            if(oldRole.FirstOrDefault() != UserRole) {
+            //remove all old roles
+            var oldRoles = await _userManager.GetRolesAsync(AppUser);
+            foreach(var role in oldRoles)
+            {
+                await _userManager.RemoveFromRoleAsync(AppUser, role);
+            }
+            await _context.SaveChangesAsync();
+
+            //add checked roles
+            foreach (var newRole in AreChecked.ToArray())
+            {
+                await _userManager.AddToRoleAsync(AppUser, newRole);
+            }
+
+            /*          
+            if(oldRole.FirstOrDefault() != UserRoles) {
                 await _userManager.RemoveFromRoleAsync(AppUser, oldRole.FirstOrDefault());
                 await _userManager.AddToRoleAsync(AppUser, UserRole);
             }
-            
+            */
+
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }

@@ -49,9 +49,9 @@ namespace DataAccessLayer.Repository
             return await _context.ApplicationUsers.ToListAsync();
         }
 
-        public async Task<string> GetUserRoleAsync(string id) {
-            var role =  await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(id));
-            return role.FirstOrDefault().ToString();
+        public async Task<IList<string>> GetUserRolesAsync(string id) {
+            var roles =  await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(id));
+            return roles;
         }
 
         public ApplicationUser GetUserById(string id) {

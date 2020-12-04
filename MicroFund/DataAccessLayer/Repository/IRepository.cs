@@ -14,7 +14,7 @@ namespace DataAccessLayer.Repository {
         Task<Dictionary<string, string>> GetUsersByRoleAsync(string roleName);
         Task<Dictionary<string, string>> GetAllUserRolesAsync();
 
-        Task<string> GetUserRoleAsync(string id);
+        Task<IList<string>> GetUserRolesAsync(string id);
 
         ApplicationUser GetUserById(string id);
 
