@@ -158,12 +158,20 @@ namespace DataAccessLayer.Repository
             return _context.ApplicationStatus.Where(x => x.StatusDescription.Equals(status)).Select(x => x.ApplicationStatusId).FirstOrDefault();
         }        
 
-        public async Task<IList<MentorNote>> GetMentorNotes(string mentorId)
+        public async Task<IList<MentorNote>> GetMentorNotes(string mentorId, int mentorAssignmentId)
         {
-            //get mentor notes only assigned to mentor
-            var mentorAssignment = GetAllMentorAssignmentsByMentorId(mentorId);
-            var mentorAssignmentIds = mentorAssignment.Select(x => x.MentorAssignmentId).ToList();
-            return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId) && !x.IsArchived).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderBy(x => x.MentorAssignment.Application.ApplicationStatusId).ThenBy(x => x.MentorAssignment.Application.CompanyName).ThenByDescending(x => x.MeetingDate).ToListAsync();
+            var mentorAssignment = GetAllMentorAssignmentsByMentorId(mentorId); 
+            if(mentorAssignmentId > 0)
+            {
+                return await _context.MentorNote.Where(x => x.MentorAssignmentId == mentorAssignmentId).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderBy(x => x.MentorAssignment.Application.ApplicationStatusId).ThenBy(x => x.MentorAssignment.Application.CompanyName).ThenByDescending(x => x.MeetingDate).ToListAsync();
+
+            }
+            else
+            {
+                var mentorAssignmentIds = mentorAssignment.Select(x => x.MentorAssignmentId).ToList();
+                return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId)).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderBy(x => x.MentorAssignment.Application.ApplicationStatusId).ThenBy(x => x.MentorAssignment.Application.CompanyName).ThenByDescending(x => x.MeetingDate).ToListAsync();
+            }
+
         } 
 
         public List<MentorAssignment> GetAllMentorAssignmentsByMentorId(string mentorId)

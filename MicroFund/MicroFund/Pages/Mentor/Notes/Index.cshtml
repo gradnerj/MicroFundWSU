@@ -16,12 +16,24 @@
             <a asp-page="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Create New</a>
         </div>
     </div>
-    <div class="mt-1 mb-3">
-        <a class="btn btn-outline-success" asp-page="" asp-route-selected="-1">All</a>
-        @foreach (var name in Model.MentorAssignments)
-        {
-            <a class="btn btn-outline-success" asp-page="" asp-route-selected="@name.MentorAssignmentId">@name.Application.CompanyName</a>
-        }
+    @*<div class="mt-1 mb-3">
+            <a class="btn btn-outline-success" asp-page="" asp-route-selected="-1">All</a>
+            @foreach (var name in Model.MentorAssignments)
+            {
+                <a class="btn btn-outline-success" asp-page="" asp-route-selected="@name.MentorAssignmentId">@name.Application.CompanyName</a>
+            }
+        </div>*@
+    <div class="btn-group mt-1 mb-3">
+        <button type="button" class="btn dropdown-toggle btn-outline-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Company
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-page="" asp-route-selected="-1">All</a>
+            @foreach (var name in Model.MentorAssignments)
+            {
+                <a class="dropdown-item" asp-page="" asp-route-selected="@name.MentorAssignmentId">@name.Application.CompanyName</a>
+            }
+        </div>
     </div>
     <table class="table" id="mentorNotesTable">
         <thead>
@@ -35,6 +47,9 @@
                 <th>
                     Status
                 </th>
+                <th>
+                    Is Archived
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -46,6 +61,7 @@
                 {
                     inactiveRow = "table-secondary";
                 }
+            
                 <tr class="@inactiveRow">
                     <td>
                         @Html.DisplayFor(modelItem => item.MentorAssignment.Application.CompanyName)
@@ -57,11 +73,15 @@
                         @Html.DisplayFor(modelItem => item.MentorAssignment.Application.ApplicationStatus.StatusDescription)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.IsArchived)
+                    </td>
+                    <td>
                         <a class="btn btn-outline-success" asp-page="./Edit" asp-route-id="@item.MentorNoteId">Edit</a> |
                         <a class="btn btn btn-outline-warning" asp-page="./Details" asp-route-id="@item.MentorNoteId">Details</a> |
                         <a class="btn btn-outline-danger" asp-page="./Delete" asp-route-id="@item.MentorNoteId">Delete</a>
                     </td>
                 </tr>
+                
             }
         </tbody>
     </table>

@@ -33,7 +33,7 @@ namespace DataAccessLayer.Repository {
         MentorAssignment GetMentorAssignmentByApplicationId(int id);
         int GetStatusIdByName(string status);        
 
-        Task<IList<MentorNote>> GetMentorNotes(string mentorId);
+        Task<IList<MentorNote>> GetMentorNotes(string mentorId, int mentorAssignmentId);
 
         List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
 

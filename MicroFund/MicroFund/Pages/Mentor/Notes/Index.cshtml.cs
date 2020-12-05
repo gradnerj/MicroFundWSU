@@ -44,14 +44,16 @@ namespace MicroFund.Pages.Mentor.Notes
             //get a list of all company names assigned to this user/mentor
             CompanyNames = MentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
 
-            if(selected == null || selected == -1)
+            //if loading page (null) or selecting All from the dropdown, display all mentor notes
+            if (selected == null || selected == -1)
             {
-                MentorNotes = await _repository.GetMentorNotes(CurrentUserId);
-            } else 
-            {
-                MentorNotes = _context.MentorNote.Where(x => x.MentorAssignment.MentorId.Equals(CurrentUserId) && x.MentorAssignmentId == selected).ToList();
+                MentorNotes = await _repository.GetMentorNotes(CurrentUserId, -1);
             }
-            
+            else //if company selected
+            {
+                MentorNotes = await _repository.GetMentorNotes(CurrentUserId, (int)selected);
+            }
+
         }
 
 
