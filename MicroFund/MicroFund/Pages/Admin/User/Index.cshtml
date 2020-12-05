@@ -47,7 +47,25 @@
                             @user.Email
                         </td>
                         <td>
-                            @Model.UserRoles[user.Email]
+
+                            @{ 
+                                if(Model.UsersRoles[user.Email].Count > 1)
+                                {
+                                    <ul>
+                                        @foreach(var r in Model.UsersRoles[user.Email])
+                                        {
+                                            <li>
+                                                @r
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    @Model.UserRoles[user.Email]
+                                }
+                            }
+      
                         </td>
                         <td>
                             @user.IsArchived

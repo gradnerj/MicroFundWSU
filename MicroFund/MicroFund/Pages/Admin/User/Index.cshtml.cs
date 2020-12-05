@@ -14,14 +14,16 @@ namespace MicroFund.Pages.Admin.User {
     public class IndexModel : PageModel {
         private readonly IRepository _repository;
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
         public IList<ApplicationUser> ApplicationUsers { get; set; } 
         public Dictionary<string, string> UserRoles { get; set; }
 
-        public IndexModel(IRepository repository, ApplicationDbContext context) {
+        public IndexModel(IRepository repository, ApplicationDbContext context, UserManager<IdentityUser> userManager) {
             _repository = repository;
             _context = context;
+            _userManager = userManager;
         }
-
+        public Dictionary<string, IList<string>> UsersRoles { get; set; }
         public async Task OnGetAsync()
         {
             UserRoles = new Dictionary<string, string>();
@@ -36,6 +38,11 @@ namespace MicroFund.Pages.Admin.User {
                 {
                     ApplicationUsers.Remove(user);
                 }
+            }
+            UsersRoles = new Dictionary<string, IList<string>>();
+            foreach (var user in AllUsers)
+            {
+                UsersRoles.Add(user.Email, await _userManager.GetRolesAsync(user));
             }
         }
 

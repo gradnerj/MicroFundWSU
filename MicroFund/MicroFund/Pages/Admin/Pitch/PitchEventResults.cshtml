@@ -2,21 +2,21 @@
 @model MicroFund.Pages.Admin.Pitch.PitchEventResultsModel
 @using System.Web
 @{
-    ViewData["Dashboard"] = "Admin Dashboard";
+    ViewData["Dashboard"] = "Pitch Dashboard";
 }
 
 <h2>Results for Pitch Event @Model.PEvent.PitchEventId on @Model.PEvent.PitchDate.ToString("MM/dd/yyyy")</h2>
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <canvas id="categoryAverage"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-6">
             <div class="card shadow">
                 <div class="card-body">
                     <canvas id="pitchAvgScores"></canvas>

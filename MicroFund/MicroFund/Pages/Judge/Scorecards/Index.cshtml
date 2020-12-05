@@ -52,7 +52,7 @@
                         @Html.DisplayFor(modelItem => Model.JudgeViewPitchesVM.PitchEvents.Where(x => x.PitchEventId == pitch.PitchEventId).FirstOrDefault().PitchDate)
                     </td>
                     <td>
-                        <a class="btn btn-outline-dark" asp-page="/Judge/ScoreCards/PitchScorecard" asp-route-id="@pitch.PitchId">View</a>
+                        <a class="btn btn-outline-dark" asp-page="/Judge/ScoreCards/PitchScorecard" asp-route-id="@pitch.PitchId">Score</a>
                     </td>
                 </tr>
             }
