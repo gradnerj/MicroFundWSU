@@ -52,11 +52,11 @@ namespace MicroFund.Pages.Applicant.Apply
             }
             else
             {
-                if (User.IsInRole(StaticDetails.JudgeRole))
+                if (!User.IsInRole(StaticDetails.ApplicantRole) && User.IsInRole(StaticDetails.JudgeRole))
                 {
                     return RedirectToPage("/Judge/Dashboard");
                 }
-                if (User.IsInRole(StaticDetails.MentorRole))
+                if (!User.IsInRole(StaticDetails.ApplicantRole) && User.IsInRole(StaticDetails.MentorRole))
                 {
                     return RedirectToPage("/Mentor/Dashboard");
                 }

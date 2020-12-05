@@ -45,12 +45,12 @@ namespace MicroFund.Pages.Applicant.Profile
             }
             else
             {
-                if (User.IsInRole(StaticDetails.JudgeRole))
+                if (!User.IsInRole(StaticDetails.ApplicantRole) && User.IsInRole(StaticDetails.JudgeRole))
                 {
                     await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                     return RedirectToPage("/Judge/Dashboard");
                 }
-                if (User.IsInRole(StaticDetails.MentorRole))
+                if (!User.IsInRole(StaticDetails.ApplicantRole) && User.IsInRole(StaticDetails.MentorRole))
                 {
                     await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
                     return RedirectToPage("/Mentor/Dashboard");
@@ -72,7 +72,8 @@ namespace MicroFund.Pages.Applicant.Profile
                     if(Address == null)
                     {
                         await _util.SendEmailAsync(StaticDetails.Log, "MF User Profile", "profile");
-                        Input = new InputModel { FirstName = Applicant.FirstName, LastName = Applicant.LastName, Email = Applicant.Email };
+                        Input = new InputModel { FirstName = Applicant.FirstName, LastName = Applicant.LastName, Email = Applicant.Email,
+                            State = "Utah", Country = "United States"};
                     }
                     else
                     {
@@ -86,6 +87,7 @@ namespace MicroFund.Pages.Applicant.Profile
                             Email = Applicant.Email,
                             ContactInfoDetail = ContactInfo.ContactInfoDetail,
                             Street = Address.Street,
+                            Street_line2 = Address.StreetLine2,
                             City = Address.City,
                             State = Address.State,
                             Zip = Address.Zip,
@@ -155,6 +157,7 @@ namespace MicroFund.Pages.Applicant.Profile
             
             
             address.Street = Input.Street;
+            address.StreetLine2 = Input.Street_line2;
             address.City = Input.City;
             address.State = Input.State;
             address.Zip = Input.Zip;
@@ -226,6 +229,8 @@ namespace MicroFund.Pages.Applicant.Profile
             public string ContactInfoDetail { get; set; }
             [Required]
             public string Street { get; set; }
+            [DisplayName("Street Address Line 2")]
+            public string Street_line2 { get; set; }
             [Required]
             public string City { get; set; }
             [Required]

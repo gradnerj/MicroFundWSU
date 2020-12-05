@@ -28,6 +28,11 @@ namespace DataAccessLayer.Models
         [DisplayName("Street Address")]
         public string Street { get; set; }
 
+        [StringLength(64)]
+        [Display(Name = "Street Address Line 2")]
+        public string StreetLine2 { get; set; }
+
+
         [Required]
         [StringLength(64)]
         public string City { get; set; }
