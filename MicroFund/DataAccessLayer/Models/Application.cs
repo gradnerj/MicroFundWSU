@@ -46,5 +46,8 @@ namespace DataAccessLayer.Models
         public bool IsArchived { get; set; }
 
         public ICollection<Response> Responses { get; set; }
+
+        [NotMapped]
+        public string DropDownName { get; set; }
     }
 }

@@ -31,13 +31,11 @@ namespace DataAccessLayer.Repository {
         Task<Dictionary<string, string>> GetAllMentorAssignmentsAsync();
         List<MentorAssignment> GetAllMentorAssignmentsByMentorId(string mentorId);
         MentorAssignment GetMentorAssignmentByApplicationId(int id);
-        int GetStatusIdByName(string status);        
-
+        int GetStatusIdByName(string status);
         Task<IList<MentorNote>> GetMentorNotes(string mentorId, int mentorAssignmentId);
-
         List<MentorAssignment> GetCurrentMentorAssignments(string mentorId);
-
         Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id);
+        Task<Dictionary<int, int>> GetMentorAssignmentIterationPairsAsync(List<MentorAssignment> list);
 
         Task<IList<PitchEvent>> GetAllPitchEventsAsync();
         Task<IList<Pitch>> GetAllPitchesAsync();

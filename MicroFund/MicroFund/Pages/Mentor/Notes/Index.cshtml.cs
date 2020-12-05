@@ -21,6 +21,7 @@ namespace MicroFund.Pages.Mentor.Notes
         public string SelectedCompany { get; set; }
         public List<MentorAssignment> MentorAssignments { get; set; }
         public List<String> CompanyNames { get; set; }
+        public Dictionary<int, int> IterationDictionary { get; set; }
 
         public IndexModel(IRepository repository, ApplicationDbContext context)
         {
@@ -37,13 +38,12 @@ namespace MicroFund.Pages.Mentor.Notes
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             CurrentUserId = claim.Value;
-            
+            CompanyNames = new List<String>();
 
             //get all mentor assignments for the current logged in user/mentor
-            MentorAssignments = _repository.GetAllMentorAssignmentsByMentorId(CurrentUserId);
-            //get a list of all company names assigned to this user/mentor
-            CompanyNames = MentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
-
+            MentorAssignments = _repository.GetAllMentorAssignmentsByMentorId(CurrentUserId).ToList();
+            IterationDictionary = await _repository.GetMentorAssignmentIterationPairsAsync(MentorAssignments);
+            
             //if loading page (null) or selecting All from the dropdown, display all mentor notes
             if (selected == null || selected == -1)
             {

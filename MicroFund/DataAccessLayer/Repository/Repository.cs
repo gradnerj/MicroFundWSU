@@ -172,25 +172,33 @@ namespace DataAccessLayer.Repository
                 return await _context.MentorNote.Where(x => mentorAssignmentIds.Contains(x.MentorAssignmentId)).Include(x => x.MentorAssignment).ThenInclude(x => x.Application).ThenInclude(x => x.ApplicationStatus).OrderBy(x => x.MentorAssignment.Application.ApplicationStatusId).ThenBy(x => x.MentorAssignment.Application.CompanyName).ThenByDescending(x => x.MeetingDate).ToListAsync();
             }
 
-        } 
+        }
+
+        public async Task<Dictionary<int, int>> GetMentorAssignmentIterationPairsAsync(List<MentorAssignment> list)
+        {
+            var dictionary = new Dictionary<int, int>();
+            foreach( var assignment in list)
+            {
+                var iteration = await GetIteration(assignment.ApplicationId, assignment.Application.ApplicantId, assignment.Application.CompanyName);
+                dictionary.Add(assignment.MentorAssignmentId, iteration);
+            }
+            return dictionary;
+        }
 
         public List<MentorAssignment> GetAllMentorAssignmentsByMentorId(string mentorId)
         {
-            return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId)).Include(x => x.Application).ToList();
+            return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId)).Include(x => x.Application).OrderBy(x => x.Application.CompanyName).ThenBy(x => x.Application.ApplicationCreationDate).ToList();
         }
 
         public List<MentorAssignment> GetCurrentMentorAssignments(string mentorId)
         {
-            return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId) && x.Application.ApplicationStatus.StatusDescription.Equals("Assigned to Mentor")).Include(x => x.Application).ToList();
+            return _context.MentorAssignment.Where(x => x.MentorId.Equals(mentorId) && x.Application.ApplicationStatus.StatusDescription.Equals("Assigned to Mentor")).Include(x => x.Application).OrderBy(x => x.Application.CompanyName).ThenBy(x => x.Application.ApplicationCreationDate).ToList();
         }
-
         
         public async Task<IList<Application>> GetAllApplicationsByApplicationUserId(string id)
         {
             return await _context.Application.Where(x => x.ApplicantId == id).Include(x => x.ApplicationStatus).ToListAsync();
         }
-
-
 
         public async Task<IList<PitchEvent>> GetAllPitchEventsAsync()
         {

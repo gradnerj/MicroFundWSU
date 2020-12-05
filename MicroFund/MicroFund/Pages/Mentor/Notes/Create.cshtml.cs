@@ -31,7 +31,7 @@ namespace MicroFund.Pages.Mentor.Notes
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             //get current user data
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -41,10 +41,15 @@ namespace MicroFund.Pages.Mentor.Notes
 
             //get all mentor assignments for the current logged in user/mentor
             var mentorAssignments = _repository.GetCurrentMentorAssignments(CurrentUserId);
-            //get a list of all company names assigned to this user/mentor
-            var companyNames = mentorAssignments.Select(x => x.Application.CompanyName).Distinct().ToList();
+            var iterations = await _repository.GetMentorAssignmentIterationPairsAsync(mentorAssignments);
+            foreach( var assignment in mentorAssignments)
+            {
+                assignment.Application.DropDownName = assignment.Application.CompanyName + " - " + iterations[assignment.MentorAssignmentId];
+            }
+
+
             //create dropdown
-            ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.CompanyName");
+            ViewData["MentorAssignmentId"] = new SelectList(mentorAssignments, "MentorAssignmentId", "Application.DropDownName");
 
             //set datetime for default date on form
             MentorNote = new MentorNote()
